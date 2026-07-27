@@ -1,0 +1,293 @@
+aid: epcor
+name: EPCOR
+review:
+  question: >-
+    Does EPCOR publish a public developer/API surface, and does any energy
+    consumer-data mandate actually bind and get implemented by this
+    organization?
+  answer: partial
+  date: '2026-07-27'
+  reviewer: API Evangelist
+  summary: >-
+    No developer portal, no API documentation and no machine-readable contracts
+    anywhere on epcor.com. The only programmatic surface is a regulator-forced
+    one: the Green Button Download My Data and Connect My Data service EPCOR
+    runs for its three Ontario service areas under Ontario's energy data
+    regulation. Ontario is the smaller part of EPCOR's business; its Alberta
+    home market, where no consumer data right exists, has no equivalent
+    surface. EPCOR publishes no open grid or market data.
+mandate:
+  regime: green-button-ontario
+  status: live-implemented
+  obligation: >-
+    Ontario O. Reg. 633/21 (energy data regulation, announced 2021-11-01)
+    requires electricity and natural gas utilities in Ontario to provide
+    customers with Green Button Download My Data (DMD) and Connect My Data
+    (CMD), certified by the Green Button Alliance, no later than 2023-11-01.
+    EPCOR is captured by this regulation through EPCOR Electricity Distribution
+    Ontario (Collingwood and Kincardine areas) and EPCOR Natural Gas Limited
+    Partnership (Aylmer area). No Canadian federal energy data right exists;
+    Alberta, EPCOR's home market and largest business, has no equivalent
+    obligation, and EPCOR's US water utilities have none.
+  what_i_verified:
+    - >-
+      EPCOR's own Green Button pages for all three Ontario service areas return
+      HTTP 200 and describe DMD ("select-and-download their usage and billing
+      data from our website in an industry-standard XML format") and CMD /
+      "Data Shares" ("securely authorizing and sharing usage data with
+      registered third-party vendors"), including per-share selection of Energy
+      Usage Data, Billing Data and/or Account Information and revocation from a
+      Data Shares tab.
+    - >-
+      A live, EPCOR-branded Green Button portal exists at
+      https://epcorgas.savagedata.com/ (HTTP 200). Every path probed on that
+      host - /, /.well-known/openid-configuration,
+      /DataCustodian/espi/1_1/resource/, /DataCustodian/oauth/authorize,
+      /espi/1_1/resource/ApplicationInformation - 302s into
+      /Connect/Authorize?returnUrl=... and serves an EPCOR-skinned single-page
+      login app (css/Epcor_site.css, LDCAuthGPFrontEnd.styles.css). Operated on
+      the Savage Data platform.
+    - >-
+      A live third-party vendor onboarding application exists at
+      https://epcorgasonboarding.savagedata.com/ (HTTP 200, page title
+      "3rdPartyRegistration"). It is a Blazor SPA that errored on render
+      ("An error has occurred. This application may no longer respond until
+      reloaded") and discloses no base URI, no endpoints and no technical
+      requirements.
+    - >-
+      EPCOR states on its own pages that "EPCOR Utilities has been certified by
+      the Green Button Alliance". The Green Button Alliance publicly announced
+      that 55 Ontario-based utility platforms were certified under O. Reg.
+      633/21.
+  what_i_could_not_verify:
+    - >-
+      No ESPI base URI, no OAuth2 authorization/token endpoints and no
+      ApplicationInformation resource could be read anonymously - the portal
+      host answers every path with the login SPA rather than an API response or
+      a 401/404, so conformance to NAESB REQ.21 ESPI 3.3 could not be
+      independently confirmed.
+    - >-
+      Green Button Alliance certified-product register pages
+      (greenbuttonalliance.org/certified, /certification, /certified-utilities,
+      /gbtest-results) returned HTTP 403 to this probe, so an entry naming
+      EPCOR specifically could not be read from the register. The certification
+      claim is EPCOR's own, corroborated only by the Alliance's aggregate
+      55-utility announcement.
+    - >-
+      EPCOR never names ESPI, NAESB, REQ.21, OAuth or a Green Button version
+      anywhere on its public pages; the "industry-standard XML format" and
+      "security tokens" phrasing is the whole of its technical disclosure.
+  status_reasoning: >-
+    Recorded as live-implemented rather than live-claimed-unverified because
+    the evidence goes past a compliance page: two distinct live, EPCOR-branded
+    production hosts exist and are wired into the customer pages - a customer
+    Green Button portal and a separate third-party vendor registration
+    application. Recorded as live-implemented rather than a
+    standards-conformance finding because no standards-conformant surface could
+    be read anonymously; the implementation is real, its conformance is
+    attested rather than observed.
+data_standard:
+  name: Green Button (Download My Data + Connect My Data)
+  version_published_by_epcor: none
+  underlying_standard_required_by_regulation: NAESB REQ.21 Energy Services Provider Interface (ESPI) 3.3
+  note: >-
+    EPCOR describes "the new Green Button Standard" and an "industry-standard
+    XML format" and claims Green Button Alliance certification, but publishes
+    no ESPI/NAESB citation, no version and no schema reference. No OCPP, OCPI,
+    OpenADR, IEEE 2030.5 or IEC CIM 61968/61970 reference was found anywhere on
+    epcor.com.
+consumer_vs_market_data_split:
+  consumer_data_api: true
+  consumer_data_detail: >-
+    Yes, but only in Ontario and only because Ontario compelled it. A third
+    party can obtain an individual EPCOR customer's usage, billing and account
+    data through Green Button Connect My Data after registering as an
+    authorized vendor and receiving that customer's explicit, revocable
+    consent. Coverage is limited to the Aylmer-area gas and
+    Collingwood/Kincardine-area electricity service territories. EPCOR's
+    Alberta electricity, Alberta/BC water and US water customers have no
+    equivalent - no Green Button page exists under any Alberta path
+    (/ca/en/ab/edmonton/account/manage-account/green-button.html returns 404).
+  market_data_open: false
+  market_data_detail: >-
+    EPCOR publishes no open grid, system or market data. The only public
+    real-time surface is a human-facing outage map at https://outages.epcor.com/
+    (HTTP 200), an ArcGIS-backed single-page web app with no documented feed,
+    no published endpoint, no licence and no developer page - it is a map, not a
+    dataset. Alberta wholesale market and system data is published by AESO, and
+    Ontario market data by IESO; neither is EPCOR's publication. There is no
+    open data portal, no data licence and no data. subdomain.
+  finding: >-
+    The split is total and it runs along the regulatory line, not the technical
+    one. Consumer data is available where a province wrote a regulation and
+    unavailable everywhere else in the same company; market data is unavailable
+    everywhere, because nothing requires it and EPCOR is a distributor rather
+    than a market operator.
+access:
+  gate: application-approval
+  developer_portal: none
+  what_a_developer_must_do: >-
+    There is no self-serve path and no API key. To reach customer data a
+    developer must (1) apply through EPCOR's third-party vendor registration
+    portal at https://epcorgasonboarding.savagedata.com/ and be authorized as a
+    registered Green Button vendor, then (2) for each customer, send that
+    customer to the vendor's own Green Button registration page, which redirects
+    the customer to EPCOR's portal to authenticate and select which data types
+    and accounts to share, after which data flows to the vendor using security
+    tokens until the customer revokes it from the Data Shares tab. Download My
+    Data is a different gate entirely - customer-account-required: only the
+    account holder, logged in, can pull their own XML. Nothing about either path
+    is documented technically in public.
+  gated: true
+auth_model:
+  scheme: >-
+    OAuth-style delegated authorization inferred from the Green Button CMD
+    pattern and from EPCOR's description of "security tokens" issued after
+    customer authorization; customer authentication is a username/password
+    login at https://epcorgas.savagedata.com/Connect/Authorize.
+  verified: false
+  verification_note: >-
+    /.well-known/openid-configuration was requested anonymously on both
+    epcorgas.savagedata.com and epcorgasonboarding.savagedata.com; both returned
+    HTTP 200 with the site's HTML single-page app, not an OpenID Connect
+    discovery document. No authorization server metadata, no scopes and no
+    token endpoint are publicly discoverable. EPCOR itself never names OAuth.
+home_market:
+  country: Canada
+  primary_jurisdiction: Alberta (Edmonton) - no consumer energy data right
+  mandated_jurisdiction: Ontario (Aylmer, Collingwood, Kincardine) - O. Reg. 633/21 Green Button
+  other_operations: British Columbia (water); Arizona, New Mexico and Texas, USA (water, wastewater, natural gas) - no energy consumer data mandate applies
+  ownership: Municipally owned; the City of Edmonton is the sole shareholder
+probes:
+  - url: https://www.epcor.com/
+    status: 200
+    note: Corporate site. No developer, API or open data link anywhere on the landing page.
+  - url: https://developer.epcor.com
+    status: 000
+    note: DNS does not resolve.
+  - url: https://developers.epcor.com
+    status: 000
+    note: DNS does not resolve.
+  - url: https://api.epcor.com
+    status: 000
+    note: DNS does not resolve.
+  - url: https://docs.epcor.com
+    status: 000
+    note: DNS does not resolve.
+  - url: https://data.epcor.com
+    status: 000
+    note: DNS does not resolve.
+  - url: https://www.epcor.com/developers
+    status: 404
+  - url: https://www.epcor.com/api
+    status: 404
+  - url: https://www.epcor.com/docs
+    status: 404
+  - url: https://www.epcor.com/data
+    status: 404
+  - url: https://www.epcor.com/openapi.json
+    status: 404
+  - url: https://www.epcor.com/swagger.json
+    status: 404
+  - url: https://www.epcor.com/.well-known/openid-configuration
+    status: 404
+  - url: https://www.epcor.com/.well-known/security.txt
+    status: 404
+  - url: https://www.epcor.com/robots.txt
+    status: 200
+    note: 'Lists only two sitemaps (ca.sitemap.xml, us.sitemap.xml); no developer or API paths.'
+  - url: https://www.epcor.com/ca/en/on/collingwood-area/account/manage-account/green-button.html
+    status: 200
+    note: Green Button page for Collingwood-area electricity customers. Links the DMD portal and the vendor onboarding portal.
+  - url: https://www.epcor.com/ca/en/on/aylmer-area/account/manage-account/green-button.html
+    status: 200
+    note: Green Button page for Aylmer-area natural gas customers. Same portals.
+  - url: https://www.epcor.com/ca/en/on/kincardine-area/account/manage-account/green-button.html
+    status: 200
+    note: Green Button page for Kincardine-area electricity customers. Same portals.
+  - url: https://www.epcor.com/ca/en/ab/edmonton/account/manage-account/green-button.html
+    status: 404
+    note: No Green Button offering exists for the Alberta home market. This 404 is the finding.
+  - url: https://epcorgas.savagedata.com/
+    status: 200
+    note: Redirects to /Connect/Authorize; EPCOR-branded login SPA. Green Button DMD/CMD portal on the Savage Data platform.
+  - url: https://epcorgas.savagedata.com/.well-known/openid-configuration
+    status: 200
+    note: Returns the login SPA HTML, not an OIDC discovery document.
+  - url: https://epcorgas.savagedata.com/DataCustodian/espi/1_1/resource/
+    status: 200
+    note: Redirects to /Connect/Authorize. No ESPI resource served anonymously.
+  - url: https://epcorgas.savagedata.com/DataCustodian/oauth/authorize
+    status: 200
+    note: Redirects to /Connect/Authorize. Speculative ESPI path; no OAuth endpoint confirmed.
+  - url: https://epcorgas.savagedata.com/espi/1_1/resource/ApplicationInformation
+    status: 200
+    note: Redirects to /Connect/Authorize. No ApplicationInformation resource served anonymously.
+  - url: https://epcorgas.savagedata.com/openapi.json
+    status: 404
+  - url: https://epcorgasonboarding.savagedata.com/
+    status: 200
+    note: 'Third-party vendor registration application (title "3rdPartyRegistration"); Blazor SPA that rendered an error. No technical disclosure.'
+  - url: https://customerportal.epcor.com/app/
+    status: 200
+    note: Customer account login for Collingwood-area customers. Not a developer portal.
+  - url: https://outages.epcor.com/
+    status: 200
+    note: Public outage map, ArcGIS SPA. No documented feed, endpoint, licence or developer page.
+  - url: https://github.com/epcor
+    status: 200
+    note: NOT EPCOR Utilities - an unrelated "Engineering Project Configuration" org with JS boilerplate repos. Deliberately excluded from apis.yml.
+  - url: https://www.linkedin.com/company/epcor
+    status: 200
+  - url: https://www.greenbuttonalliance.org/certified
+    status: 403
+    note: Certified-product register unreadable to this probe (also /certification, /certified-utilities, /gbtest-results all 403).
+  - url: https://www.oeb.ca/consumer-information-and-protection/green-button
+    status: 200
+    note: Ontario Energy Board Green Button consumer page; the regulator-side reference for O. Reg. 633/21.
+artifacts:
+  openapi: []
+  asyncapi: []
+  collections: []
+  note: >-
+    No OpenAPI, AsyncAPI, Swagger, Postman collection or any other
+    machine-readable contract was found for EPCOR at any probed location, so no
+    openapi/ directory was created. Nothing was generated or inferred.
+sources:
+  - url: https://www.epcor.com/ca/en/on/collingwood-area/account/manage-account/green-button.html
+    type: Documentation
+    fetched: '2026-07-27'
+    status: 200
+  - url: https://www.epcor.com/ca/en/on/aylmer-area/account/manage-account/green-button.html
+    type: Documentation
+    fetched: '2026-07-27'
+    status: 200
+  - url: https://www.epcor.com/ca/en/on/kincardine-area/account/manage-account/green-button.html
+    type: Documentation
+    fetched: '2026-07-27'
+    status: 200
+  - url: https://epcorgas.savagedata.com/
+    type: Portal
+    fetched: '2026-07-27'
+    status: 200
+  - url: https://epcorgasonboarding.savagedata.com/
+    type: Registration
+    fetched: '2026-07-27'
+    status: 200
+  - url: https://www.oeb.ca/consumer-information-and-protection/green-button
+    type: Regulation
+    fetched: '2026-07-27'
+    status: 200
+  - url: https://www.greenbuttonalliance.org/news/green-button-alliance-announces-55-ontario-based-utilities-platforms-are-now-green-button-certified
+    type: Announcement
+    fetched: '2026-07-27'
+    status: 200
+    note: Aggregate certification announcement covering 55 Ontario utility platforms; does not name EPCOR in the fetched summary.
+  - url: https://news.ontario.ca/en/release/1001086/ontario-helping-energy-customers-save-money-with-green-button
+    type: Announcement
+    note: Government of Ontario release linked from every EPCOR Green Button page.
+  - url: https://en.wikipedia.org/wiki/EPCOR_Utilities
+    type: Reference
+    fetched: '2026-07-27'
+    status: 200
+    note: Corporate facts - City of Edmonton sole shareholder, 1891 roots, 1996 incorporation, 2009 Capital Power spin-out, US water expansion.
