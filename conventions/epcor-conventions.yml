@@ -1,0 +1,123 @@
+generated: '2026-07-27'
+method: derived
+source: openapi/epcor-outages-arcgis-openapi.yml + live probes of https://services6.arcgis.com/Ji2rusuWXDFSqNsP/ArcGIS/rest/services
+note: >-
+  EPCOR publishes no API documentation, so none of these conventions are stated by EPCOR. They were read off
+  the live behaviour of the public ArcGIS REST feature services that back the EPCOR outage map, plus the
+  Esri GeoServices contract those services implement. The Green Button interface in EPCOR's three Ontario
+  service areas is a second, entirely separate surface with no public technical documentation at all - none
+  of the conventions below have been shown to apply to it.
+surfaces:
+  - name: EPCOR public ArcGIS feature services
+    base: https://services6.arcgis.com/Ji2rusuWXDFSqNsP/ArcGIS/rest/services
+    documented_by_provider: false
+    observed: true
+  - name: EPCOR Ontario Green Button (DMD / CMD)
+    base: not published
+    documented_by_provider: false
+    observed: false
+authentication:
+  style: none-for-read
+  detail: >-
+    Every production feature service in the folder is shared publicly and answers anonymously - no API key,
+    no token, no Referer restriction was observed. Several services advertise editing capabilities
+    (Create, Update, Delete, Editing, Extract, ChangeTracking); writing to an ArcGIS Online hosted feature
+    service requires an ArcGIS token, and no write was attempted.
+  see: authentication/epcor-authentication.yml
+content_negotiation:
+  parameter: f
+  default: html
+  values: [html, json, geojson, pbf]
+  detail: >-
+    Format is selected by the `f` query parameter, not by the Accept header. Omitting `f` returns the human
+    HTML service directory. `f=geojson` returns an RFC 7946 FeatureCollection; `f=json` returns the Esri
+    FeatureSet envelope.
+pagination:
+  style: offset
+  params:
+    limit: resultRecordCount
+    offset: resultOffset
+    order: orderByFields
+  page_size_max: 2000
+  page_size_max_source: service metadata maxRecordCount
+  response_fields:
+    more_flag: exceededTransferLimit
+  detail: >-
+    Responses set `exceededTransferLimit: true` when more features match than were returned; the client pages
+    by incrementing `resultOffset`. `returnCountOnly=true` returns the match count, `returnIdsOnly=true` the
+    object IDs (maxIdsCount 1000000).
+filtering:
+  attribute: SQL-92 `where` clause over layer attributes (`where=1=1` selects everything)
+  field_selection: outFields (comma separated, or `*`)
+  geometry: >-
+    Optional spatial filter via `geometry` + `geometryType` + `spatialRel` (+ `inSR`); `returnGeometry=false`
+    drops geometry from the response, `outSR` reprojects it.
+  aggregation: >-
+    The layers advertise supportsStatistics / advancedQueryCapabilities (outStatistics, groupByFieldsForStatistics,
+    distinct, percentile, top-features), so server-side aggregation is available.
+identifiers:
+  object_id_field: OBJECTID or FID depending on layer (service maintained, unique per layer)
+  global_id_field: GlobalID (GUID) on the ocps_prod_* power outage layers only
+  business_keys:
+    - field: id
+      layer: ocps_prod_av / ocps_prod_pl
+      example: 'INC 218006057'
+      note: EPCOR outage incident number.
+    - field: MainbreakI
+      layer: EPCor_Water_Outages_Prod / water_canada_outages_prod
+      example: MB4575
+      note: EPCOR water main break identifier.
+    - field: PR_NUMBER
+      layer: Water_InfrastructureProjects_Prod
+      note: EPCOR water infrastructure project number.
+    - field: UDFID
+      layer: UDF_Events_Prod
+      note: Field event identifier.
+date_handling:
+  esri_date_fields: epoch milliseconds (integer) - used on UDF_Events_Prod, GenericWaterEvents_Prod, Water_InfrastructureProjects_Prod, CityBoundary_prod
+  string_date_fields: >-
+    The outage layers do NOT use typed date fields. `estresto`, `faulted`, `ReportDate`, `EstimateRe`,
+    `Restoratio` and the usa_* date columns are free-text strings in local display form
+    ("Jul-27 5:30 PM", "Jan-30  7:34 PM") with no year and no timezone. This is the single largest
+    machine-readability defect in the surface.
+error_envelope:
+  format: esri-rest
+  http_status_on_error: 200
+  shape: '{"error": {"code": <int>, "message": <string>, "details": [<string>]}}'
+  detail: >-
+    Invalid queries, missing layers and invalid service names all return HTTP 200 with an `error` body.
+    Clients cannot rely on HTTP status codes. No RFC 9457 problem+json anywhere.
+  see: errors/epcor-problem-types.yml
+idempotency:
+  supported: false
+  detail: >-
+    No idempotency key, no request-deduplication contract, and no documented write path for public consumers.
+    Read operations are naturally safe/idempotent because they are plain GETs. No Idempotency pointer is
+    emitted for this provider because there is no idempotency contract to point at.
+rate_limits:
+  published: false
+  detail: >-
+    EPCOR publishes no rate limit for this surface, and no limit headers were observed on responses.
+    ArcGIS Online applies its own platform level throttling that EPCOR does not document. The only hard
+    limit read off the service is the 2000 feature maxRecordCount transfer cap.
+request_tracing:
+  request_id_header: none observed
+versioning:
+  scheme: platform-version
+  current: 'ArcGIS currentVersion 12'
+  detail: >-
+    EPCOR versions nothing itself. The only version signal is Esri's `currentVersion` on each service, and the
+    service naming convention (`*_dev`, `*_test`, `*_ist`, `*_uat`, `*_prod`) which exposes EPCOR's environment
+    pipeline in the same public folder. Layer schemas can change without notice.
+  see: lifecycle/epcor-lifecycle.yml
+caching:
+  headers_observed: none documented by EPCOR
+  data_freshness: >-
+    Near real time. The ocps_prod_av layer carried a dataLastEditDate within hours of the probe, and outage
+    records are added and removed as incidents open and close.
+licence:
+  published: false
+  detail: >-
+    No licence, no terms of use and no attribution requirement is published for the feature services. The
+    ArcGIS items carry empty licenseInfo and copyrightText fields. Consumers have no stated right to reuse
+    this data; treat availability as undertaking-free.

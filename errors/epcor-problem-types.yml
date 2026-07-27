@@ -1,0 +1,52 @@
+generated: '2026-07-27'
+method: probed
+source: live probes of https://services6.arcgis.com/Ji2rusuWXDFSqNsP/ArcGIS/rest/services
+format: esri-rest
+rfc9457: false
+note: >-
+  EPCOR publishes no error reference. These entries were captured by sending deliberately invalid requests to
+  the public ArcGIS feature services and recording the verbatim responses (see
+  examples/epcor-arcgis-error-responses.json). The critical convention: the interface answers errors with
+  HTTP 200 and an `error` object in the body, so status-code based error handling silently succeeds on failure.
+envelope:
+  shape: '{"error": {"code": <int>, "message": <string>, "details": [<string>]}}'
+  http_status: 200
+  fields:
+    code: Esri error code. Observed as 400 for every client-side failure.
+    message: Short message. Observed empty on some failures - do not rely on it.
+    details: Array of human readable strings carrying the actual diagnosis.
+problems:
+  - code: 400
+    title: Invalid query parameters
+    message: Cannot perform query. Invalid query parameters.
+    details: ["'where' parameter is invalid"]
+    http_status: 200
+    trigger: A malformed SQL-92 `where` clause on a layer query.
+    remediation: Send a valid SQL-92 predicate; use `where=1=1` to select all features.
+    source_operation: openapi/epcor-outages-arcgis-openapi.yml#queryOcpsProdAv
+    verified: '2026-07-27'
+  - code: 400
+    title: Layer not found
+    message: ''
+    details: ['The requested layer (layerId: 99) was not found.']
+    http_status: 200
+    trigger: Requesting a layer id that the feature service does not expose.
+    remediation: Read the service metadata document first and use a layer id from its `layers` array.
+    source_operation: openapi/epcor-outages-arcgis-openapi.yml#getOcpsProdAvService
+    verified: '2026-07-27'
+  - code: 400
+    title: Invalid URL
+    message: Invalid URL
+    details: ['Invalid URL']
+    http_status: 200
+    trigger: Requesting a service name that does not exist in the folder.
+    remediation: Enumerate services with the folder catalog operation before addressing one.
+    source_operation: openapi/epcor-outages-arcgis-openapi.yml#listFeatureServices
+    verified: '2026-07-27'
+not_captured:
+  - >-
+    Authorization failures were not provoked: no write was attempted against any service and no private
+    service was addressed, so the token-required error shape is not recorded here.
+  - >-
+    The Green Button Download My Data / Connect My Data surface returns no machine-readable errors that could
+    be read anonymously - every path answers with the login single page app - so it contributes no entries.

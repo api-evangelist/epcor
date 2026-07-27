@@ -1,0 +1,107 @@
+generated: '2026-07-27'
+method: probed
+source: >-
+  derived from openapi/epcor-outages-arcgis-openapi.yml and live probes, plus EPCOR's own Green Button pages
+  and Ontario O. Reg. 633/21
+note: >-
+  Two surfaces, two very different conformance stories. The geospatial surface conforms to an Esri de facto
+  interface because Esri hosts it, not because EPCOR designed to a standard. The Green Button surface is
+  compelled by regulation and its conformance is attested by EPCOR but could not be observed anonymously.
+standards:
+  - id: esri-geoservices-arcgis-rest
+    name: ArcGIS REST API (GeoServices) feature service interface
+    conforms: true
+    evidence: >-
+      All 36 production services answer the standard ArcGIS REST contract - service/layer metadata documents,
+      the `query` operation with where/outFields/geometry/resultOffset/resultRecordCount, `f` format
+      negotiation and the Esri error envelope. Verified live on 2026-07-27.
+  - id: geojson-rfc7946
+    name: GeoJSON (RFC 7946)
+    conforms: true
+    evidence: >-
+      `f=geojson` on the layer query returns a valid FeatureCollection - captured verbatim in
+      examples/epcor-power-outage-areas-geojson.json.
+  - id: ogc-api-features
+    name: OGC API - Features
+    conforms: false
+    evidence: No /collections, /conformance or /api endpoints exist; the surface is Esri REST, not OGC API.
+  - id: wfs
+    name: OGC Web Feature Service
+    conforms: false
+    evidence: No WFS endpoint is exposed on the public folder.
+  - id: green-button-dmd
+    name: Green Button Download My Data
+    conforms: attested
+    evidence: >-
+      EPCOR states on its Ontario service-area pages that customers can download usage and billing data in an
+      industry-standard XML format, and that "EPCOR Utilities has been certified by the Green Button Alliance".
+      A live EPCOR-branded portal exists at https://epcorgas.savagedata.com/ but every path redirects to a
+      login, so no ESPI document could be read anonymously.
+  - id: green-button-cmd
+    name: Green Button Connect My Data
+    conforms: attested
+    evidence: >-
+      EPCOR documents "Data Shares" - customer authorized, revocable, ongoing sharing of energy usage, billing
+      and account data with registered third-party vendors using security tokens - and operates a live vendor
+      registration application at https://epcorgasonboarding.savagedata.com/. No base URI or endpoint published.
+  - id: naesb-req21-espi-3.3
+    name: NAESB REQ.21 Energy Services Provider Interface 3.3
+    conforms: unverified
+    evidence: >-
+      The standard Ontario's O. Reg. 633/21 requires behind Green Button. EPCOR never cites ESPI, NAESB or a
+      version anywhere public; speculative ESPI paths (/espi/1_1/resource/ApplicationInformation,
+      /DataCustodian/oauth/authorize) all 302 into the login app.
+  - id: oauth2
+    name: OAuth 2.0
+    conforms: unverified
+    evidence: >-
+      Connect My Data is an OAuth-shaped delegated-consent flow by construction, but EPCOR never names OAuth,
+      and /.well-known/oauth-authorization-server and /.well-known/openid-configuration return the login SPA
+      rather than metadata on both savagedata hosts.
+  - id: openid-connect
+    name: OpenID Connect
+    conforms: false
+    evidence: No OIDC discovery document exists on any EPCOR or EPCOR-operated host.
+  - id: rfc9457-problem-details
+    name: RFC 9457 Problem Details
+    conforms: false
+    evidence: >-
+      Errors use the Esri `{"error": {...}}` envelope and are returned with HTTP 200, not application/problem+json.
+  - id: openapi
+    name: OpenAPI
+    conforms: false
+    evidence: >-
+      EPCOR publishes no OpenAPI. openapi/epcor-outages-arcgis-openapi.yml is derived by API Evangelist from
+      live service metadata, not published by the provider.
+  - id: rfc9116-security-txt
+    name: security.txt (RFC 9116)
+    conforms: false
+    evidence: /.well-known/security.txt returns 404 on every EPCOR host probed.
+  - id: rfc8594-sunset-header
+    name: Sunset HTTP header (RFC 8594)
+    conforms: false
+    evidence: No deprecation or sunset signalling of any kind.
+regulatory:
+  - id: ontario-o-reg-633-21
+    name: Ontario Regulation 633/21 (energy data - Green Button)
+    applies_to: >-
+      EPCOR Electricity Distribution Ontario (Collingwood and Kincardine areas) and EPCOR Natural Gas Limited
+      Partnership (Aylmer area)
+    status: live-implemented
+    deadline: '2023-11-01'
+    regulator: https://www.oeb.ca/consumer-information-and-protection/green-button
+  - id: alberta
+    name: No Alberta consumer energy data right
+    applies_to: EPCOR's Edmonton wires business and EPCOR Energy Alberta retail business
+    status: not-applicable
+    note: >-
+      No equivalent obligation exists, and no equivalent surface is offered -
+      /ca/en/ab/edmonton/account/manage-account/green-button.html returns 404.
+certifications:
+  - name: Green Button Alliance certification
+    claimed_by: EPCOR
+    source: https://www.epcor.com/ca/en/on/collingwood-area/account/manage-account/green-button.html
+    independently_verified: false
+    note: >-
+      The Green Button Alliance certified-product register returned HTTP 403 to this probe, so an entry naming
+      EPCOR could not be read. The Alliance publicly announced 55 certified Ontario utility platforms.

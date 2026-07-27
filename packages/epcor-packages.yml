@@ -1,0 +1,30 @@
+generated: '2026-07-27'
+method: searched
+result: none
+source: npm registry search, PyPI, and EPCOR's own site
+note: >-
+  EPCOR publishes no client libraries, no SDK and no CLI. It has no developer programme to ship one from. No
+  SDKs pointer is wired in apis.yml.
+packages: []
+searched:
+  - registry: npm
+    query: epcor
+    result: no first-party package
+  - registry: pypi
+    query: epcor, epcor-api
+    result: 404
+  - registry: github
+    query: github.com/epcor
+    result: not EPCOR Utilities
+name_collisions:
+  - namespace: '@epcor/* on npm'
+    packages: ['@epcor/prettier-config', '@epcor/eslint-config', '@epcor/stylelint-config']
+    owner: >-
+      The same unrelated "Engineering Project Configuration" project that owns github.com/epcor. Front-end
+      tooling configs, nothing to do with EPCOR Utilities Inc. Deliberately excluded - do not treat as
+      first-party.
+consumer_side_libraries:
+  note: >-
+    The public geospatial surface is a stock ArcGIS REST feature service, so any generic ArcGIS or GeoJSON
+    client consumes it (EPCOR's own outage map uses the Esri ArcGIS JS API 4.12). Those are Esri's libraries,
+    not EPCOR's, and are not catalogued here as provider packages.

@@ -1,0 +1,65 @@
+generated: '2026-07-27'
+method: probed
+source: >-
+  live probes of https://services6.arcgis.com/Ji2rusuWXDFSqNsP/ArcGIS/rest/services,
+  https://epcorgas.savagedata.com/ and https://epcorgasonboarding.savagedata.com/, plus EPCOR's own Green
+  Button pages
+summary:
+  types: [none, delegated-consent]
+  api_key_in: []
+  oauth2_flows: []
+  note: >-
+    EPCOR has two utterly different access models and no published authentication documentation for either.
+    The public geospatial surface needs no credential at all; the regulated consumer-data surface needs a
+    customer login and, for third parties, an application-approval process with no public technical contract.
+schemes:
+  - name: anonymous
+    surface: EPCOR public ArcGIS feature services
+    type: none
+    sources: [openapi/epcor-outages-arcgis-openapi.yml]
+    detail: >-
+      All 36 production feature services in the epcor_outages ArcGIS Online folder are shared publicly. Every
+      probed metadata document and query returned 200 with no credential, no Referer restriction and no key
+      parameter. `security: []` in the derived OpenAPI reflects this.
+    verified: '2026-07-27'
+  - name: arcgis-token
+    surface: EPCOR public ArcGIS feature services (write side)
+    type: apiKey
+    in: query
+    parameter_name: token
+    sources: [openapi/epcor-outages-arcgis-openapi.yml]
+    detail: >-
+      Several services advertise Create/Update/Delete/Editing/Extract/ChangeTracking capabilities. Writing to
+      an ArcGIS Online hosted feature service requires an ArcGIS token (Esri platform authentication, not an
+      EPCOR credential). This is inferred from the advertised capabilities and the ArcGIS platform contract -
+      no write was attempted and no token endpoint of EPCOR's own exists.
+    verified: false
+  - name: customer-login
+    surface: EPCOR Ontario Green Button - Download My Data
+    type: interactive-login
+    sources: [https://epcorgas.savagedata.com/]
+    detail: >-
+      Every path on the Green Button portal host 302s into /Connect/Authorize and serves an EPCOR-skinned
+      single page login application. Only the account holder, authenticated, can download their own XML.
+    verified: '2026-07-27'
+  - name: green-button-cmd-consent
+    surface: EPCOR Ontario Green Button - Connect My Data
+    type: delegated-consent
+    sources:
+      - https://www.epcor.com/ca/en/on/collingwood-area/account/manage-account/green-button.html
+      - https://epcorgasonboarding.savagedata.com/
+    detail: >-
+      EPCOR describes customer-authorized ongoing sharing of energy usage, billing and account data with
+      registered third-party vendors "using security tokens", revocable from a Data Shares tab. This is the
+      Green Button Connect My Data pattern, which the NAESB ESPI standard implements over OAuth 2.0 - but
+      EPCOR never names OAuth, never publishes an authorization or token endpoint, and never publishes scopes.
+      A vendor must first be approved through the registration application.
+    verified: false
+    verification_note: >-
+      /.well-known/openid-configuration, /.well-known/oauth-authorization-server and
+      /.well-known/oauth-protected-resource were requested anonymously on both savagedata hosts on 2026-07-27.
+      All returned HTTP 200 with the site's HTML single page app rather than a discovery document - a soft 404.
+      No authorization server metadata, no scopes and no token endpoint are publicly discoverable.
+scopes:
+  published: false
+  detail: No OAuth scope surface is discoverable, so no scopes/ artifact is emitted for this provider.

@@ -1,0 +1,73 @@
+generated: '2026-07-27'
+method: probed
+source: live DNS/TLS/HTTP probes of apis.yml + OpenAPI hosts
+note: >-
+  Extended beyond the two apis.yml hosts to cover every host EPCOR's programmatic surfaces actually run on -
+  the outage map, the two Green Button hosts operated for EPCOR on the Savage Data platform, and the Esri
+  ArcGIS Online host serving EPCOR's public feature services. The Green Button hosts are the weakest link:
+  TLS 1.2, a 30-day HSTS max-age, and a savagedata.com domain with no DNSSEC and no CAA - the surface that
+  carries regulated customer energy data is the least hardened of the set, and EPCOR does not control it.
+hosts:
+- host: www.epcor.com
+  https: true
+  tls_version: TLSv1.3
+  cert_expires: Sep  1 23:59:59 2026 GMT
+  hsts: true
+  hsts_max_age: 31557600
+- host: customerportal.epcor.com
+  https: true
+  tls_version: TLSv1.3
+  cert_expires: Nov 18 23:59:59 2026 GMT
+  hsts: true
+  hsts_max_age: 31536000
+- host: outages.epcor.com
+  https: true
+  tls_version: TLSv1.3
+  cert_expires: Oct 12 23:59:59 2026 GMT
+  hsts: false
+  role: public outage map single page app
+- host: epcorgas.savagedata.com
+  https: true
+  tls_version: TLSv1.2
+  cert_expires: Nov 17 14:06:38 2026 GMT
+  hsts: true
+  hsts_max_age: 2592000
+  role: Green Button Download My Data / Connect My Data customer portal (third-party operated)
+  epcor_controlled: false
+- host: epcorgasonboarding.savagedata.com
+  https: true
+  tls_version: TLSv1.2
+  cert_expires: Nov 17 14:06:38 2026 GMT
+  hsts: true
+  hsts_max_age: 2592000
+  role: Green Button third-party vendor registration application (third-party operated)
+  epcor_controlled: false
+- host: services6.arcgis.com
+  https: true
+  tls_version: TLSv1.3
+  cert_expires: Oct 13 23:59:59 2026 GMT
+  hsts: true
+  hsts_max_age: 63072000
+  role: Esri ArcGIS Online host serving EPCOR's public feature services
+  epcor_controlled: false
+domains:
+- domain: epcor.com
+  dnssec: false
+  caa: []
+  spf: true
+  dmarc: true
+  dmarc_policy: quarantine
+- domain: savagedata.com
+  dnssec: false
+  caa: []
+  spf: true
+  dmarc: true
+  dmarc_policy: quarantine
+  note: Operator of EPCOR's Ontario Green Button portal and vendor onboarding application.
+- domain: arcgis.com
+  dnssec: true
+  caa: ['0 issuewild "awstrust.com"', '0 issuewild "digicert.com"', '0 iodef "mailto:vkeymaster@esri.com"']
+  spf: true
+  dmarc: true
+  dmarc_policy: reject
+  note: Esri, not EPCOR. Recorded because EPCOR's only public machine-readable surface is hosted here.

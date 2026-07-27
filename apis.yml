@@ -11,22 +11,27 @@ description: >-
   Alberta home market it is both a wires company for Edmonton and, through EPCOR
   Energy Alberta, a regulated-rate electricity retailer, sitting at the
   distribution-and-retail end of the value chain rather than in generation
-  (generation was spun out as Capital Power in 2009). Its API posture is defined
-  entirely by regulation and nothing else: epcor.com publishes no developer
-  portal, no API documentation and no machine-readable contracts, and the
-  developer., developers., api., docs. and data. subdomains do not resolve. The
-  one programmatic consumer surface is the Green Button implementation its three
-  Ontario service areas - natural gas in the Aylmer area and electricity in the
-  Collingwood and Kincardine areas - are required to run under Ontario's energy
-  data regulation (O. Reg. 633/21), delivered as Download My Data behind a
-  customer login and Connect My Data behind a third-party vendor registration
-  portal, with EPCOR stating Green Button Alliance certification. Its far larger
-  unmandated Alberta business publishes no equivalent, and EPCOR publishes no
-  open grid or market data of its own - Alberta system and market data comes
-  from AESO, not from EPCOR. The result is a utility that is open exactly where
-  a province compelled it and closed everywhere else, with consumer data gated
-  and market data absent.
-image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/groq.png
+  (generation was spun out as Capital Power in 2009). EPCOR runs no developer
+  programme: epcor.com publishes no developer portal, no API documentation, no
+  OpenAPI and no llms.txt, and the developer., developers., api., docs. and
+  data. subdomains do not resolve. It nonetheless operates two real programmatic
+  surfaces. The first is compelled: the Green Button Download My Data and
+  Connect My Data service its three Ontario service areas - natural gas in the
+  Aylmer area and electricity in the Collingwood and Kincardine areas - must run
+  under Ontario's energy data regulation (O. Reg. 633/21), delivered behind a
+  customer login and a third-party vendor registration portal, with EPCOR
+  stating Green Button Alliance certification but publishing no base URI, no
+  ESPI version and no technical contract. The second is accidental and entirely
+  open: a public ArcGIS Online organization (owner epcor_outages) whose 36
+  production feature services - Edmonton power outage areas, Canadian water main
+  breaks, water infrastructure projects, scheduled field events, and the outage
+  and service-area layers for fourteen EPCOR Water USA districts in Arizona and
+  New Mexico - answer anonymous ArcGIS REST queries with live data. EPCOR
+  documents none of it, licenses none of it and announces none of it. The result
+  is a utility that is open where a province compelled it, open where nobody
+  noticed, and closed everywhere it would count as a product; wholesale market
+  and system data still comes from AESO and IESO, not from EPCOR.
+image: https://www.epcor.com/content/dam/epcor/images/dm-images/logos-and-icons/epcor-logo.png
 tags:
   - Energy
   - Canada
@@ -39,6 +44,9 @@ tags:
   - Grid
   - Ontario
   - Alberta
+  - Outages
+  - Geospatial
+  - Open Data
 created: '2026-07-27'
 modified: '2026-07-27'
 specificationVersion: '0.19'
@@ -84,7 +92,87 @@ apis:
         url: https://www.greenbuttonalliance.org/
       - type: Regulation
         url: https://www.oeb.ca/consumer-information-and-protection/green-button
+      - type: AgentSkill
+        url: skills/epcor-request-ontario-green-button-data.md
+  - aid: epcor:epcor-outages-arcgis
+    name: EPCOR Public Outage and Service Area Feature Services (ArcGIS REST)
+    description: >-
+      EPCOR's undocumented but fully public geospatial data surface. Its outage
+      map at outages.epcor.com loads its endpoints from a configuration file
+      that points at a publicly shared ArcGIS Online organization
+      (services6.arcgis.com/Ji2rusuWXDFSqNsP, item owner epcor_outages, access
+      public). Thirty-six production feature services answer anonymous ArcGIS
+      REST queries with live operational data: Edmonton active and planned power
+      outage areas with incident number, cause, affected-customer count,
+      neighbourhoods and street ranges; Canadian water outages and main breaks;
+      generic water events and scheduled field events; water infrastructure
+      capital projects with status, lifecycle and typed dates; and per-district
+      outage points plus service-area boundaries for fourteen EPCOR Water USA
+      districts in Arizona and New Mexico. No API key, no signup, no rate limit,
+      no licence, no terms of use and no support channel are published for it,
+      and EPCOR's own environment pipeline (dev/test/ist/uat copies) sits in the
+      same public folder. Format is selected with an f parameter (json, geojson,
+      pbf), paging uses resultOffset/resultRecordCount against a 2000-feature
+      cap, and errors are returned with HTTP 200 and an Esri error body. The
+      OpenAPI in this repo is derived by API Evangelist from live service and
+      layer metadata - EPCOR publishes no specification.
+    humanURL: https://outages.epcor.com/
+    baseURL: https://services6.arcgis.com/Ji2rusuWXDFSqNsP/ArcGIS/rest/services
+    tags:
+      - Outages
+      - Geospatial
+      - Electricity
+      - Water
+      - Open Data
+      - Edmonton
+      - Alberta
+      - Arizona
+      - New Mexico
+      - ArcGIS
+    properties:
+      - type: OpenAPI
+        url: openapi/epcor-outages-arcgis-openapi.yml
+      - type: JSONSchema
+        url: json-schema/epcor-outage-features.schema.json
+      - type: Examples
+        url: examples/epcor-power-outage-areas-query.json
+      - type: Examples
+        url: examples/epcor-arcgis-service-directory.json
+      - type: Examples
+        url: examples/epcor-water-canada-outages-query.json
+      - type: Portal
+        url: https://outages.epcor.com/
+      - type: Standard
+        url: https://developers.arcgis.com/rest/services-reference/enterprise/query-feature-service-layer/
+      - type: AgentSkill
+        url: skills/epcor-check-edmonton-power-outages.md
+      - type: AgentSkill
+        url: skills/epcor-track-water-outages-and-projects.md
+      - type: AgentSkill
+        url: skills/epcor-map-us-water-districts.md
 common:
+  - type: AgenticAccess
+    url: agentic-access/epcor-agentic-access.yml
+  - type: DomainSecurity
+    url: security/epcor-domain-security.yml
+  - type: Authentication
+    url: authentication/epcor-authentication.yml
+  - type: Conventions
+    url: conventions/epcor-conventions.yml
+  - type: ErrorCatalog
+    url: errors/epcor-problem-types.yml
+  - type: Lifecycle
+    url: lifecycle/epcor-lifecycle.yml
+  - type: Conformance
+    url: conformance/epcor-conformance.yml
+  - type: DataModel
+    url: data-model/epcor-data-model.yml
+  - type: Packages
+    url: packages/epcor-packages.yml
+  - type: LLMsTxt
+    url: llms/epcor-llms.txt
+  - type: AgentSkill
+    url: skills/_index.yml
   - type: Website
     url: https://www.epcor.com/
   - type: Website
@@ -93,10 +181,24 @@ common:
     url: https://www.epcor.com/us/en.html
   - type: LinkedIn
     url: https://www.linkedin.com/company/epcor
+  - type: Twitter
+    url: https://twitter.com/epcor
+  - type: Facebook
+    url: https://www.facebook.com/epcor
+  - type: Instagram
+    url: https://www.instagram.com/epcor
   - type: Portal
     url: https://customerportal.epcor.com/app/
   - type: StatusPage
     url: https://outages.epcor.com/
+  - type: Support
+    url: https://www.epcor.com/ca/en/ab/edmonton/contact-edmonton.html
+  - type: Blog
+    url: https://www.epcor.com/ca/en/news.html
+  - type: PrivacyPolicy
+    url: https://www.epcor.com/ca/en/about/policies/privacy-policy.html
+  - type: TermsOfService
+    url: https://www.epcor.com/ca/en/about/policies/terms-of-use.html
   - type: About
     url: https://www.epcor.com/Pages/about-epcor-ontario.aspx
 maintainers:

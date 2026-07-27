@@ -1,0 +1,69 @@
+generated: '2026-07-27'
+method: probed
+result: none
+note: >-
+  Nothing. Five hosts were probed for the full /.well-known/ discovery surface plus /llms.txt, /openapi.json
+  and /swagger.json on 2026-07-27 and not one document exists. No raw files were saved and no WellKnown or
+  SecurityTxt pointer is wired in apis.yml, because there is nothing to point at. The savagedata hosts are
+  worth noting: they answer /.well-known/* with HTTP 200 and the site's HTML single page app - a soft 404 that
+  looks like a hit to a naive crawler but carries no discovery document.
+hosts:
+  - host: https://www.epcor.com
+    documents:
+      - {path: /.well-known/security.txt, status: 404}
+      - {path: /.well-known/openid-configuration, status: 404}
+      - {path: /.well-known/oauth-authorization-server, status: 404}
+      - {path: /.well-known/oauth-protected-resource, status: 404}
+      - {path: /.well-known/api-catalog, status: 404}
+      - {path: /.well-known/ai-plugin.json, status: 404}
+      - {path: /llms.txt, status: 404}
+      - {path: /openapi.json, status: 404}
+      - {path: /swagger.json, status: 404}
+  - host: https://epcorgas.savagedata.com
+    note: Green Button Download My Data / Connect My Data customer portal.
+    documents:
+      - {path: /.well-known/security.txt, status: 404}
+      - {path: /.well-known/openid-configuration, status: 200, content_type: text/html, soft_404: true}
+      - {path: /.well-known/oauth-authorization-server, status: 200, content_type: text/html, soft_404: true}
+      - {path: /.well-known/oauth-protected-resource, status: 200, content_type: text/html, soft_404: true}
+      - {path: /.well-known/api-catalog, status: 200, content_type: text/html, soft_404: true}
+      - {path: /.well-known/ai-plugin.json, status: 404}
+      - {path: /llms.txt, status: 404}
+      - {path: /openapi.json, status: 404}
+      - {path: /swagger.json, status: 404}
+  - host: https://epcorgasonboarding.savagedata.com
+    note: Third-party Green Button vendor registration application.
+    documents:
+      - {path: /.well-known/security.txt, status: 404}
+      - {path: /.well-known/openid-configuration, status: 200, content_type: text/html, soft_404: true}
+      - {path: /.well-known/oauth-authorization-server, status: 200, content_type: text/html, soft_404: true}
+      - {path: /.well-known/oauth-protected-resource, status: 200, content_type: text/html, soft_404: true}
+      - {path: /.well-known/api-catalog, status: 200, content_type: text/html, soft_404: true}
+      - {path: /.well-known/ai-plugin.json, status: 404}
+      - {path: /llms.txt, status: 404}
+      - {path: /openapi.json, status: 404}
+      - {path: /swagger.json, status: 404}
+  - host: https://outages.epcor.com
+    note: Public outage map single page app. Its ArcGIS feature service endpoints are configured in /assets/config.json, not in a well-known document.
+    documents:
+      - {path: /.well-known/security.txt, status: 404}
+      - {path: /.well-known/openid-configuration, status: 404}
+      - {path: /.well-known/oauth-authorization-server, status: 404}
+      - {path: /.well-known/oauth-protected-resource, status: 404}
+      - {path: /.well-known/api-catalog, status: 404}
+      - {path: /.well-known/ai-plugin.json, status: 404}
+      - {path: /llms.txt, status: 404}
+      - {path: /openapi.json, status: 404}
+      - {path: /swagger.json, status: 404}
+      - {path: /assets/config.json, status: 200, content_type: application/json, saved: examples/epcor-outage-map-config.json}
+  - host: https://customerportal.epcor.com
+    documents:
+      - {path: /.well-known/security.txt, status: 404}
+      - {path: /.well-known/openid-configuration, status: 404}
+      - {path: /.well-known/oauth-authorization-server, status: 404}
+      - {path: /.well-known/oauth-protected-resource, status: 404}
+      - {path: /.well-known/api-catalog, status: 404}
+      - {path: /.well-known/ai-plugin.json, status: 404}
+      - {path: /llms.txt, status: 404}
+      - {path: /openapi.json, status: 404}
+      - {path: /swagger.json, status: 404}

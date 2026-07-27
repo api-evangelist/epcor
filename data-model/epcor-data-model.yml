@@ -1,0 +1,129 @@
+generated: '2026-07-27'
+method: derived
+source: openapi/epcor-outages-arcgis-openapi.yml (39 production feature layers, fields read from live ArcGIS layer metadata)
+note: >-
+  A flat model, not a graph. Each EPCOR feature layer is an independent, self-contained table with a
+  service-maintained object id and no foreign keys - there are no $ref links and no id-reference fields
+  between layers, so `relationships` is empty by observation rather than by omission. What ties records
+  together is geography (all layers share a coordinate space) and, weakly, EPCOR's own incident and project
+  numbers, which appear as free-text business keys inside a single layer only.
+entities:
+  - name: PowerOutageArea
+    layer: ocps_prod_av (layer 0)
+    domain: Edmonton electricity distribution
+    geometry: polygon
+    identity: {object_id: OBJECTID, global_id: GlobalID, business_key: id}
+    business_key_example: 'INC 218006057'
+    fields: [id, estresto, faulted, affcusts, cause, nbhoods, affstree]
+    semantics: >-
+      An active unplanned outage: estimated restoration time, fault start time, affected customer count,
+      cause, affected neighbourhoods and affected street ranges. Times are display strings, not timestamps.
+    operation: queryOcpsProdAv
+  - name: PlannedPowerOutageArea
+    layer: ocps_prod_pl (layer 0)
+    domain: Edmonton electricity distribution
+    geometry: polygon
+    identity: {object_id: OBJECTID, global_id: GlobalID, business_key: id}
+    fields: [id, startat, endat, affcusts, cause, details, nbhoods, lastupd, affstree]
+    semantics: A scheduled outage window. Empty at probe time (0 features).
+    operation: queryOcpsProdPl
+  - name: PowerOutagePoint
+    layer: power_outage_prod (layer 0)
+    domain: Edmonton electricity distribution
+    geometry: point
+    identity: {object_id: FID, business_key: ID}
+    fields: [ID, AvenueFrom, AvenueTo, CauseTitle, Details, FaultResto, FaultStart, NodeTitle, StreetFrom, StreetTo]
+    semantics: >-
+      An older point-geometry representation of a power outage located by street/avenue cross-ranges. Empty at
+      probe time; appears to be superseded by the ocps_* polygon services but is still published.
+    operation: queryPowerOutageProd
+  - name: WaterOutage
+    layer: EPCor_Water_Outages_Prod (layer 0) and water_canada_outages_prod (layer 0)
+    domain: Canadian water distribution
+    geometry: point
+    identity: {object_id: FID, business_key: MainbreakI}
+    business_key_example: MB4575
+    fields: [MainbreakI, Cause, ReportDate, Restoratio, Status, Details, EstimateRe, TankLocati]
+    semantics: >-
+      A water main break or water outage event with cause, report date, restoration state and a customer
+      facing status narrative. Two near-identical services carry this shape (16 and 24 records at probe time);
+      TankLocati exists only on EPCor_Water_Outages_Prod.
+    operations: [queryEPCorWaterOutagesProd, queryWaterCanadaOutagesProd]
+  - name: GenericWaterEvent
+    layer: GenericWaterEvents_Prod (layers 0 point, 1 area)
+    domain: Canadian water operations
+    geometry: point and polygon
+    identity: {object_id: OBJECTID}
+    fields: [Event, Location, EventType, CreatedBy, Description, ApproximateStartDate, ApproximateEndDate]
+    semantics: Non-outage water events with typed epoch-millisecond start/end dates. Point and area variants share the field set.
+    operations: [queryGenericWaterEventsProdL0, queryGenericWaterEventsProdL1]
+  - name: FieldEvent
+    layer: UDF_Events_Prod (layers 0 point, 1 area)
+    domain: Canadian operations
+    geometry: point and polygon
+    identity: {object_id: OBJECTID, business_key: UDFID}
+    fields: [UDFID, MSLINK, URL, SCHD_START, SCHD_END]
+    semantics: >-
+      Scheduled field/disruption events carrying a URL back to an EPCOR page and typed schedule dates. 24
+      records in each of the point and area layers at probe time - the two layers mirror each other.
+    operations: [queryUDFEventsProdL0, queryUDFEventsProdL1]
+  - name: WaterInfrastructureProject
+    layer: Water_InfrastructureProjects_Prod (layers 0 point, 1 area)
+    domain: Canadian water capital programme
+    geometry: point and polygon
+    identity: {object_id: OBJECTID, business_key: PR_NUMBER}
+    fields: [PR_NUMBER, PR_STATUS, PR_TYPE, PR_YEAR, LIFE_CYCLE, PR_NAME, START_DATE, END_DATE, OVERVIEW, REDIRECT]
+    semantics: >-
+      Construction and renewal projects with status, lifecycle stage, programme year, typed start/end dates
+      and a REDIRECT link to the project page. The richest and most reusable dataset in the folder.
+    operations: [queryWaterInfrastructureProjectsProdL0, queryWaterInfrastructureProjectsProdL1]
+  - name: UsDistrictOutage
+    layer: usa_<district>_outages_prod (layer 0) x 14 districts
+    domain: EPCOR Water USA (Arizona, New Mexico)
+    geometry: point
+    identity: {object_id: FID, business_key: FaultID}
+    fields: [ID, FaultID, CommunityI, CommunityN, ConditionI, ConditionN, Planned, ApproxArea, ReportDate, EstimateRe, ActualRest, Details, MapX, MapY, CreatedBy, CreatedDat, EditedBy, EditedDate, PublishBy, PublishDat]
+    semantics: >-
+      The US water outage record - materially richer than the Canadian one (21 fields vs 8), with planned vs
+      unplanned flag, community identity, condition codes, approximate area, and full publish/edit audit
+      columns. Districts: Agua Fria, Anthem, Chaparral, Clovis, Edgewood, Havasu, Mohave, North Mohave Valley,
+      Paradise Valley, Sun City, Sun City West, Thunder Mountain, Tubac, Willow Valley.
+    operation_pattern: queryUsa<District>OutagesProd
+  - name: UsServiceArea
+    layer: ServiceAreas_<district>_prod (layer 0) x 13 districts
+    domain: EPCOR Water USA
+    geometry: polygon
+    identity: {object_id: FID}
+    fields: [OBJECTID, ServiceAre, District, State, Shape_Leng, Shape_Area]
+    semantics: The licensed service territory polygon for a US water district - the closest thing EPCOR publishes to a footprint dataset.
+    operation_pattern: queryServiceAreas<District>Prod
+  - name: CityBoundary
+    layer: CityBoundary_prod (layer 0)
+    domain: reference geography
+    geometry: polyline
+    identity: {object_id: FID, business_key: MSLINK}
+    fields: [MSLINK, CITY_NAME_, CREATE_USE, CREATE_DAT, MODIFY_USE, MODIFY_DAT]
+    semantics: City of Edmonton boundary used as a map frame by the outage application.
+    operation: queryCityBoundaryProd
+relationships: []
+relationship_note: >-
+  No layer references another layer's identifier. The only cross-entity joins available to a consumer are
+  spatial (point-in-polygon of an outage against a service area or city boundary) and, for US districts,
+  the district name embedded in the service name itself.
+implicit_groupings:
+  - name: by-region
+    canada_alberta: [PowerOutageArea, PlannedPowerOutageArea, PowerOutagePoint, WaterOutage, GenericWaterEvent, FieldEvent, WaterInfrastructureProject, CityBoundary]
+    usa: [UsDistrictOutage, UsServiceArea]
+    ontario: []
+  - name: by-utility
+    electricity: [PowerOutageArea, PlannedPowerOutageArea, PowerOutagePoint]
+    water: [WaterOutage, GenericWaterEvent, WaterInfrastructureProject, UsDistrictOutage, UsServiceArea]
+gaps:
+  - Ontario has no geospatial layer at all - the three Ontario service areas appear nowhere in the folder.
+  - Alberta natural gas and the Ontario gas business are absent.
+  - >-
+    No customer, account, meter, premise or interval-consumption entity exists on the public side; that data
+    lives behind the Green Button surface and is unreadable anonymously.
+  - >-
+    Date semantics are inconsistent across entities - typed epoch-millisecond fields on projects and events,
+    free-text local display strings on every outage entity.

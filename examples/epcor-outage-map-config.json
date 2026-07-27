@@ -1,0 +1,18 @@
+{
+    "environment": {
+        "production": true,
+        "analyticsId": "TBD",
+        "appAnalyticsInstrumentationKey": "0d265753-f332-43b7-bbed-a586accc175c",
+        "gtagCode": "UA-2859889-36",
+        "services": {
+            "power": {
+                "edmonton": {
+                    "defaultLayerURLs": [
+                        "https://services6.arcgis.com/Ji2rusuWXDFSqNsP/ArcGIS/rest/services/CityBoundary_prod/FeatureServer"
+                    ],
+                    "featureServiceURL": "https://services6.arcgis.com/Ji2rusuWXDFSqNsP/ArcGIS/rest/services/ocps_prod_av/FeatureServer/0"
+                }
+            }
+        }
+    }
+}

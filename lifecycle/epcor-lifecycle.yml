@@ -1,0 +1,50 @@
+generated: '2026-07-27'
+method: probed
+source: >-
+  live probes of the ArcGIS service directory and EPCOR's public site; no versioning, deprecation or SLA
+  document is published by EPCOR for any programmatic surface
+versioning:
+  scheme: platform-version
+  current: ArcGIS REST currentVersion 12
+  published_by_provider: false
+  detail: >-
+    EPCOR versions nothing. The feature services carry Esri's platform `currentVersion`, and the folder itself
+    exposes EPCOR's environment pipeline in public - the same layers exist as `*_dev`, `*_test`, `*_ist`,
+    `*_uat` and `*_prod` services, all readable anonymously. Only the `*_prod` services are modelled in
+    openapi/epcor-outages-arcgis-openapi.yml; the non-prod copies are live but are not a consumer contract.
+deprecation:
+  policy_url: null
+  policy_published: false
+  sunset_header: false
+  detail: >-
+    No deprecation policy, no Sunset/Deprecation header support, no notice channel. Layer schemas and service
+    names can change without warning; the presence of both `power_outage_prod` (0 features, point geometry)
+    and `ocps_prod_av` (live polygons) suggests a superseded generation of the outage service is still
+    published with no deprecation marker.
+deprecated_operations: []
+sla:
+  url: null
+  uptime_target: null
+  published: false
+status_page:
+  url: https://outages.epcor.com/
+  kind: service-outage-map
+  detail: >-
+    EPCOR's only public operational status surface is the customer outage map - it reports electricity and
+    water outages to customers, not the availability of any API. There is no developer status page and no
+    incident feed for the feature services themselves.
+support:
+  developer_channel: none
+  general_contact: https://www.epcor.com/ca/en/ab/edmonton/contact-edmonton.html
+data_freshness:
+  ocps_prod_av: near real time - dataLastEditDate observed within hours of the 2026-07-27 probe
+  water_canada_outages_prod: 24 open records at probe time, including main breaks first reported in January
+  note: >-
+    Water outage records are not pruned aggressively; several carry report dates months old with the status
+    "repaired, awaiting surface restoration".
+green_button_surface:
+  mandated_by: Ontario O. Reg. 633/21
+  deadline: '2023-11-01'
+  status: live-implemented
+  versioning: none published - EPCOR names no ESPI, NAESB or Green Button version
+  deprecation: none published

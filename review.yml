@@ -10,12 +10,18 @@ review:
   reviewer: API Evangelist
   summary: >-
     No developer portal, no API documentation and no machine-readable contracts
-    anywhere on epcor.com. The only programmatic surface is a regulator-forced
-    one: the Green Button Download My Data and Connect My Data service EPCOR
-    runs for its three Ontario service areas under Ontario's energy data
-    regulation. Ontario is the smaller part of EPCOR's business; its Alberta
-    home market, where no consumer data right exists, has no equivalent
-    surface. EPCOR publishes no open grid or market data.
+    anywhere on epcor.com. The only programmatic surface EPCOR describes is a
+    regulator-forced one: the Green Button Download My Data and Connect My Data
+    service EPCOR runs for its three Ontario service areas under Ontario's
+    energy data regulation. Ontario is the smaller part of EPCOR's business; its
+    Alberta home market, where no consumer data right exists, has no equivalent
+    surface. But EPCOR also runs an undocumented, unannounced and entirely
+    public one - see enrichment_2026_07_27 below: a public ArcGIS Online
+    organization whose 36 production feature services (Edmonton power outages,
+    Canadian water main breaks, water infrastructure projects, 14 US water
+    district outage and service-area layers) are readable anonymously over the
+    ArcGIS REST interface. It is a real open operational data surface that EPCOR
+    neither documents nor licenses.
 mandate:
   regime: green-button-ontario
   status: live-implemented
@@ -109,14 +115,23 @@ consumer_vs_market_data_split:
     equivalent - no Green Button page exists under any Alberta path
     (/ca/en/ab/edmonton/account/manage-account/green-button.html returns 404).
   market_data_open: false
+  operational_data_open: true
   market_data_detail: >-
-    EPCOR publishes no open grid, system or market data. The only public
-    real-time surface is a human-facing outage map at https://outages.epcor.com/
-    (HTTP 200), an ArcGIS-backed single-page web app with no documented feed,
-    no published endpoint, no licence and no developer page - it is a map, not a
-    dataset. Alberta wholesale market and system data is published by AESO, and
-    Ontario market data by IESO; neither is EPCOR's publication. There is no
-    open data portal, no data licence and no data. subdomain.
+    EPCOR publishes no open grid, system or wholesale market data. Alberta
+    wholesale market and system data is published by AESO, and Ontario market
+    data by IESO; neither is EPCOR's publication. There is no open data portal,
+    no data licence and no data. subdomain.
+    CORRECTION (2026-07-27, enrichment round): the earlier statement that the
+    outage map at https://outages.epcor.com/ is "a map, not a dataset" was
+    wrong. The map loads its endpoints from /assets/config.json, which points at
+    a publicly shared ArcGIS Online organization
+    (services6.arcgis.com/Ji2rusuWXDFSqNsP, item owner `epcor_outages`,
+    access: public). All 36 *_prod feature services in that folder answer
+    anonymous ArcGIS REST queries with live data. That is open OPERATIONAL data
+    - outages, main breaks, capital projects, service territories - published
+    without documentation, without a licence and without any developer
+    announcement. It is not market data, and EPCOR appears not to think of it as
+    a publication at all.
   finding: >-
     The split is total and it runs along the regulatory line, not the technical
     one. Consumer data is available where a province wrote a regulation and
@@ -246,13 +261,83 @@ probes:
     status: 200
     note: Ontario Energy Board Green Button consumer page; the regulator-side reference for O. Reg. 633/21.
 artifacts:
-  openapi: []
+  openapi:
+    - file: openapi/epcor-outages-arcgis-openapi.yml
+      method: derived
+      note: >-
+        Derived 2026-07-27 from live ArcGIS service and layer metadata - 115 read
+        operations over 39 production feature layers. EPCOR publishes no OpenAPI;
+        this document is API Evangelist's, not EPCOR's.
   asyncapi: []
   collections: []
   note: >-
-    No OpenAPI, AsyncAPI, Swagger, Postman collection or any other
-    machine-readable contract was found for EPCOR at any probed location, so no
-    openapi/ directory was created. Nothing was generated or inferred.
+    EPCOR publishes no OpenAPI, AsyncAPI, Swagger or Postman collection at any
+    probed location. The openapi/ file in this repo is derived from live ArcGIS
+    REST metadata, not harvested from EPCOR.
+enrichment_2026_07_27:
+  finding: >-
+    The first round concluded EPCOR had no machine-readable surface. That was
+    incomplete. Following the outage map's JavaScript bundle to its
+    configuration file exposed a fully public, anonymously readable ArcGIS REST
+    data surface - the largest open data publication EPCOR makes, entirely
+    undocumented.
+  discovery_path:
+    - >-
+      https://outages.epcor.com/ is an Angular SPA loading the Esri ArcGIS JS
+      API 4.12; its main bundle references assets/config.json.
+    - >-
+      https://outages.epcor.com/assets/config.json (HTTP 200) publishes
+      featureServiceURL
+      https://services6.arcgis.com/Ji2rusuWXDFSqNsP/ArcGIS/rest/services/ocps_prod_av/FeatureServer/0
+      and a CityBoundary_prod layer.
+    - >-
+      The folder root
+      https://services6.arcgis.com/Ji2rusuWXDFSqNsP/ArcGIS/rest/services?f=json
+      (HTTP 200) lists 110 feature services, 36 of them *_prod.
+    - >-
+      ArcGIS item metadata for the backing items reports owner `epcor_outages`,
+      access `public`, tags [EPCOR, Power, Prod, OCPS, Active] - confirming this
+      is EPCOR's own organization, not a vendor's.
+  what_is_published:
+    - Edmonton active power outage areas (ocps_prod_av) - 5 live records at probe time, with incident number, cause, affected customers, neighbourhoods, street ranges and estimated restoration.
+    - Edmonton planned power outage areas (ocps_prod_pl) - empty at probe time.
+    - Canadian water outages and main breaks (EPCor_Water_Outages_Prod 16 records, water_canada_outages_prod 24 records).
+    - Generic water events and scheduled field events (GenericWaterEvents_Prod, UDF_Events_Prod - 24 records each layer).
+    - Water infrastructure projects (Water_InfrastructureProjects_Prod - 8 records, typed dates, project numbers, status and lifecycle).
+    - 14 EPCOR Water USA district outage layers and 13 US service-area boundary layers (Arizona, New Mexico) - a 21-field outage record materially richer than the Canadian one.
+    - City of Edmonton boundary (CityBoundary_prod).
+  what_is_absent:
+    - No Ontario layer of any kind - the three Ontario service areas appear nowhere in the folder.
+    - No customer, account, meter or consumption entity - that data is behind Green Button only.
+  posture_notes:
+    - >-
+      EPCOR publishes its whole environment pipeline in the same public folder -
+      *_dev, *_test, *_ist and *_uat copies of the same layers are all readable
+      anonymously. Only *_prod is a consumer surface.
+    - >-
+      Several services advertise Create/Update/Delete/Editing capabilities. No
+      write was attempted; ArcGIS Online requires a token for editing.
+    - >-
+      No licence, no terms of use, no attribution requirement, no rate limit, no
+      SLA and no contact channel is published for this surface. ArcGIS item
+      licenseInfo and copyrightText are empty.
+    - >-
+      Errors are returned with HTTP 200 and an Esri error body; outage date
+      fields are free-text local display strings with no year or timezone.
+  probes_added:
+    - {url: 'https://outages.epcor.com/assets/config.json', status: 200}
+    - {url: 'https://services6.arcgis.com/Ji2rusuWXDFSqNsP/ArcGIS/rest/services?f=json', status: 200}
+    - {url: 'https://services6.arcgis.com/Ji2rusuWXDFSqNsP/ArcGIS/rest/services/ocps_prod_av/FeatureServer/0/query?where=1%3D1&outFields=*&f=json', status: 200}
+    - {url: 'https://services6.arcgis.com/Ji2rusuWXDFSqNsP/ArcGIS/rest/services/ocps_prod_av/FeatureServer/0/query?f=geojson', status: 200}
+    - {url: 'https://www.arcgis.com/sharing/rest/content/items/998b7f18e5d042ce95a53189c5daa097?f=json', status: 200, note: 'owner epcor_outages, access public'}
+    - {url: 'https://www.epcor.com/llms.txt', status: 404}
+    - {url: 'https://www.epcor.com/.well-known/oauth-authorization-server', status: 404}
+    - {url: 'https://epcorgas.savagedata.com/.well-known/oauth-protected-resource', status: 200, note: 'soft 404 - returns the login SPA HTML, not metadata'}
+    - {url: 'https://www.epcor.com/ca/en/about/policies/privacy-policy.html', status: 200}
+    - {url: 'https://www.epcor.com/ca/en/about/policies/terms-of-use.html', status: 200}
+    - {url: 'https://www.epcor.com/ca/en/news.html', status: 200}
+    - {url: 'https://www.epcor.com/ca/en/ab/edmonton/contact-edmonton.html', status: 200}
+    - {url: 'https://registry.npmjs.org/-/v1/search?text=epcor', status: 200, note: 'only @epcor/* configs from the unrelated Engineering Project Configuration project - no first-party SDK'}
 sources:
   - url: https://www.epcor.com/ca/en/on/collingwood-area/account/manage-account/green-button.html
     type: Documentation

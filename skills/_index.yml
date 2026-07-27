@@ -1,0 +1,37 @@
+generated: '2026-07-27'
+method: generated
+source: openapi/epcor-outages-arcgis-openapi.yml + EPCOR's published Green Button pages
+skills:
+  - file: epcor-check-edmonton-power-outages.md
+    name: Check EPCOR Edmonton power outages
+    api: openapi/epcor-outages-arcgis-openapi.yml
+    operations: [listFeatureServices, getOcpsProdAvService, queryOcpsProdAv, queryOcpsProdPl, queryCityBoundaryProd]
+  - file: epcor-track-water-outages-and-projects.md
+    name: Track EPCOR water outages, main breaks and infrastructure projects
+    api: openapi/epcor-outages-arcgis-openapi.yml
+    operations:
+      - queryEPCorWaterOutagesProd
+      - queryWaterCanadaOutagesProd
+      - queryGenericWaterEventsProdL0
+      - queryGenericWaterEventsProdL1
+      - queryUDFEventsProdL0
+      - queryWaterInfrastructureProjectsProdL0
+      - queryWaterInfrastructureProjectsProdL1
+  - file: epcor-map-us-water-districts.md
+    name: Map EPCOR Water USA districts and outages
+    api: openapi/epcor-outages-arcgis-openapi.yml
+    operations:
+      - listFeatureServices
+      - queryServiceAreasAguaFriaProd
+      - queryServiceAreasMohaveProd
+      - queryServiceAreasSunCityProd
+      - queryUsaChaparralOutagesProd
+      - queryUsaSuncityOutagesProd
+      - queryUsaAguaFriaOutagesProd
+  - file: epcor-request-ontario-green-button-data.md
+    name: Obtain EPCOR Ontario Green Button customer energy data
+    api: none-published
+    operations: []
+    note: >-
+      Procedural, not operational - EPCOR publishes no technical contract for Green Button, so this skill
+      exists to stop an agent inventing endpoints.

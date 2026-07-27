@@ -1,0 +1,2691 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/epcor/refs/heads/main/json-schema/epcor-outage-features.schema.json",
+  "title": "EPCOR public feature layer attributes",
+  "description": "Attribute schemas for every publicly readable production feature layer in EPCOR's ArcGIS Online organization (services6.arcgis.com/Ji2rusuWXDFSqNsP, owner epcor_outages). DERIVED by the API Evangelist enrichment pipeline on 2026-07-27 from the live ArcGIS layer metadata documents (field names, Esri field types and aliases read verbatim); EPCOR publishes no schema of its own.",
+  "x-apievangelist": {
+    "method": "derived",
+    "generated": "2026-07-27",
+    "source": "openapi/epcor-outages-arcgis-openapi.yml"
+  },
+  "$defs": {
+    "CityBoundaryProdL0Attributes": {
+      "type": "object",
+      "description": "Attributes of a feature in the `CityBoundary_prod` layer (CityBoundary_prod, layer 0). Geometry type esriGeometryPolyline.",
+      "properties": {
+        "FID": {
+          "type": "integer",
+          "description": "Object ID; the unique, service maintained identifier.",
+          "x-esri-field-type": "esriFieldTypeOID"
+        },
+        "MSLINK": {
+          "type": "number",
+          "x-esri-field-type": "esriFieldTypeDouble"
+        },
+        "CITY_NAME_": {
+          "type": "string",
+          "maxLength": 60,
+          "x-esri-field-type": "esriFieldTypeString"
+        },
+        "CREATE_USE": {
+          "type": "string",
+          "maxLength": 10,
+          "x-esri-field-type": "esriFieldTypeString"
+        },
+        "CREATE_DAT": {
+          "type": "integer",
+          "maxLength": 8,
+          "description": "Epoch milliseconds (Esri date field).",
+          "x-esri-field-type": "esriFieldTypeDate"
+        },
+        "MODIFY_USE": {
+          "type": "string",
+          "maxLength": 10,
+          "x-esri-field-type": "esriFieldTypeString"
+        },
+        "MODIFY_DAT": {
+          "type": "integer",
+          "maxLength": 8,
+          "description": "Epoch milliseconds (Esri date field).",
+          "x-esri-field-type": "esriFieldTypeDate"
+        }
+      }
+    },
+    "EPCorWaterOutagesProdL0Attributes": {
+      "type": "object",
+      "description": "Attributes of a feature in the `EPCor_Water_Outages_Prod` layer (EPCor_Water_Outages_Prod, layer 0). Geometry type esriGeometryPoint.",
+      "properties": {
+        "FID": {
+          "type": "integer",
+          "description": "Object ID; the unique, service maintained identifier.",
+          "x-esri-field-type": "esriFieldTypeOID"
+        },
+        "MainbreakI": {
+          "type": "string",
+          "maxLength": 10,
+          "x-esri-field-type": "esriFieldTypeString"
+        },
+        "Cause": {
+          "type": "string",
+          "maxLength": 254,
+          "x-esri-field-type": "esriFieldTypeString"
+        },
+        "ReportDate": {
+          "type": "string",
+          "maxLength": 50,
+          "x-esri-field-type": "esriFieldTypeString"
+        },
+        "Restoratio": {
+          "type": "string",
+          "maxLength": 50,
+          "x-esri-field-type": "esriFieldTypeString"
+        },
+        "Status": {
+          "type": "string",
+          "maxLength": 254,
+          "x-esri-field-type": "esriFieldTypeString"
+        },
+        "Details": {
+          "type": "string",
+          "maxLength": 254,
+          "x-esri-field-type": "esriFieldTypeString"
+        },
+        "EstimateRe": {
+          "type": "string",
+          "maxLength": 254,
+          "x-esri-field-type": "esriFieldTypeString"
+        },
+        "TankLocati": {
+          "type": "string",
+          "maxLength": 256,
+          "description": "Tank Location",
+          "x-esri-field-type": "esriFieldTypeString"
+        }
+      }
+    },
+    "GenericWaterEventsProdL0Attributes": {
+      "type": "object",
+      "description": "Attributes of a feature in the `Generic_Events_Pt` layer (GenericWaterEvents_Prod, layer 0). Geometry type esriGeometryPoint.",
+      "properties": {
+        "OBJECTID": {
+          "type": "integer",
+          "description": "Object ID; the unique, service maintained identifier.",
+          "x-esri-field-type": "esriFieldTypeOID"
+        },
+        "Event": {
+          "type": "string",
+          "maxLength": 256,
+          "x-esri-field-type": "esriFieldTypeString"
+        },
+        "Location": {
+          "type": "string",
+          "maxLength": 256,
+          "x-esri-field-type": "esriFieldTypeString"
+        },
+        "EventType": {
+          "type": "string",
+          "maxLength": 256,
+          "description": "Event Type",
+          "x-esri-field-type": "esriFieldTypeString"
+        },
+        "CreatedBy": {
+          "type": "string",
+          "maxLength": 256,
+          "description": "Created By:",
+          "x-esri-field-type": "esriFieldTypeString"
+        },
+        "Description": {
+          "type": "string",
+          "maxLength": 256,
+          "x-esri-field-type": "esriFieldTypeString"
+        },
+        "ApproximateStartDate": {
+          "type": "integer",
+          "maxLength": 8,
+          "description": "Approximate Start Date Epoch milliseconds (Esri date field).",
+          "x-esri-field-type": "esriFieldTypeDate"
+        },
+        "ApproximateEndDate": {
+          "type": "integer",
+          "maxLength": 8,
+          "description": "Approximate End Date Epoch milliseconds (Esri date field).",
+          "x-esri-field-type": "esriFieldTypeDate"
+        }
+      }
+    },
+    "GenericWaterEventsProdL1Attributes": {
+      "type": "object",
+      "description": "Attributes of a feature in the `Generic_Events_Area` layer (GenericWaterEvents_Prod, layer 1). Geometry type esriGeometryPolygon.",
+      "properties": {
+        "OBJECTID": {
+          "type": "integer",
+          "description": "Object ID; the unique, service maintained identifier.",
+          "x-esri-field-type": "esriFieldTypeOID"
+        },
+        "Event": {
+          "type": "string",
+          "maxLength": 256,
+          "x-esri-field-type": "esriFieldTypeString"
+        },
+        "Location": {
+          "type": "string",
+          "maxLength": 256,
+          "x-esri-field-type": "esriFieldTypeString"
+        },
+        "EventType": {
+          "type": "string",
+          "maxLength": 256,
+          "description": "Event Type",
+          "x-esri-field-type": "esriFieldTypeString"
+        },
+        "CreatedBy": {
+          "type": "string",
+          "maxLength": 256,
+          "description": "Created By:",
+          "x-esri-field-type": "esriFieldTypeString"
+        },
+        "Description": {
+          "type": "string",
+          "maxLength": 256,
+          "x-esri-field-type": "esriFieldTypeString"
+        },
+        "ApproximateStartDate": {
+          "type": "integer",
+          "maxLength": 8,
+          "description": "Approximate Start Date Epoch milliseconds (Esri date field).",
+          "x-esri-field-type": "esriFieldTypeDate"
+        },
+        "ApproximateEndDate": {
+          "type": "integer",
+          "maxLength": 8,
+          "description": "Approximate End Date Epoch milliseconds (Esri date field).",
+          "x-esri-field-type": "esriFieldTypeDate"
+        },
+        "Shape__Area": {
+          "type": "number",
+          "x-esri-field-type": "esriFieldTypeDouble"
+        },
+        "Shape__Length": {
+          "type": "number",
+          "x-esri-field-type": "esriFieldTypeDouble"
+        }
+      }
+    },
+    "OcpsProdAvL0Attributes": {
+      "type": "object",
+      "description": "Attributes of a feature in the `ocps_prod_av` layer (ocps_prod_av, layer 0). Geometry type esriGeometryPolygon.",
+      "properties": {
+        "OBJECTID": {
+          "type": "integer",
+          "description": "Object ID; the unique, service maintained identifier.",
+          "x-esri-field-type": "esriFieldTypeOID"
+        },
+        "id": {
+          "type": "string",
+          "maxLength": 256,
+          "description": "ID",
+          "x-esri-field-type": "esriFieldTypeString"
+        },
+        "Shape__Area": {
+          "type": "number",
+          "x-esri-field-type": "esriFieldTypeDouble"
+        },
+        "Shape__Length": {
+          "type": "number",
+          "x-esri-field-type": "esriFieldTypeDouble"
+        },
+        "GlobalID": {
+          "type": "string",
+          "maxLength": 38,
+          "description": "GUID.",
+          "x-esri-field-type": "esriFieldTypeGlobalID"
+        },
+        "estresto": {
+          "type": "string",
+          "maxLength": 50,
+          "description": "Est. Restoration Time",
+          "x-esri-field-type": "esriFieldTypeString"
+        },
+        "faulted": {
+          "type": "string",
+          "maxLength": 50,
+          "description": "Faulted At",
+          "x-esri-field-type": "esriFieldTypeString"
+        },
+        "affcusts": {
+          "type": "string",
+          "maxLength": 15,
+          "description": "Affected Customers",
+          "x-esri-field-type": "esriFieldTypeString"
+        },
+        "cause": {
+          "type": "string",
+          "maxLength": 200,
+          "description": "Cause",
+          "x-esri-field-type": "esriFieldTypeString"
+        },
+        "nbhoods": {
+          "type": "string",
+          "maxLength": 1000,
+          "description": "Affected Neighborhoods",
+          "x-esri-field-type": "esriFieldTypeString"
+        },
+        "affstree": {
+          "type": "string",
+          "maxLength": 2147483647,
+          "description": "Affected Streets",
+          "x-esri-field-type": "esriFieldTypeString"
+        }
+      },
+      "examples": [
+        {
+          "OBJECTID": 12883,
+          "id": "INC 218006057",
+          "Shape__Area": null,
+          "Shape__Length": null,
+          "GlobalID": "86f1e356-7e39-4ab8-9fac-fbd22371f2be",
+          "estresto": "Jul-27 5:30 PM",
+          "faulted": "Jul-25 9:39 PM",
+          "affcusts": "1",
+          "cause": "Under review",
+          "nbhoods": "Parkview",
+          "affstree": "VALLEYVIEW CRESCENT NW, VALLEYVIEW DRIVE NW, VALLEYVIEW POINT NW, 88 AVENUE NW - 92A AVENUE NW, 137 STREET NW - 143 STREET NW"
+        }
+      ]
+    },
+    "OcpsProdPlL0Attributes": {
+      "type": "object",
+      "description": "Attributes of a feature in the `ocps_prod_pl` layer (ocps_prod_pl, layer 0). Geometry type esriGeometryPolygon.",
+      "properties": {
+        "OBJECTID": {
+          "type": "integer",
+          "description": "Object ID; the unique, service maintained identifier.",
+          "x-esri-field-type": "esriFieldTypeOID"
+        },
+        "id": {
+          "type": "string",
+          "maxLength": 256,
+          "description": "ID",
+          "x-esri-field-type": "esriFieldTypeString"
+        },
+        "Shape__Area": {
+          "type": "number",
+          "x-esri-field-type": "esriFieldTypeDouble"
+        },
+        "Shape__Length": {
+          "type": "number",
+          "x-esri-field-type": "esriFieldTypeDouble"
+        },
+        "GlobalID": {
+          "type": "string",
+          "maxLength": 38,
+          "description": "GUID.",
+          "x-esri-field-type": "esriFieldTypeGlobalID"
+        },
+        "startat": {
+          "type": "string",
+          "maxLength": 50,
+          "description": "Start Time",
+          "x-esri-field-type": "esriFieldTypeString"
+        },
+        "endat": {
+          "type": "string",
+          "maxLength": 50,
+          "description": "End Time",
+          "x-esri-field-type": "esriFieldTypeString"
+        },
+        "affcusts": {
+          "type": "string",
+          "maxLength": 15,
+          "description": "Affected Customers",
+          "x-esri-field-type": "esriFieldTypeString"
+        },
+        "cause": {
+          "type": "string",
+          "maxLength": 200,
+          "description": "Cause",
+          "x-esri-field-type": "esriFieldTypeString"
+        },
+        "details": {
+          "type": "string",
+          "maxLength": 300,
+          "description": "Details",
+          "x-esri-field-type": "esriFieldTypeString"
+        },
+        "nbhoods": {
+          "type": "string",
+          "maxLength": 1000,
+          "description": "Affected Neighborhoods",
+          "x-esri-field-type": "esriFieldTypeString"
+        },
+        "lastupd": {
+          "type": "string",
+          "maxLength": 25,
+          "description": "Lasted Updated Time",
+          "x-esri-field-type": "esriFieldTypeString"
+        },
+        "affstree": {
+          "type": "string",
+          "maxLength": 8000,
+          "description": "Affected Streets",
+          "x-esri-field-type": "esriFieldTypeString"
+        }
+      }
+    },
+    "PowerOutageProdL0Attributes": {
+      "type": "object",
+      "description": "Attributes of a feature in the `power_outage-prod` layer (power_outage_prod, layer 0). Geometry type esriGeometryPoint.",
+      "properties": {
+        "FID": {
+          "type": "integer",
+          "description": "Object ID; the unique, service maintained identifier.",
+          "x-esri-field-type": "esriFieldTypeOID"
+        },
+        "ID": {
+          "type": "number",
+          "x-esri-field-type": "esriFieldTypeDouble"
+        },
+        "AvenueFrom": {
+          "type": "string",
+          "maxLength": 200,
+          "x-esri-field-type": "esriFieldTypeString"
+        },
+        "AvenueTo": {
+          "type": "string",
+          "maxLength": 200,
+          "x-esri-field-type": "esriFieldTypeString"
+        },
+        "CauseTitle": {
+          "type": "string",
+          "maxLength": 200,
+          "x-esri-field-type": "esriFieldTypeString"
+        },
+        "Details": {
+          "type": "string",
+          "maxLength": 200,
+          "x-esri-field-type": "esriFieldTypeString"
+        },
+        "FaultResto": {
+          "type": "string",
+          "maxLength": 200,
+          "x-esri-field-type": "esriFieldTypeString"
+        },
+        "FaultStart": {
+          "type": "string",
+          "maxLength": 200,
+          "x-esri-field-type": "esriFieldTypeString"
+        },
+        "NodeTitle": {
+          "type": "string",
+          "maxLength": 200,
+          "x-esri-field-type": "esriFieldTypeString"
+        },
+        "StreetFrom": {
+          "type": "string",
+          "maxLength": 200,
+          "x-esri-field-type": "esriFieldTypeString"
+        },
+        "StreetTo": {
+          "type": "string",
+          "maxLength": 200,
+          "x-esri-field-type": "esriFieldTypeString"
+        }
+      }
+    },
+    "ServiceAreasAguaFriaProdL0Attributes": {
+      "type": "object",
+      "description": "Attributes of a feature in the `ServiceAreas_AguaFria_prod` layer (ServiceAreas_AguaFria_prod, layer 0). Geometry type esriGeometryPolygon.",
+      "properties": {
+        "FID": {
+          "type": "integer",
+          "description": "Object ID; the unique, service maintained identifier.",
+          "x-esri-field-type": "esriFieldTypeOID"
+        },
+        "OBJECTID": {
+          "type": "number",
+          "x-esri-field-type": "esriFieldTypeDouble"
+        },
+        "ServiceAre": {
+          "type": "string",
+          "maxLength": 30,
+          "x-esri-field-type": "esriFieldTypeString"
+        },
+        "District": {
+          "type": "string",
+          "maxLength": 50,
+          "x-esri-field-type": "esriFieldTypeString"
+        },
+        "State": {
+          "type": "string",
+          "maxLength": 20,
+          "x-esri-field-type": "esriFieldTypeString"
+        },
+        "Shape_Leng": {
+          "type": "number",
+          "x-esri-field-type": "esriFieldTypeDouble"
+        },
+        "Shape_Area": {
+          "type": "number",
+          "x-esri-field-type": "esriFieldTypeDouble"
+        }
+      }
+    },
+    "ServiceAreasAnthemProdL0Attributes": {
+      "type": "object",
+      "description": "Attributes of a feature in the `ServiceAreas_Anthem_prod` layer (ServiceAreas_Anthem_prod, layer 0). Geometry type esriGeometryPolygon.",
+      "properties": {
+        "FID": {
+          "type": "integer",
+          "description": "Object ID; the unique, service maintained identifier.",
+          "x-esri-field-type": "esriFieldTypeOID"
+        },
+        "OBJECTID": {
+          "type": "number",
+          "x-esri-field-type": "esriFieldTypeDouble"
+        },
+        "ServiceAre": {
+          "type": "string",
+          "maxLength": 30,
+          "x-esri-field-type": "esriFieldTypeString"
+        },
+        "District": {
+          "type": "string",
+          "maxLength": 50,
+          "x-esri-field-type": "esriFieldTypeString"
+        },
+        "State": {
+          "type": "string",
+          "maxLength": 20,
+          "x-esri-field-type": "esriFieldTypeString"
+        },
+        "Shape_Leng": {
+          "type": "number",
+          "x-esri-field-type": "esriFieldTypeDouble"
+        },
+        "Shape_Area": {
+          "type": "number",
+          "x-esri-field-type": "esriFieldTypeDouble"
+        }
+      }
+    },
+    "ServiceAreasChaparralProdL0Attributes": {
+      "type": "object",
+      "description": "Attributes of a feature in the `ServiceAreas_Chaparral_prod` layer (ServiceAreas_Chaparral_prod, layer 0). Geometry type esriGeometryPolygon.",
+      "properties": {
+        "FID": {
+          "type": "integer",
+          "description": "Object ID; the unique, service maintained identifier.",
+          "x-esri-field-type": "esriFieldTypeOID"
+        },
+        "OBJECTID": {
+          "type": "number",
+          "x-esri-field-type": "esriFieldTypeDouble"
+        },
+        "ServiceAre": {
+          "type": "string",
+          "maxLength": 30,
+          "x-esri-field-type": "esriFieldTypeString"
+        },
+        "District": {
+          "type": "string",
+          "maxLength": 50,
+          "x-esri-field-type": "esriFieldTypeString"
+        },
+        "State": {
+          "type": "string",
+          "maxLength": 20,
+          "x-esri-field-type": "esriFieldTypeString"
+        },
+        "Shape_Leng": {
+          "type": "number",
+          "x-esri-field-type": "esriFieldTypeDouble"
+        },
+        "Shape_Area": {
+          "type": "number",
+          "x-esri-field-type": "esriFieldTypeDouble"
+        }
+      }
+    },
+    "ServiceAreasClovisProdL0Attributes": {
+      "type": "object",
+      "description": "Attributes of a feature in the `ServiceAreas_Clovis_prod` layer (ServiceAreas_Clovis_prod, layer 0). Geometry type esriGeometryPolygon.",
+      "properties": {
+        "FID": {
+          "type": "integer",
+          "description": "Object ID; the unique, service maintained identifier.",
+          "x-esri-field-type": "esriFieldTypeOID"
+        },
+        "OBJECTID": {
+          "type": "number",
+          "x-esri-field-type": "esriFieldTypeDouble"
+        },
+        "ServiceAre": {
+          "type": "string",
+          "maxLength": 30,
+          "x-esri-field-type": "esriFieldTypeString"
+        },
+        "District": {
+          "type": "string",
+          "maxLength": 50,
+          "x-esri-field-type": "esriFieldTypeString"
+        },
+        "State": {
+          "type": "string",
+          "maxLength": 20,
+          "x-esri-field-type": "esriFieldTypeString"
+        },
+        "Shape_Leng": {
+          "type": "number",
+          "x-esri-field-type": "esriFieldTypeDouble"
+        },
+        "Shape_Area": {
+          "type": "number",
+          "x-esri-field-type": "esriFieldTypeDouble"
+        }
+      }
+    },
+    "ServiceAreasEdgewoodProdL0Attributes": {
+      "type": "object",
+      "description": "Attributes of a feature in the `ServiceAreas_Edgewood_prod` layer (ServiceAreas_Edgewood_prod, layer 0). Geometry type esriGeometryPolygon.",
+      "properties": {
+        "FID": {
+          "type": "integer",
+          "description": "Object ID; the unique, service maintained identifier.",
+          "x-esri-field-type": "esriFieldTypeOID"
+        },
+        "OBJECTID": {
+          "type": "number",
+          "x-esri-field-type": "esriFieldTypeDouble"
+        },
+        "ServiceAre": {
+          "type": "string",
+          "maxLength": 30,
+          "x-esri-field-type": "esriFieldTypeString"
+        },
+        "District": {
+          "type": "string",
+          "maxLength": 50,
+          "x-esri-field-type": "esriFieldTypeString"
+        },
+        "State": {
+          "type": "string",
+          "maxLength": 20,
+          "x-esri-field-type": "esriFieldTypeString"
+        },
+        "Shape_Leng": {
+          "type": "number",
+          "x-esri-field-type": "esriFieldTypeDouble"
+        },
+        "Shape_Area": {
+          "type": "number",
+          "x-esri-field-type": "esriFieldTypeDouble"
+        }
+      }
+    },
+    "ServiceAreasHavasuProdL0Attributes": {
+      "type": "object",
+      "description": "Attributes of a feature in the `ServiceAreas_Havasu_prod` layer (ServiceAreas_Havasu_prod, layer 0). Geometry type esriGeometryPolygon.",
+      "properties": {
+        "FID": {
+          "type": "integer",
+          "description": "Object ID; the unique, service maintained identifier.",
+          "x-esri-field-type": "esriFieldTypeOID"
+        },
+        "OBJECTID": {
+          "type": "number",
+          "x-esri-field-type": "esriFieldTypeDouble"
+        },
+        "ServiceAre": {
+          "type": "string",
+          "maxLength": 30,
+          "x-esri-field-type": "esriFieldTypeString"
+        },
+        "District": {
+          "type": "string",
+          "maxLength": 50,
+          "x-esri-field-type": "esriFieldTypeString"
+        },
+        "State": {
+          "type": "string",
+          "maxLength": 20,
+          "x-esri-field-type": "esriFieldTypeString"
+        },
+        "Shape_Leng": {
+          "type": "number",
+          "x-esri-field-type": "esriFieldTypeDouble"
+        },
+        "Shape_Area": {
+          "type": "number",
+          "x-esri-field-type": "esriFieldTypeDouble"
+        }
+      }
+    },
+    "ServiceAreasMohaveProdL0Attributes": {
+      "type": "object",
+      "description": "Attributes of a feature in the `ServiceAreas_Mohave_prod` layer (ServiceAreas_Mohave_prod, layer 0). Geometry type esriGeometryPolygon.",
+      "properties": {
+        "FID": {
+          "type": "integer",
+          "description": "Object ID; the unique, service maintained identifier.",
+          "x-esri-field-type": "esriFieldTypeOID"
+        },
+        "OBJECTID": {
+          "type": "number",
+          "x-esri-field-type": "esriFieldTypeDouble"
+        },
+        "ServiceAre": {
+          "type": "string",
+          "maxLength": 30,
+          "x-esri-field-type": "esriFieldTypeString"
+        },
+        "District": {
+          "type": "string",
+          "maxLength": 50,
+          "x-esri-field-type": "esriFieldTypeString"
+        },
+        "State": {
+          "type": "string",
+          "maxLength": 20,
+          "x-esri-field-type": "esriFieldTypeString"
+        },
+        "Shape_Leng": {
+          "type": "number",
+          "x-esri-field-type": "esriFieldTypeDouble"
+        },
+        "Shape_Area": {
+          "type": "number",
+          "x-esri-field-type": "esriFieldTypeDouble"
+        }
+      }
+    },
+    "ServiceAreasNorthMohaveValleyProdL0Attributes": {
+      "type": "object",
+      "description": "Attributes of a feature in the `ServiceAreas_NorthMohaveValley_prod` layer (ServiceAreas_NorthMohaveValley_prod, layer 0). Geometry type esriGeometryPolygon.",
+      "properties": {
+        "FID": {
+          "type": "integer",
+          "description": "Object ID; the unique, service maintained identifier.",
+          "x-esri-field-type": "esriFieldTypeOID"
+        },
+        "OBJECTID": {
+          "type": "number",
+          "x-esri-field-type": "esriFieldTypeDouble"
+        },
+        "ServiceAre": {
+          "type": "string",
+          "maxLength": 30,
+          "x-esri-field-type": "esriFieldTypeString"
+        },
+        "District": {
+          "type": "string",
+          "maxLength": 50,
+          "x-esri-field-type": "esriFieldTypeString"
+        },
+        "State": {
+          "type": "string",
+          "maxLength": 20,
+          "x-esri-field-type": "esriFieldTypeString"
+        },
+        "Shape_Leng": {
+          "type": "number",
+          "x-esri-field-type": "esriFieldTypeDouble"
+        },
+        "Shape_Area": {
+          "type": "number",
+          "x-esri-field-type": "esriFieldTypeDouble"
+        }
+      }
+    },
+    "ServiceAreasParadiseValleyProdL0Attributes": {
+      "type": "object",
+      "description": "Attributes of a feature in the `ServiceAreas_ParadiseValley_prod` layer (ServiceAreas_ParadiseValley_prod, layer 0). Geometry type esriGeometryPolygon.",
+      "properties": {
+        "FID": {
+          "type": "integer",
+          "description": "Object ID; the unique, service maintained identifier.",
+          "x-esri-field-type": "esriFieldTypeOID"
+        },
+        "OBJECTID": {
+          "type": "number",
+          "x-esri-field-type": "esriFieldTypeDouble"
+        },
+        "ServiceAre": {
+          "type": "string",
+          "maxLength": 30,
+          "x-esri-field-type": "esriFieldTypeString"
+        },
+        "District": {
+          "type": "string",
+          "maxLength": 50,
+          "x-esri-field-type": "esriFieldTypeString"
+        },
+        "State": {
+          "type": "string",
+          "maxLength": 20,
+          "x-esri-field-type": "esriFieldTypeString"
+        },
+        "Shape_Leng": {
+          "type": "number",
+          "x-esri-field-type": "esriFieldTypeDouble"
+        },
+        "Shape_Area": {
+          "type": "number",
+          "x-esri-field-type": "esriFieldTypeDouble"
+        }
+      }
+    },
+    "ServiceAreasSunCityProdL0Attributes": {
+      "type": "object",
+      "description": "Attributes of a feature in the `ServiceAreas_SunCity_prod` layer (ServiceAreas_SunCity_prod, layer 0). Geometry type esriGeometryPolygon.",
+      "properties": {
+        "FID": {
+          "type": "integer",
+          "description": "Object ID; the unique, service maintained identifier.",
+          "x-esri-field-type": "esriFieldTypeOID"
+        },
+        "OBJECTID": {
+          "type": "number",
+          "x-esri-field-type": "esriFieldTypeDouble"
+        },
+        "ServiceAre": {
+          "type": "string",
+          "maxLength": 30,
+          "x-esri-field-type": "esriFieldTypeString"
+        },
+        "District": {
+          "type": "string",
+          "maxLength": 50,
+          "x-esri-field-type": "esriFieldTypeString"
+        },
+        "State": {
+          "type": "string",
+          "maxLength": 20,
+          "x-esri-field-type": "esriFieldTypeString"
+        },
+        "Shape_Leng": {
+          "type": "number",
+          "x-esri-field-type": "esriFieldTypeDouble"
+        },
+        "Shape_Area": {
+          "type": "number",
+          "x-esri-field-type": "esriFieldTypeDouble"
+        }
+      }
+    },
+    "ServiceAreasSunCityWestProdL0Attributes": {
+      "type": "object",
+      "description": "Attributes of a feature in the `ServiceAreas_SunCityWest_prod` layer (ServiceAreas_SunCityWest_prod, layer 0). Geometry type esriGeometryPolygon.",
+      "properties": {
+        "FID": {
+          "type": "integer",
+          "description": "Object ID; the unique, service maintained identifier.",
+          "x-esri-field-type": "esriFieldTypeOID"
+        },
+        "OBJECTID": {
+          "type": "number",
+          "x-esri-field-type": "esriFieldTypeDouble"
+        },
+        "ServiceAre": {
+          "type": "string",
+          "maxLength": 30,
+          "x-esri-field-type": "esriFieldTypeString"
+        },
+        "District": {
+          "type": "string",
+          "maxLength": 50,
+          "x-esri-field-type": "esriFieldTypeString"
+        },
+        "State": {
+          "type": "string",
+          "maxLength": 20,
+          "x-esri-field-type": "esriFieldTypeString"
+        },
+        "Shape_Leng": {
+          "type": "number",
+          "x-esri-field-type": "esriFieldTypeDouble"
+        },
+        "Shape_Area": {
+          "type": "number",
+          "x-esri-field-type": "esriFieldTypeDouble"
+        }
+      }
+    },
+    "ServiceAreasThunderMountainProdL0Attributes": {
+      "type": "object",
+      "description": "Attributes of a feature in the `ServiceAreas_ThunderMountain_prod` layer (ServiceAreas_ThunderMountain_prod, layer 0). Geometry type esriGeometryPolygon.",
+      "properties": {
+        "FID": {
+          "type": "integer",
+          "description": "Object ID; the unique, service maintained identifier.",
+          "x-esri-field-type": "esriFieldTypeOID"
+        },
+        "OBJECTID": {
+          "type": "number",
+          "x-esri-field-type": "esriFieldTypeDouble"
+        },
+        "ServiceAre": {
+          "type": "string",
+          "maxLength": 30,
+          "x-esri-field-type": "esriFieldTypeString"
+        },
+        "District": {
+          "type": "string",
+          "maxLength": 50,
+          "x-esri-field-type": "esriFieldTypeString"
+        },
+        "State": {
+          "type": "string",
+          "maxLength": 20,
+          "x-esri-field-type": "esriFieldTypeString"
+        },
+        "Shape_Leng": {
+          "type": "number",
+          "x-esri-field-type": "esriFieldTypeDouble"
+        },
+        "Shape_Area": {
+          "type": "number",
+          "x-esri-field-type": "esriFieldTypeDouble"
+        }
+      }
+    },
+    "ServiceAreasTubacProdL0Attributes": {
+      "type": "object",
+      "description": "Attributes of a feature in the `ServiceAreas_Tubac_prod` layer (ServiceAreas_Tubac_prod, layer 0). Geometry type esriGeometryPolygon.",
+      "properties": {
+        "FID": {
+          "type": "integer",
+          "description": "Object ID; the unique, service maintained identifier.",
+          "x-esri-field-type": "esriFieldTypeOID"
+        },
+        "OBJECTID": {
+          "type": "number",
+          "x-esri-field-type": "esriFieldTypeDouble"
+        },
+        "ServiceAre": {
+          "type": "string",
+          "maxLength": 30,
+          "x-esri-field-type": "esriFieldTypeString"
+        },
+        "District": {
+          "type": "string",
+          "maxLength": 50,
+          "x-esri-field-type": "esriFieldTypeString"
+        },
+        "State": {
+          "type": "string",
+          "maxLength": 20,
+          "x-esri-field-type": "esriFieldTypeString"
+        },
+        "Shape_Leng": {
+          "type": "number",
+          "x-esri-field-type": "esriFieldTypeDouble"
+        },
+        "Shape_Area": {
+          "type": "number",
+          "x-esri-field-type": "esriFieldTypeDouble"
+        }
+      }
+    },
+    "UDFEventsProdL0Attributes": {
+      "type": "object",
+      "description": "Attributes of a feature in the `UDF_Events_Pt` layer (UDF_Events_Prod, layer 0). Geometry type esriGeometryPoint.",
+      "properties": {
+        "OBJECTID": {
+          "type": "integer",
+          "description": "Object ID; the unique, service maintained identifier.",
+          "x-esri-field-type": "esriFieldTypeOID"
+        },
+        "UDFID": {
+          "type": "string",
+          "maxLength": 50,
+          "description": "UDF Area",
+          "x-esri-field-type": "esriFieldTypeString"
+        },
+        "MSLINK": {
+          "type": "integer",
+          "description": "MSLink",
+          "x-esri-field-type": "esriFieldTypeInteger"
+        },
+        "URL": {
+          "type": "string",
+          "maxLength": 400,
+          "x-esri-field-type": "esriFieldTypeString"
+        },
+        "SCHD_START": {
+          "type": "integer",
+          "maxLength": 8,
+          "description": "Approximate Start Date Epoch milliseconds (Esri date field).",
+          "x-esri-field-type": "esriFieldTypeDate"
+        },
+        "SCHD_END": {
+          "type": "integer",
+          "maxLength": 8,
+          "description": "Approximate End Date Epoch milliseconds (Esri date field).",
+          "x-esri-field-type": "esriFieldTypeDate"
+        }
+      }
+    },
+    "UDFEventsProdL1Attributes": {
+      "type": "object",
+      "description": "Attributes of a feature in the `UDF_Events_area` layer (UDF_Events_Prod, layer 1). Geometry type esriGeometryPolygon.",
+      "properties": {
+        "OBJECTID": {
+          "type": "integer",
+          "description": "Object ID; the unique, service maintained identifier.",
+          "x-esri-field-type": "esriFieldTypeOID"
+        },
+        "UDFID": {
+          "type": "string",
+          "maxLength": 50,
+          "description": "UDF Area",
+          "x-esri-field-type": "esriFieldTypeString"
+        },
+        "MSLINK": {
+          "type": "integer",
+          "x-esri-field-type": "esriFieldTypeInteger"
+        },
+        "URL": {
+          "type": "string",
+          "maxLength": 400,
+          "x-esri-field-type": "esriFieldTypeString"
+        },
+        "SCHD_START": {
+          "type": "integer",
+          "maxLength": 8,
+          "description": "Approximate Start Date Epoch milliseconds (Esri date field).",
+          "x-esri-field-type": "esriFieldTypeDate"
+        },
+        "SCHD_END": {
+          "type": "integer",
+          "maxLength": 8,
+          "description": "Approximate End Date Epoch milliseconds (Esri date field).",
+          "x-esri-field-type": "esriFieldTypeDate"
+        },
+        "Shape__Area": {
+          "type": "number",
+          "x-esri-field-type": "esriFieldTypeDouble"
+        },
+        "Shape__Length": {
+          "type": "number",
+          "x-esri-field-type": "esriFieldTypeDouble"
+        }
+      }
+    },
+    "UsaAguaFriaOutagesProdL0Attributes": {
+      "type": "object",
+      "description": "Attributes of a feature in the `usa_agua_fria_outages-prod` layer (usa_agua_fria_outages_prod, layer 0). Geometry type esriGeometryPoint.",
+      "properties": {
+        "FID": {
+          "type": "integer",
+          "description": "Object ID; the unique, service maintained identifier.",
+          "x-esri-field-type": "esriFieldTypeOID"
+        },
+        "ID": {
+          "type": "number",
+          "x-esri-field-type": "esriFieldTypeDouble"
+        },
+        "FaultID": {
+          "type": "number",
+          "x-esri-field-type": "esriFieldTypeDouble"
+        },
+        "CommunityI": {
+          "type": "number",
+          "x-esri-field-type": "esriFieldTypeDouble"
+        },
+        "CommunityN": {
+          "type": "string",
+          "maxLength": 250,
+          "x-esri-field-type": "esriFieldTypeString"
+        },
+        "ConditionI": {
+          "type": "number",
+          "x-esri-field-type": "esriFieldTypeDouble"
+        },
+        "Planned": {
+          "type": "string",
+          "maxLength": 1,
+          "x-esri-field-type": "esriFieldTypeString"
+        },
+        "ApproxArea": {
+          "type": "string",
+          "maxLength": 250,
+          "x-esri-field-type": "esriFieldTypeString"
+        },
+        "ReportDate": {
+          "type": "string",
+          "maxLength": 20,
+          "x-esri-field-type": "esriFieldTypeString"
+        },
+        "EstimateRe": {
+          "type": "string",
+          "maxLength": 20,
+          "x-esri-field-type": "esriFieldTypeString"
+        },
+        "ActualRest": {
+          "type": "string",
+          "maxLength": 20,
+          "x-esri-field-type": "esriFieldTypeString"
+        },
+        "Details": {
+          "type": "string",
+          "maxLength": 254,
+          "x-esri-field-type": "esriFieldTypeString"
+        },
+        "MapX": {
+          "type": "number",
+          "x-esri-field-type": "esriFieldTypeDouble"
+        },
+        "MapY": {
+          "type": "number",
+          "x-esri-field-type": "esriFieldTypeDouble"
+        },
+        "CreatedBy": {
+          "type": "string",
+          "maxLength": 50,
+          "x-esri-field-type": "esriFieldTypeString"
+        },
+        "CreatedDat": {
+          "type": "string",
+          "maxLength": 20,
+          "x-esri-field-type": "esriFieldTypeString"
+        },
+        "EditedBy": {
+          "type": "string",
+          "maxLength": 50,
+          "x-esri-field-type": "esriFieldTypeString"
+        },
+        "EditedDate": {
+          "type": "string",
+          "maxLength": 20,
+          "x-esri-field-type": "esriFieldTypeString"
+        },
+        "PublishBy": {
+          "type": "string",
+          "maxLength": 50,
+          "x-esri-field-type": "esriFieldTypeString"
+        },
+        "PublishDat": {
+          "type": "string",
+          "maxLength": 20,
+          "x-esri-field-type": "esriFieldTypeString"
+        },
+        "ConditionN": {
+          "type": "string",
+          "maxLength": 50,
+          "x-esri-field-type": "esriFieldTypeString"
+        }
+      }
+    },
+    "UsaAnthemOutagesProdL0Attributes": {
+      "type": "object",
+      "description": "Attributes of a feature in the `usa_anthem_outages-prod` layer (usa_anthem_outages_prod, layer 0). Geometry type esriGeometryPoint.",
+      "properties": {
+        "FID": {
+          "type": "integer",
+          "description": "Object ID; the unique, service maintained identifier.",
+          "x-esri-field-type": "esriFieldTypeOID"
+        },
+        "ID": {
+          "type": "number",
+          "x-esri-field-type": "esriFieldTypeDouble"
+        },
+        "FaultID": {
+          "type": "number",
+          "x-esri-field-type": "esriFieldTypeDouble"
+        },
+        "CommunityI": {
+          "type": "number",
+          "x-esri-field-type": "esriFieldTypeDouble"
+        },
+        "CommunityN": {
+          "type": "string",
+          "maxLength": 250,
+          "x-esri-field-type": "esriFieldTypeString"
+        },
+        "ConditionI": {
+          "type": "number",
+          "x-esri-field-type": "esriFieldTypeDouble"
+        },
+        "Planned": {
+          "type": "string",
+          "maxLength": 1,
+          "x-esri-field-type": "esriFieldTypeString"
+        },
+        "ApproxArea": {
+          "type": "string",
+          "maxLength": 250,
+          "x-esri-field-type": "esriFieldTypeString"
+        },
+        "ReportDate": {
+          "type": "string",
+          "maxLength": 20,
+          "x-esri-field-type": "esriFieldTypeString"
+        },
+        "EstimateRe": {
+          "type": "string",
+          "maxLength": 20,
+          "x-esri-field-type": "esriFieldTypeString"
+        },
+        "ActualRest": {
+          "type": "string",
+          "maxLength": 20,
+          "x-esri-field-type": "esriFieldTypeString"
+        },
+        "Details": {
+          "type": "string",
+          "maxLength": 254,
+          "x-esri-field-type": "esriFieldTypeString"
+        },
+        "MapX": {
+          "type": "number",
+          "x-esri-field-type": "esriFieldTypeDouble"
+        },
+        "MapY": {
+          "type": "number",
+          "x-esri-field-type": "esriFieldTypeDouble"
+        },
+        "CreatedBy": {
+          "type": "string",
+          "maxLength": 50,
+          "x-esri-field-type": "esriFieldTypeString"
+        },
+        "CreatedDat": {
+          "type": "string",
+          "maxLength": 20,
+          "x-esri-field-type": "esriFieldTypeString"
+        },
+        "EditedBy": {
+          "type": "string",
+          "maxLength": 50,
+          "x-esri-field-type": "esriFieldTypeString"
+        },
+        "EditedDate": {
+          "type": "string",
+          "maxLength": 20,
+          "x-esri-field-type": "esriFieldTypeString"
+        },
+        "PublishBy": {
+          "type": "string",
+          "maxLength": 50,
+          "x-esri-field-type": "esriFieldTypeString"
+        },
+        "PublishDat": {
+          "type": "string",
+          "maxLength": 20,
+          "x-esri-field-type": "esriFieldTypeString"
+        },
+        "ConditionN": {
+          "type": "string",
+          "maxLength": 50,
+          "x-esri-field-type": "esriFieldTypeString"
+        }
+      }
+    },
+    "UsaChaparralOutagesProdL0Attributes": {
+      "type": "object",
+      "description": "Attributes of a feature in the `usa_chaparral_outages-prod` layer (usa_chaparral_outages_prod, layer 0). Geometry type esriGeometryPoint.",
+      "properties": {
+        "FID": {
+          "type": "integer",
+          "description": "Object ID; the unique, service maintained identifier.",
+          "x-esri-field-type": "esriFieldTypeOID"
+        },
+        "ID": {
+          "type": "number",
+          "x-esri-field-type": "esriFieldTypeDouble"
+        },
+        "FaultID": {
+          "type": "number",
+          "x-esri-field-type": "esriFieldTypeDouble"
+        },
+        "CommunityI": {
+          "type": "number",
+          "x-esri-field-type": "esriFieldTypeDouble"
+        },
+        "CommunityN": {
+          "type": "string",
+          "maxLength": 250,
+          "x-esri-field-type": "esriFieldTypeString"
+        },
+        "ConditionI": {
+          "type": "number",
+          "x-esri-field-type": "esriFieldTypeDouble"
+        },
+        "Planned": {
+          "type": "string",
+          "maxLength": 1,
+          "x-esri-field-type": "esriFieldTypeString"
+        },
+        "ApproxArea": {
+          "type": "string",
+          "maxLength": 250,
+          "x-esri-field-type": "esriFieldTypeString"
+        },
+        "ReportDate": {
+          "type": "string",
+          "maxLength": 20,
+          "x-esri-field-type": "esriFieldTypeString"
+        },
+        "EstimateRe": {
+          "type": "string",
+          "maxLength": 20,
+          "x-esri-field-type": "esriFieldTypeString"
+        },
+        "ActualRest": {
+          "type": "string",
+          "maxLength": 20,
+          "x-esri-field-type": "esriFieldTypeString"
+        },
+        "Details": {
+          "type": "string",
+          "maxLength": 254,
+          "x-esri-field-type": "esriFieldTypeString"
+        },
+        "MapX": {
+          "type": "number",
+          "x-esri-field-type": "esriFieldTypeDouble"
+        },
+        "MapY": {
+          "type": "number",
+          "x-esri-field-type": "esriFieldTypeDouble"
+        },
+        "CreatedBy": {
+          "type": "string",
+          "maxLength": 50,
+          "x-esri-field-type": "esriFieldTypeString"
+        },
+        "CreatedDat": {
+          "type": "string",
+          "maxLength": 20,
+          "x-esri-field-type": "esriFieldTypeString"
+        },
+        "EditedBy": {
+          "type": "string",
+          "maxLength": 50,
+          "x-esri-field-type": "esriFieldTypeString"
+        },
+        "EditedDate": {
+          "type": "string",
+          "maxLength": 20,
+          "x-esri-field-type": "esriFieldTypeString"
+        },
+        "PublishBy": {
+          "type": "string",
+          "maxLength": 50,
+          "x-esri-field-type": "esriFieldTypeString"
+        },
+        "PublishDat": {
+          "type": "string",
+          "maxLength": 20,
+          "x-esri-field-type": "esriFieldTypeString"
+        },
+        "ConditionN": {
+          "type": "string",
+          "maxLength": 50,
+          "x-esri-field-type": "esriFieldTypeString"
+        }
+      }
+    },
+    "UsaClovisOutagesProdL0Attributes": {
+      "type": "object",
+      "description": "Attributes of a feature in the `usa_clovis_outages-prod` layer (usa_clovis_outages_prod, layer 0). Geometry type esriGeometryPoint.",
+      "properties": {
+        "FID": {
+          "type": "integer",
+          "description": "Object ID; the unique, service maintained identifier.",
+          "x-esri-field-type": "esriFieldTypeOID"
+        },
+        "ID": {
+          "type": "number",
+          "x-esri-field-type": "esriFieldTypeDouble"
+        },
+        "FaultID": {
+          "type": "number",
+          "x-esri-field-type": "esriFieldTypeDouble"
+        },
+        "CommunityI": {
+          "type": "number",
+          "x-esri-field-type": "esriFieldTypeDouble"
+        },
+        "CommunityN": {
+          "type": "string",
+          "maxLength": 250,
+          "x-esri-field-type": "esriFieldTypeString"
+        },
+        "ConditionI": {
+          "type": "number",
+          "x-esri-field-type": "esriFieldTypeDouble"
+        },
+        "Planned": {
+          "type": "string",
+          "maxLength": 1,
+          "x-esri-field-type": "esriFieldTypeString"
+        },
+        "ApproxArea": {
+          "type": "string",
+          "maxLength": 250,
+          "x-esri-field-type": "esriFieldTypeString"
+        },
+        "ReportDate": {
+          "type": "string",
+          "maxLength": 20,
+          "x-esri-field-type": "esriFieldTypeString"
+        },
+        "EstimateRe": {
+          "type": "string",
+          "maxLength": 20,
+          "x-esri-field-type": "esriFieldTypeString"
+        },
+        "ActualRest": {
+          "type": "string",
+          "maxLength": 20,
+          "x-esri-field-type": "esriFieldTypeString"
+        },
+        "Details": {
+          "type": "string",
+          "maxLength": 254,
+          "x-esri-field-type": "esriFieldTypeString"
+        },
+        "MapX": {
+          "type": "number",
+          "x-esri-field-type": "esriFieldTypeDouble"
+        },
+        "MapY": {
+          "type": "number",
+          "x-esri-field-type": "esriFieldTypeDouble"
+        },
+        "CreatedBy": {
+          "type": "string",
+          "maxLength": 50,
+          "x-esri-field-type": "esriFieldTypeString"
+        },
+        "CreatedDat": {
+          "type": "string",
+          "maxLength": 20,
+          "x-esri-field-type": "esriFieldTypeString"
+        },
+        "EditedBy": {
+          "type": "string",
+          "maxLength": 50,
+          "x-esri-field-type": "esriFieldTypeString"
+        },
+        "EditedDate": {
+          "type": "string",
+          "maxLength": 20,
+          "x-esri-field-type": "esriFieldTypeString"
+        },
+        "PublishBy": {
+          "type": "string",
+          "maxLength": 50,
+          "x-esri-field-type": "esriFieldTypeString"
+        },
+        "PublishDat": {
+          "type": "string",
+          "maxLength": 20,
+          "x-esri-field-type": "esriFieldTypeString"
+        },
+        "ConditionN": {
+          "type": "string",
+          "maxLength": 50,
+          "x-esri-field-type": "esriFieldTypeString"
+        }
+      }
+    },
+    "UsaEdgewoodOutagesProdL0Attributes": {
+      "type": "object",
+      "description": "Attributes of a feature in the `usa_edgewood_outages-prod` layer (usa_edgewood_outages_prod, layer 0). Geometry type esriGeometryPoint.",
+      "properties": {
+        "FID": {
+          "type": "integer",
+          "description": "Object ID; the unique, service maintained identifier.",
+          "x-esri-field-type": "esriFieldTypeOID"
+        },
+        "ID": {
+          "type": "number",
+          "x-esri-field-type": "esriFieldTypeDouble"
+        },
+        "FaultID": {
+          "type": "number",
+          "x-esri-field-type": "esriFieldTypeDouble"
+        },
+        "CommunityI": {
+          "type": "number",
+          "x-esri-field-type": "esriFieldTypeDouble"
+        },
+        "CommunityN": {
+          "type": "string",
+          "maxLength": 250,
+          "x-esri-field-type": "esriFieldTypeString"
+        },
+        "ConditionI": {
+          "type": "number",
+          "x-esri-field-type": "esriFieldTypeDouble"
+        },
+        "Planned": {
+          "type": "string",
+          "maxLength": 1,
+          "x-esri-field-type": "esriFieldTypeString"
+        },
+        "ApproxArea": {
+          "type": "string",
+          "maxLength": 250,
+          "x-esri-field-type": "esriFieldTypeString"
+        },
+        "ReportDate": {
+          "type": "string",
+          "maxLength": 20,
+          "x-esri-field-type": "esriFieldTypeString"
+        },
+        "EstimateRe": {
+          "type": "string",
+          "maxLength": 20,
+          "x-esri-field-type": "esriFieldTypeString"
+        },
+        "ActualRest": {
+          "type": "string",
+          "maxLength": 20,
+          "x-esri-field-type": "esriFieldTypeString"
+        },
+        "Details": {
+          "type": "string",
+          "maxLength": 254,
+          "x-esri-field-type": "esriFieldTypeString"
+        },
+        "MapX": {
+          "type": "number",
+          "x-esri-field-type": "esriFieldTypeDouble"
+        },
+        "MapY": {
+          "type": "number",
+          "x-esri-field-type": "esriFieldTypeDouble"
+        },
+        "CreatedBy": {
+          "type": "string",
+          "maxLength": 50,
+          "x-esri-field-type": "esriFieldTypeString"
+        },
+        "CreatedDat": {
+          "type": "string",
+          "maxLength": 20,
+          "x-esri-field-type": "esriFieldTypeString"
+        },
+        "EditedBy": {
+          "type": "string",
+          "maxLength": 50,
+          "x-esri-field-type": "esriFieldTypeString"
+        },
+        "EditedDate": {
+          "type": "string",
+          "maxLength": 20,
+          "x-esri-field-type": "esriFieldTypeString"
+        },
+        "PublishBy": {
+          "type": "string",
+          "maxLength": 50,
+          "x-esri-field-type": "esriFieldTypeString"
+        },
+        "PublishDat": {
+          "type": "string",
+          "maxLength": 20,
+          "x-esri-field-type": "esriFieldTypeString"
+        },
+        "ConditionN": {
+          "type": "string",
+          "maxLength": 50,
+          "x-esri-field-type": "esriFieldTypeString"
+        }
+      }
+    },
+    "UsaHavasuOutagesProdL0Attributes": {
+      "type": "object",
+      "description": "Attributes of a feature in the `usa_havasu_outages-prod` layer (usa_havasu_outages_prod, layer 0). Geometry type esriGeometryPoint.",
+      "properties": {
+        "FID": {
+          "type": "integer",
+          "description": "Object ID; the unique, service maintained identifier.",
+          "x-esri-field-type": "esriFieldTypeOID"
+        },
+        "ID": {
+          "type": "number",
+          "x-esri-field-type": "esriFieldTypeDouble"
+        },
+        "FaultID": {
+          "type": "number",
+          "x-esri-field-type": "esriFieldTypeDouble"
+        },
+        "CommunityI": {
+          "type": "number",
+          "x-esri-field-type": "esriFieldTypeDouble"
+        },
+        "CommunityN": {
+          "type": "string",
+          "maxLength": 250,
+          "x-esri-field-type": "esriFieldTypeString"
+        },
+        "ConditionI": {
+          "type": "number",
+          "x-esri-field-type": "esriFieldTypeDouble"
+        },
+        "Planned": {
+          "type": "string",
+          "maxLength": 1,
+          "x-esri-field-type": "esriFieldTypeString"
+        },
+        "ApproxArea": {
+          "type": "string",
+          "maxLength": 250,
+          "x-esri-field-type": "esriFieldTypeString"
+        },
+        "ReportDate": {
+          "type": "string",
+          "maxLength": 20,
+          "x-esri-field-type": "esriFieldTypeString"
+        },
+        "EstimateRe": {
+          "type": "string",
+          "maxLength": 20,
+          "x-esri-field-type": "esriFieldTypeString"
+        },
+        "ActualRest": {
+          "type": "string",
+          "maxLength": 20,
+          "x-esri-field-type": "esriFieldTypeString"
+        },
+        "Details": {
+          "type": "string",
+          "maxLength": 254,
+          "x-esri-field-type": "esriFieldTypeString"
+        },
+        "MapX": {
+          "type": "number",
+          "x-esri-field-type": "esriFieldTypeDouble"
+        },
+        "MapY": {
+          "type": "number",
+          "x-esri-field-type": "esriFieldTypeDouble"
+        },
+        "CreatedBy": {
+          "type": "string",
+          "maxLength": 50,
+          "x-esri-field-type": "esriFieldTypeString"
+        },
+        "CreatedDat": {
+          "type": "string",
+          "maxLength": 20,
+          "x-esri-field-type": "esriFieldTypeString"
+        },
+        "EditedBy": {
+          "type": "string",
+          "maxLength": 50,
+          "x-esri-field-type": "esriFieldTypeString"
+        },
+        "EditedDate": {
+          "type": "string",
+          "maxLength": 20,
+          "x-esri-field-type": "esriFieldTypeString"
+        },
+        "PublishBy": {
+          "type": "string",
+          "maxLength": 50,
+          "x-esri-field-type": "esriFieldTypeString"
+        },
+        "PublishDat": {
+          "type": "string",
+          "maxLength": 20,
+          "x-esri-field-type": "esriFieldTypeString"
+        },
+        "ConditionN": {
+          "type": "string",
+          "maxLength": 50,
+          "x-esri-field-type": "esriFieldTypeString"
+        }
+      }
+    },
+    "UsaMohaveOutagesProdL0Attributes": {
+      "type": "object",
+      "description": "Attributes of a feature in the `usa_mohave_outages-prod` layer (usa_mohave_outages_prod, layer 0). Geometry type esriGeometryPoint.",
+      "properties": {
+        "FID": {
+          "type": "integer",
+          "description": "Object ID; the unique, service maintained identifier.",
+          "x-esri-field-type": "esriFieldTypeOID"
+        },
+        "ID": {
+          "type": "number",
+          "x-esri-field-type": "esriFieldTypeDouble"
+        },
+        "FaultID": {
+          "type": "number",
+          "x-esri-field-type": "esriFieldTypeDouble"
+        },
+        "CommunityI": {
+          "type": "number",
+          "x-esri-field-type": "esriFieldTypeDouble"
+        },
+        "CommunityN": {
+          "type": "string",
+          "maxLength": 250,
+          "x-esri-field-type": "esriFieldTypeString"
+        },
+        "ConditionI": {
+          "type": "number",
+          "x-esri-field-type": "esriFieldTypeDouble"
+        },
+        "Planned": {
+          "type": "string",
+          "maxLength": 1,
+          "x-esri-field-type": "esriFieldTypeString"
+        },
+        "ApproxArea": {
+          "type": "string",
+          "maxLength": 250,
+          "x-esri-field-type": "esriFieldTypeString"
+        },
+        "ReportDate": {
+          "type": "string",
+          "maxLength": 20,
+          "x-esri-field-type": "esriFieldTypeString"
+        },
+        "EstimateRe": {
+          "type": "string",
+          "maxLength": 20,
+          "x-esri-field-type": "esriFieldTypeString"
+        },
+        "ActualRest": {
+          "type": "string",
+          "maxLength": 20,
+          "x-esri-field-type": "esriFieldTypeString"
+        },
+        "Details": {
+          "type": "string",
+          "maxLength": 254,
+          "x-esri-field-type": "esriFieldTypeString"
+        },
+        "MapX": {
+          "type": "number",
+          "x-esri-field-type": "esriFieldTypeDouble"
+        },
+        "MapY": {
+          "type": "number",
+          "x-esri-field-type": "esriFieldTypeDouble"
+        },
+        "CreatedBy": {
+          "type": "string",
+          "maxLength": 50,
+          "x-esri-field-type": "esriFieldTypeString"
+        },
+        "CreatedDat": {
+          "type": "string",
+          "maxLength": 20,
+          "x-esri-field-type": "esriFieldTypeString"
+        },
+        "EditedBy": {
+          "type": "string",
+          "maxLength": 50,
+          "x-esri-field-type": "esriFieldTypeString"
+        },
+        "EditedDate": {
+          "type": "string",
+          "maxLength": 20,
+          "x-esri-field-type": "esriFieldTypeString"
+        },
+        "PublishBy": {
+          "type": "string",
+          "maxLength": 50,
+          "x-esri-field-type": "esriFieldTypeString"
+        },
+        "PublishDat": {
+          "type": "string",
+          "maxLength": 20,
+          "x-esri-field-type": "esriFieldTypeString"
+        },
+        "ConditionN": {
+          "type": "string",
+          "maxLength": 50,
+          "x-esri-field-type": "esriFieldTypeString"
+        }
+      }
+    },
+    "UsaNorthmohavevalleyOutagesProdL0Attributes": {
+      "type": "object",
+      "description": "Attributes of a feature in the `usa_northmohavevalley_outages-prod` layer (usa_northmohavevalley_outages_prod, layer 0). Geometry type esriGeometryPoint.",
+      "properties": {
+        "FID": {
+          "type": "integer",
+          "description": "Object ID; the unique, service maintained identifier.",
+          "x-esri-field-type": "esriFieldTypeOID"
+        },
+        "ID": {
+          "type": "number",
+          "x-esri-field-type": "esriFieldTypeDouble"
+        },
+        "FaultID": {
+          "type": "number",
+          "x-esri-field-type": "esriFieldTypeDouble"
+        },
+        "CommunityI": {
+          "type": "number",
+          "x-esri-field-type": "esriFieldTypeDouble"
+        },
+        "CommunityN": {
+          "type": "string",
+          "maxLength": 250,
+          "x-esri-field-type": "esriFieldTypeString"
+        },
+        "ConditionI": {
+          "type": "number",
+          "x-esri-field-type": "esriFieldTypeDouble"
+        },
+        "Planned": {
+          "type": "string",
+          "maxLength": 1,
+          "x-esri-field-type": "esriFieldTypeString"
+        },
+        "ApproxArea": {
+          "type": "string",
+          "maxLength": 250,
+          "x-esri-field-type": "esriFieldTypeString"
+        },
+        "ReportDate": {
+          "type": "string",
+          "maxLength": 20,
+          "x-esri-field-type": "esriFieldTypeString"
+        },
+        "EstimateRe": {
+          "type": "string",
+          "maxLength": 20,
+          "x-esri-field-type": "esriFieldTypeString"
+        },
+        "ActualRest": {
+          "type": "string",
+          "maxLength": 20,
+          "x-esri-field-type": "esriFieldTypeString"
+        },
+        "Details": {
+          "type": "string",
+          "maxLength": 254,
+          "x-esri-field-type": "esriFieldTypeString"
+        },
+        "MapX": {
+          "type": "number",
+          "x-esri-field-type": "esriFieldTypeDouble"
+        },
+        "MapY": {
+          "type": "number",
+          "x-esri-field-type": "esriFieldTypeDouble"
+        },
+        "CreatedBy": {
+          "type": "string",
+          "maxLength": 50,
+          "x-esri-field-type": "esriFieldTypeString"
+        },
+        "CreatedDat": {
+          "type": "string",
+          "maxLength": 20,
+          "x-esri-field-type": "esriFieldTypeString"
+        },
+        "EditedBy": {
+          "type": "string",
+          "maxLength": 50,
+          "x-esri-field-type": "esriFieldTypeString"
+        },
+        "EditedDate": {
+          "type": "string",
+          "maxLength": 20,
+          "x-esri-field-type": "esriFieldTypeString"
+        },
+        "PublishBy": {
+          "type": "string",
+          "maxLength": 50,
+          "x-esri-field-type": "esriFieldTypeString"
+        },
+        "PublishDat": {
+          "type": "string",
+          "maxLength": 20,
+          "x-esri-field-type": "esriFieldTypeString"
+        },
+        "ConditionN": {
+          "type": "string",
+          "maxLength": 50,
+          "x-esri-field-type": "esriFieldTypeString"
+        }
+      }
+    },
+    "UsaParadisevalleyOutagesProdL0Attributes": {
+      "type": "object",
+      "description": "Attributes of a feature in the `usa_paradisevalley_outages-prod` layer (usa_paradisevalley_outages_prod, layer 0). Geometry type esriGeometryPoint.",
+      "properties": {
+        "FID": {
+          "type": "integer",
+          "description": "Object ID; the unique, service maintained identifier.",
+          "x-esri-field-type": "esriFieldTypeOID"
+        },
+        "ID": {
+          "type": "number",
+          "x-esri-field-type": "esriFieldTypeDouble"
+        },
+        "FaultID": {
+          "type": "number",
+          "x-esri-field-type": "esriFieldTypeDouble"
+        },
+        "CommunityI": {
+          "type": "number",
+          "x-esri-field-type": "esriFieldTypeDouble"
+        },
+        "CommunityN": {
+          "type": "string",
+          "maxLength": 250,
+          "x-esri-field-type": "esriFieldTypeString"
+        },
+        "ConditionI": {
+          "type": "number",
+          "x-esri-field-type": "esriFieldTypeDouble"
+        },
+        "Planned": {
+          "type": "string",
+          "maxLength": 1,
+          "x-esri-field-type": "esriFieldTypeString"
+        },
+        "ApproxArea": {
+          "type": "string",
+          "maxLength": 250,
+          "x-esri-field-type": "esriFieldTypeString"
+        },
+        "ReportDate": {
+          "type": "string",
+          "maxLength": 20,
+          "x-esri-field-type": "esriFieldTypeString"
+        },
+        "EstimateRe": {
+          "type": "string",
+          "maxLength": 20,
+          "x-esri-field-type": "esriFieldTypeString"
+        },
+        "ActualRest": {
+          "type": "string",
+          "maxLength": 20,
+          "x-esri-field-type": "esriFieldTypeString"
+        },
+        "Details": {
+          "type": "string",
+          "maxLength": 254,
+          "x-esri-field-type": "esriFieldTypeString"
+        },
+        "MapX": {
+          "type": "number",
+          "x-esri-field-type": "esriFieldTypeDouble"
+        },
+        "MapY": {
+          "type": "number",
+          "x-esri-field-type": "esriFieldTypeDouble"
+        },
+        "CreatedBy": {
+          "type": "string",
+          "maxLength": 50,
+          "x-esri-field-type": "esriFieldTypeString"
+        },
+        "CreatedDat": {
+          "type": "string",
+          "maxLength": 20,
+          "x-esri-field-type": "esriFieldTypeString"
+        },
+        "EditedBy": {
+          "type": "string",
+          "maxLength": 50,
+          "x-esri-field-type": "esriFieldTypeString"
+        },
+        "EditedDate": {
+          "type": "string",
+          "maxLength": 20,
+          "x-esri-field-type": "esriFieldTypeString"
+        },
+        "PublishBy": {
+          "type": "string",
+          "maxLength": 50,
+          "x-esri-field-type": "esriFieldTypeString"
+        },
+        "PublishDat": {
+          "type": "string",
+          "maxLength": 20,
+          "x-esri-field-type": "esriFieldTypeString"
+        },
+        "ConditionN": {
+          "type": "string",
+          "maxLength": 50,
+          "x-esri-field-type": "esriFieldTypeString"
+        }
+      }
+    },
+    "UsaSuncityOutagesProdL0Attributes": {
+      "type": "object",
+      "description": "Attributes of a feature in the `usa_suncity_outages-prod` layer (usa_suncity_outages_prod, layer 0). Geometry type esriGeometryPoint.",
+      "properties": {
+        "FID": {
+          "type": "integer",
+          "description": "Object ID; the unique, service maintained identifier.",
+          "x-esri-field-type": "esriFieldTypeOID"
+        },
+        "ID": {
+          "type": "number",
+          "x-esri-field-type": "esriFieldTypeDouble"
+        },
+        "FaultID": {
+          "type": "number",
+          "x-esri-field-type": "esriFieldTypeDouble"
+        },
+        "CommunityI": {
+          "type": "number",
+          "x-esri-field-type": "esriFieldTypeDouble"
+        },
+        "CommunityN": {
+          "type": "string",
+          "maxLength": 250,
+          "x-esri-field-type": "esriFieldTypeString"
+        },
+        "ConditionI": {
+          "type": "number",
+          "x-esri-field-type": "esriFieldTypeDouble"
+        },
+        "Planned": {
+          "type": "string",
+          "maxLength": 1,
+          "x-esri-field-type": "esriFieldTypeString"
+        },
+        "ApproxArea": {
+          "type": "string",
+          "maxLength": 250,
+          "x-esri-field-type": "esriFieldTypeString"
+        },
+        "ReportDate": {
+          "type": "string",
+          "maxLength": 20,
+          "x-esri-field-type": "esriFieldTypeString"
+        },
+        "EstimateRe": {
+          "type": "string",
+          "maxLength": 20,
+          "x-esri-field-type": "esriFieldTypeString"
+        },
+        "ActualRest": {
+          "type": "string",
+          "maxLength": 20,
+          "x-esri-field-type": "esriFieldTypeString"
+        },
+        "Details": {
+          "type": "string",
+          "maxLength": 254,
+          "x-esri-field-type": "esriFieldTypeString"
+        },
+        "MapX": {
+          "type": "number",
+          "x-esri-field-type": "esriFieldTypeDouble"
+        },
+        "MapY": {
+          "type": "number",
+          "x-esri-field-type": "esriFieldTypeDouble"
+        },
+        "CreatedBy": {
+          "type": "string",
+          "maxLength": 50,
+          "x-esri-field-type": "esriFieldTypeString"
+        },
+        "CreatedDat": {
+          "type": "string",
+          "maxLength": 20,
+          "x-esri-field-type": "esriFieldTypeString"
+        },
+        "EditedBy": {
+          "type": "string",
+          "maxLength": 50,
+          "x-esri-field-type": "esriFieldTypeString"
+        },
+        "EditedDate": {
+          "type": "string",
+          "maxLength": 20,
+          "x-esri-field-type": "esriFieldTypeString"
+        },
+        "PublishBy": {
+          "type": "string",
+          "maxLength": 50,
+          "x-esri-field-type": "esriFieldTypeString"
+        },
+        "PublishDat": {
+          "type": "string",
+          "maxLength": 20,
+          "x-esri-field-type": "esriFieldTypeString"
+        },
+        "ConditionN": {
+          "type": "string",
+          "maxLength": 50,
+          "x-esri-field-type": "esriFieldTypeString"
+        }
+      }
+    },
+    "UsaSuncitywestOutagesProdL0Attributes": {
+      "type": "object",
+      "description": "Attributes of a feature in the `usa_suncitywest_outages-prod` layer (usa_suncitywest_outages_prod, layer 0). Geometry type esriGeometryPoint.",
+      "properties": {
+        "FID": {
+          "type": "integer",
+          "description": "Object ID; the unique, service maintained identifier.",
+          "x-esri-field-type": "esriFieldTypeOID"
+        },
+        "ID": {
+          "type": "number",
+          "x-esri-field-type": "esriFieldTypeDouble"
+        },
+        "FaultID": {
+          "type": "number",
+          "x-esri-field-type": "esriFieldTypeDouble"
+        },
+        "CommunityI": {
+          "type": "number",
+          "x-esri-field-type": "esriFieldTypeDouble"
+        },
+        "CommunityN": {
+          "type": "string",
+          "maxLength": 250,
+          "x-esri-field-type": "esriFieldTypeString"
+        },
+        "ConditionI": {
+          "type": "number",
+          "x-esri-field-type": "esriFieldTypeDouble"
+        },
+        "Planned": {
+          "type": "string",
+          "maxLength": 1,
+          "x-esri-field-type": "esriFieldTypeString"
+        },
+        "ApproxArea": {
+          "type": "string",
+          "maxLength": 250,
+          "x-esri-field-type": "esriFieldTypeString"
+        },
+        "ReportDate": {
+          "type": "string",
+          "maxLength": 20,
+          "x-esri-field-type": "esriFieldTypeString"
+        },
+        "EstimateRe": {
+          "type": "string",
+          "maxLength": 20,
+          "x-esri-field-type": "esriFieldTypeString"
+        },
+        "ActualRest": {
+          "type": "string",
+          "maxLength": 20,
+          "x-esri-field-type": "esriFieldTypeString"
+        },
+        "Details": {
+          "type": "string",
+          "maxLength": 254,
+          "x-esri-field-type": "esriFieldTypeString"
+        },
+        "MapX": {
+          "type": "number",
+          "x-esri-field-type": "esriFieldTypeDouble"
+        },
+        "MapY": {
+          "type": "number",
+          "x-esri-field-type": "esriFieldTypeDouble"
+        },
+        "CreatedBy": {
+          "type": "string",
+          "maxLength": 50,
+          "x-esri-field-type": "esriFieldTypeString"
+        },
+        "CreatedDat": {
+          "type": "string",
+          "maxLength": 20,
+          "x-esri-field-type": "esriFieldTypeString"
+        },
+        "EditedBy": {
+          "type": "string",
+          "maxLength": 50,
+          "x-esri-field-type": "esriFieldTypeString"
+        },
+        "EditedDate": {
+          "type": "string",
+          "maxLength": 20,
+          "x-esri-field-type": "esriFieldTypeString"
+        },
+        "PublishBy": {
+          "type": "string",
+          "maxLength": 50,
+          "x-esri-field-type": "esriFieldTypeString"
+        },
+        "PublishDat": {
+          "type": "string",
+          "maxLength": 20,
+          "x-esri-field-type": "esriFieldTypeString"
+        },
+        "ConditionN": {
+          "type": "string",
+          "maxLength": 50,
+          "x-esri-field-type": "esriFieldTypeString"
+        }
+      }
+    },
+    "UsaThundermountainOutagesProdL0Attributes": {
+      "type": "object",
+      "description": "Attributes of a feature in the `usa_thundermountain_outages-prod` layer (usa_thundermountain_outages_prod, layer 0). Geometry type esriGeometryPoint.",
+      "properties": {
+        "FID": {
+          "type": "integer",
+          "description": "Object ID; the unique, service maintained identifier.",
+          "x-esri-field-type": "esriFieldTypeOID"
+        },
+        "ID": {
+          "type": "number",
+          "x-esri-field-type": "esriFieldTypeDouble"
+        },
+        "FaultID": {
+          "type": "number",
+          "x-esri-field-type": "esriFieldTypeDouble"
+        },
+        "CommunityI": {
+          "type": "number",
+          "x-esri-field-type": "esriFieldTypeDouble"
+        },
+        "CommunityN": {
+          "type": "string",
+          "maxLength": 250,
+          "x-esri-field-type": "esriFieldTypeString"
+        },
+        "ConditionI": {
+          "type": "number",
+          "x-esri-field-type": "esriFieldTypeDouble"
+        },
+        "Planned": {
+          "type": "string",
+          "maxLength": 1,
+          "x-esri-field-type": "esriFieldTypeString"
+        },
+        "ApproxArea": {
+          "type": "string",
+          "maxLength": 250,
+          "x-esri-field-type": "esriFieldTypeString"
+        },
+        "ReportDate": {
+          "type": "string",
+          "maxLength": 20,
+          "x-esri-field-type": "esriFieldTypeString"
+        },
+        "EstimateRe": {
+          "type": "string",
+          "maxLength": 20,
+          "x-esri-field-type": "esriFieldTypeString"
+        },
+        "ActualRest": {
+          "type": "string",
+          "maxLength": 20,
+          "x-esri-field-type": "esriFieldTypeString"
+        },
+        "Details": {
+          "type": "string",
+          "maxLength": 254,
+          "x-esri-field-type": "esriFieldTypeString"
+        },
+        "MapX": {
+          "type": "number",
+          "x-esri-field-type": "esriFieldTypeDouble"
+        },
+        "MapY": {
+          "type": "number",
+          "x-esri-field-type": "esriFieldTypeDouble"
+        },
+        "CreatedBy": {
+          "type": "string",
+          "maxLength": 50,
+          "x-esri-field-type": "esriFieldTypeString"
+        },
+        "CreatedDat": {
+          "type": "string",
+          "maxLength": 20,
+          "x-esri-field-type": "esriFieldTypeString"
+        },
+        "EditedBy": {
+          "type": "string",
+          "maxLength": 50,
+          "x-esri-field-type": "esriFieldTypeString"
+        },
+        "EditedDate": {
+          "type": "string",
+          "maxLength": 20,
+          "x-esri-field-type": "esriFieldTypeString"
+        },
+        "PublishBy": {
+          "type": "string",
+          "maxLength": 50,
+          "x-esri-field-type": "esriFieldTypeString"
+        },
+        "PublishDat": {
+          "type": "string",
+          "maxLength": 20,
+          "x-esri-field-type": "esriFieldTypeString"
+        },
+        "ConditionN": {
+          "type": "string",
+          "maxLength": 50,
+          "x-esri-field-type": "esriFieldTypeString"
+        }
+      }
+    },
+    "UsaTubacOutagesProdL0Attributes": {
+      "type": "object",
+      "description": "Attributes of a feature in the `usa_tubac_outages-prod` layer (usa_tubac_outages_prod, layer 0). Geometry type esriGeometryPoint.",
+      "properties": {
+        "FID": {
+          "type": "integer",
+          "description": "Object ID; the unique, service maintained identifier.",
+          "x-esri-field-type": "esriFieldTypeOID"
+        },
+        "ID": {
+          "type": "number",
+          "x-esri-field-type": "esriFieldTypeDouble"
+        },
+        "FaultID": {
+          "type": "number",
+          "x-esri-field-type": "esriFieldTypeDouble"
+        },
+        "CommunityI": {
+          "type": "number",
+          "x-esri-field-type": "esriFieldTypeDouble"
+        },
+        "CommunityN": {
+          "type": "string",
+          "maxLength": 250,
+          "x-esri-field-type": "esriFieldTypeString"
+        },
+        "ConditionI": {
+          "type": "number",
+          "x-esri-field-type": "esriFieldTypeDouble"
+        },
+        "Planned": {
+          "type": "string",
+          "maxLength": 1,
+          "x-esri-field-type": "esriFieldTypeString"
+        },
+        "ApproxArea": {
+          "type": "string",
+          "maxLength": 250,
+          "x-esri-field-type": "esriFieldTypeString"
+        },
+        "ReportDate": {
+          "type": "string",
+          "maxLength": 20,
+          "x-esri-field-type": "esriFieldTypeString"
+        },
+        "EstimateRe": {
+          "type": "string",
+          "maxLength": 20,
+          "x-esri-field-type": "esriFieldTypeString"
+        },
+        "ActualRest": {
+          "type": "string",
+          "maxLength": 20,
+          "x-esri-field-type": "esriFieldTypeString"
+        },
+        "Details": {
+          "type": "string",
+          "maxLength": 254,
+          "x-esri-field-type": "esriFieldTypeString"
+        },
+        "MapX": {
+          "type": "number",
+          "x-esri-field-type": "esriFieldTypeDouble"
+        },
+        "MapY": {
+          "type": "number",
+          "x-esri-field-type": "esriFieldTypeDouble"
+        },
+        "CreatedBy": {
+          "type": "string",
+          "maxLength": 50,
+          "x-esri-field-type": "esriFieldTypeString"
+        },
+        "CreatedDat": {
+          "type": "string",
+          "maxLength": 20,
+          "x-esri-field-type": "esriFieldTypeString"
+        },
+        "EditedBy": {
+          "type": "string",
+          "maxLength": 50,
+          "x-esri-field-type": "esriFieldTypeString"
+        },
+        "EditedDate": {
+          "type": "string",
+          "maxLength": 20,
+          "x-esri-field-type": "esriFieldTypeString"
+        },
+        "PublishBy": {
+          "type": "string",
+          "maxLength": 50,
+          "x-esri-field-type": "esriFieldTypeString"
+        },
+        "PublishDat": {
+          "type": "string",
+          "maxLength": 20,
+          "x-esri-field-type": "esriFieldTypeString"
+        },
+        "ConditionN": {
+          "type": "string",
+          "maxLength": 50,
+          "x-esri-field-type": "esriFieldTypeString"
+        }
+      }
+    },
+    "UsaWillowvalleyOutagesProdL0Attributes": {
+      "type": "object",
+      "description": "Attributes of a feature in the `usa_willowvalley_outages-prod` layer (usa_willowvalley_outages_prod, layer 0). Geometry type esriGeometryPoint.",
+      "properties": {
+        "FID": {
+          "type": "integer",
+          "description": "Object ID; the unique, service maintained identifier.",
+          "x-esri-field-type": "esriFieldTypeOID"
+        },
+        "ID": {
+          "type": "number",
+          "x-esri-field-type": "esriFieldTypeDouble"
+        },
+        "FaultID": {
+          "type": "number",
+          "x-esri-field-type": "esriFieldTypeDouble"
+        },
+        "CommunityI": {
+          "type": "number",
+          "x-esri-field-type": "esriFieldTypeDouble"
+        },
+        "CommunityN": {
+          "type": "string",
+          "maxLength": 250,
+          "x-esri-field-type": "esriFieldTypeString"
+        },
+        "ConditionI": {
+          "type": "number",
+          "x-esri-field-type": "esriFieldTypeDouble"
+        },
+        "Planned": {
+          "type": "string",
+          "maxLength": 1,
+          "x-esri-field-type": "esriFieldTypeString"
+        },
+        "ApproxArea": {
+          "type": "string",
+          "maxLength": 250,
+          "x-esri-field-type": "esriFieldTypeString"
+        },
+        "ReportDate": {
+          "type": "string",
+          "maxLength": 20,
+          "x-esri-field-type": "esriFieldTypeString"
+        },
+        "EstimateRe": {
+          "type": "string",
+          "maxLength": 20,
+          "x-esri-field-type": "esriFieldTypeString"
+        },
+        "ActualRest": {
+          "type": "string",
+          "maxLength": 20,
+          "x-esri-field-type": "esriFieldTypeString"
+        },
+        "Details": {
+          "type": "string",
+          "maxLength": 254,
+          "x-esri-field-type": "esriFieldTypeString"
+        },
+        "MapX": {
+          "type": "number",
+          "x-esri-field-type": "esriFieldTypeDouble"
+        },
+        "MapY": {
+          "type": "number",
+          "x-esri-field-type": "esriFieldTypeDouble"
+        },
+        "CreatedBy": {
+          "type": "string",
+          "maxLength": 50,
+          "x-esri-field-type": "esriFieldTypeString"
+        },
+        "CreatedDat": {
+          "type": "string",
+          "maxLength": 20,
+          "x-esri-field-type": "esriFieldTypeString"
+        },
+        "EditedBy": {
+          "type": "string",
+          "maxLength": 50,
+          "x-esri-field-type": "esriFieldTypeString"
+        },
+        "EditedDate": {
+          "type": "string",
+          "maxLength": 20,
+          "x-esri-field-type": "esriFieldTypeString"
+        },
+        "PublishBy": {
+          "type": "string",
+          "maxLength": 50,
+          "x-esri-field-type": "esriFieldTypeString"
+        },
+        "PublishDat": {
+          "type": "string",
+          "maxLength": 20,
+          "x-esri-field-type": "esriFieldTypeString"
+        },
+        "ConditionN": {
+          "type": "string",
+          "maxLength": 50,
+          "x-esri-field-type": "esriFieldTypeString"
+        }
+      }
+    },
+    "WaterCanadaOutagesProdL0Attributes": {
+      "type": "object",
+      "description": "Attributes of a feature in the `water_canada_outages-prod` layer (water_canada_outages_prod, layer 0). Geometry type esriGeometryPoint.",
+      "properties": {
+        "FID": {
+          "type": "integer",
+          "description": "Object ID; the unique, service maintained identifier.",
+          "x-esri-field-type": "esriFieldTypeOID"
+        },
+        "MainbreakI": {
+          "type": "string",
+          "maxLength": 10,
+          "x-esri-field-type": "esriFieldTypeString"
+        },
+        "Cause": {
+          "type": "string",
+          "maxLength": 254,
+          "x-esri-field-type": "esriFieldTypeString"
+        },
+        "ReportDate": {
+          "type": "string",
+          "maxLength": 50,
+          "x-esri-field-type": "esriFieldTypeString"
+        },
+        "Restoratio": {
+          "type": "string",
+          "maxLength": 50,
+          "x-esri-field-type": "esriFieldTypeString"
+        },
+        "Status": {
+          "type": "string",
+          "maxLength": 254,
+          "x-esri-field-type": "esriFieldTypeString"
+        },
+        "Details": {
+          "type": "string",
+          "maxLength": 254,
+          "x-esri-field-type": "esriFieldTypeString"
+        },
+        "EstimateRe": {
+          "type": "string",
+          "maxLength": 254,
+          "x-esri-field-type": "esriFieldTypeString"
+        }
+      },
+      "examples": [
+        {
+          "FID": 1,
+          "MainbreakI": "MB4575",
+          "Cause": "Water Main Break",
+          "ReportDate": "Jan-30  7:34 PM",
+          "Restoratio": null,
+          "Status": "Water main break has been repaired. Awaiting surface restoration. If you\u2019re experiencing a water outage, please report it to 780-412-4500.",
+          "Details": "Road restoration is carried out by a 3rd party and may take up to 6 weeks to complete.",
+          "EstimateRe": "Customers are NOT out of Water"
+        }
+      ]
+    },
+    "WaterInfrastructureProjectsProdL0Attributes": {
+      "type": "object",
+      "description": "Attributes of a feature in the `WaterInfrastructureProjects_pt` layer (Water_InfrastructureProjects_Prod, layer 0). Geometry type esriGeometryPoint.",
+      "properties": {
+        "OBJECTID": {
+          "type": "integer",
+          "description": "Object ID; the unique, service maintained identifier.",
+          "x-esri-field-type": "esriFieldTypeOID"
+        },
+        "PR_NUMBER": {
+          "type": "string",
+          "maxLength": 20,
+          "description": "Project Number",
+          "x-esri-field-type": "esriFieldTypeString"
+        },
+        "PR_STATUS": {
+          "type": "string",
+          "maxLength": 40,
+          "description": "Project Status",
+          "x-esri-field-type": "esriFieldTypeString"
+        },
+        "PR_TYPE": {
+          "type": "string",
+          "maxLength": 256,
+          "description": "Project Type",
+          "x-esri-field-type": "esriFieldTypeString"
+        },
+        "PR_YEAR": {
+          "type": "integer",
+          "description": "Project Year",
+          "x-esri-field-type": "esriFieldTypeInteger"
+        },
+        "LIFE_CYCLE": {
+          "type": "string",
+          "maxLength": 40,
+          "description": "Life Cycle",
+          "x-esri-field-type": "esriFieldTypeString"
+        },
+        "PR_NAME": {
+          "type": "string",
+          "maxLength": 256,
+          "description": "Project Name",
+          "x-esri-field-type": "esriFieldTypeString"
+        },
+        "START_DATE": {
+          "type": "integer",
+          "maxLength": 8,
+          "description": "Start Date Epoch milliseconds (Esri date field).",
+          "x-esri-field-type": "esriFieldTypeDate"
+        },
+        "END_DATE": {
+          "type": "integer",
+          "maxLength": 8,
+          "description": "End Date Epoch milliseconds (Esri date field).",
+          "x-esri-field-type": "esriFieldTypeDate"
+        },
+        "OVERVIEW": {
+          "type": "string",
+          "maxLength": 256,
+          "description": "Overview",
+          "x-esri-field-type": "esriFieldTypeString"
+        },
+        "REDIRECT": {
+          "type": "string",
+          "maxLength": 256,
+          "description": "Redirect URL",
+          "x-esri-field-type": "esriFieldTypeString"
+        }
+      }
+    },
+    "WaterInfrastructureProjectsProdL1Attributes": {
+      "type": "object",
+      "description": "Attributes of a feature in the `WaterInfrastructureProjects_area` layer (Water_InfrastructureProjects_Prod, layer 1). Geometry type esriGeometryPolygon.",
+      "properties": {
+        "OBJECTID": {
+          "type": "integer",
+          "description": "Object ID; the unique, service maintained identifier.",
+          "x-esri-field-type": "esriFieldTypeOID"
+        },
+        "PR_NUMBER": {
+          "type": "string",
+          "maxLength": 20,
+          "description": "Project Number",
+          "x-esri-field-type": "esriFieldTypeString"
+        },
+        "PR_STATUS": {
+          "type": "string",
+          "maxLength": 40,
+          "description": "Project Status",
+          "x-esri-field-type": "esriFieldTypeString"
+        },
+        "PR_TYPE": {
+          "type": "string",
+          "maxLength": 256,
+          "description": "Project Type",
+          "x-esri-field-type": "esriFieldTypeString"
+        },
+        "PR_YEAR": {
+          "type": "integer",
+          "description": "Project Year",
+          "x-esri-field-type": "esriFieldTypeInteger"
+        },
+        "LIFE_CYCLE": {
+          "type": "string",
+          "maxLength": 40,
+          "description": "Life Cycle",
+          "x-esri-field-type": "esriFieldTypeString"
+        },
+        "PR_NAME": {
+          "type": "string",
+          "maxLength": 256,
+          "description": "Project Name",
+          "x-esri-field-type": "esriFieldTypeString"
+        },
+        "START_DATE": {
+          "type": "integer",
+          "maxLength": 8,
+          "description": "Start Date Epoch milliseconds (Esri date field).",
+          "x-esri-field-type": "esriFieldTypeDate"
+        },
+        "END_DATE": {
+          "type": "integer",
+          "maxLength": 8,
+          "description": "End Date Epoch milliseconds (Esri date field).",
+          "x-esri-field-type": "esriFieldTypeDate"
+        },
+        "OVERVIEW": {
+          "type": "string",
+          "maxLength": 256,
+          "description": "Overview",
+          "x-esri-field-type": "esriFieldTypeString"
+        },
+        "REDIRECT": {
+          "type": "string",
+          "maxLength": 256,
+          "description": "Redirect URL",
+          "x-esri-field-type": "esriFieldTypeString"
+        },
+        "Shape__Area": {
+          "type": "number",
+          "x-esri-field-type": "esriFieldTypeDouble"
+        },
+        "Shape__Length": {
+          "type": "number",
+          "x-esri-field-type": "esriFieldTypeDouble"
+        }
+      }
+    }
+  }
+}

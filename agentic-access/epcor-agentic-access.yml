@@ -1,0 +1,1164 @@
+generated: '2026-07-27'
+method: generated
+source: openapi/epcor-outages-arcgis-openapi.yml
+description: Recommended x-agentic-access execution contracts, classified heuristically from
+  the OpenAPI. A governance starting point for exposing this API to AI agents — review and bind
+  audience per deployment. See research/curity/agentic-governance/.
+summary:
+  operations: 115
+  by_action_class:
+    connected: 115
+  by_consequence:
+    read: 115
+  human_in_the_loop_required: 0
+operations:
+- path: /
+  method: get
+  operationId: listFeatureServices
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /CityBoundary_prod/FeatureServer
+  method: get
+  operationId: getCityBoundaryProdService
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /CityBoundary_prod/FeatureServer/0
+  method: get
+  operationId: getCityBoundaryProdLayer
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /CityBoundary_prod/FeatureServer/0/query
+  method: get
+  operationId: queryCityBoundaryProd
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /EPCor_Water_Outages_Prod/FeatureServer
+  method: get
+  operationId: getEPCorWaterOutagesProdService
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /EPCor_Water_Outages_Prod/FeatureServer/0
+  method: get
+  operationId: getEPCorWaterOutagesProdLayer
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /EPCor_Water_Outages_Prod/FeatureServer/0/query
+  method: get
+  operationId: queryEPCorWaterOutagesProd
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /GenericWaterEvents_Prod/FeatureServer
+  method: get
+  operationId: getGenericWaterEventsProdService
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /GenericWaterEvents_Prod/FeatureServer/0
+  method: get
+  operationId: getGenericWaterEventsProdL0Layer
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /GenericWaterEvents_Prod/FeatureServer/0/query
+  method: get
+  operationId: queryGenericWaterEventsProdL0
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /GenericWaterEvents_Prod/FeatureServer/1
+  method: get
+  operationId: getGenericWaterEventsProdL1Layer
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /GenericWaterEvents_Prod/FeatureServer/1/query
+  method: get
+  operationId: queryGenericWaterEventsProdL1
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /ocps_prod_av/FeatureServer
+  method: get
+  operationId: getOcpsProdAvService
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /ocps_prod_av/FeatureServer/0
+  method: get
+  operationId: getOcpsProdAvLayer
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /ocps_prod_av/FeatureServer/0/query
+  method: get
+  operationId: queryOcpsProdAv
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /ocps_prod_pl/FeatureServer
+  method: get
+  operationId: getOcpsProdPlService
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /ocps_prod_pl/FeatureServer/0
+  method: get
+  operationId: getOcpsProdPlLayer
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /ocps_prod_pl/FeatureServer/0/query
+  method: get
+  operationId: queryOcpsProdPl
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /power_outage_prod/FeatureServer
+  method: get
+  operationId: getPowerOutageProdService
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /power_outage_prod/FeatureServer/0
+  method: get
+  operationId: getPowerOutageProdLayer
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /power_outage_prod/FeatureServer/0/query
+  method: get
+  operationId: queryPowerOutageProd
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /ServiceAreas_AguaFria_prod/FeatureServer
+  method: get
+  operationId: getServiceAreasAguaFriaProdService
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /ServiceAreas_AguaFria_prod/FeatureServer/0
+  method: get
+  operationId: getServiceAreasAguaFriaProdLayer
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /ServiceAreas_AguaFria_prod/FeatureServer/0/query
+  method: get
+  operationId: queryServiceAreasAguaFriaProd
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /ServiceAreas_Anthem_prod/FeatureServer
+  method: get
+  operationId: getServiceAreasAnthemProdService
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /ServiceAreas_Anthem_prod/FeatureServer/0
+  method: get
+  operationId: getServiceAreasAnthemProdLayer
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /ServiceAreas_Anthem_prod/FeatureServer/0/query
+  method: get
+  operationId: queryServiceAreasAnthemProd
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /ServiceAreas_Chaparral_prod/FeatureServer
+  method: get
+  operationId: getServiceAreasChaparralProdService
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /ServiceAreas_Chaparral_prod/FeatureServer/0
+  method: get
+  operationId: getServiceAreasChaparralProdLayer
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /ServiceAreas_Chaparral_prod/FeatureServer/0/query
+  method: get
+  operationId: queryServiceAreasChaparralProd
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /ServiceAreas_Clovis_prod/FeatureServer
+  method: get
+  operationId: getServiceAreasClovisProdService
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /ServiceAreas_Clovis_prod/FeatureServer/0
+  method: get
+  operationId: getServiceAreasClovisProdLayer
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /ServiceAreas_Clovis_prod/FeatureServer/0/query
+  method: get
+  operationId: queryServiceAreasClovisProd
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /ServiceAreas_Edgewood_prod/FeatureServer
+  method: get
+  operationId: getServiceAreasEdgewoodProdService
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /ServiceAreas_Edgewood_prod/FeatureServer/0
+  method: get
+  operationId: getServiceAreasEdgewoodProdLayer
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /ServiceAreas_Edgewood_prod/FeatureServer/0/query
+  method: get
+  operationId: queryServiceAreasEdgewoodProd
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /ServiceAreas_Havasu_prod/FeatureServer
+  method: get
+  operationId: getServiceAreasHavasuProdService
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /ServiceAreas_Havasu_prod/FeatureServer/0
+  method: get
+  operationId: getServiceAreasHavasuProdLayer
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /ServiceAreas_Havasu_prod/FeatureServer/0/query
+  method: get
+  operationId: queryServiceAreasHavasuProd
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /ServiceAreas_Mohave_prod/FeatureServer
+  method: get
+  operationId: getServiceAreasMohaveProdService
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /ServiceAreas_Mohave_prod/FeatureServer/0
+  method: get
+  operationId: getServiceAreasMohaveProdLayer
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /ServiceAreas_Mohave_prod/FeatureServer/0/query
+  method: get
+  operationId: queryServiceAreasMohaveProd
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /ServiceAreas_NorthMohaveValley_prod/FeatureServer
+  method: get
+  operationId: getServiceAreasNorthMohaveValleyProdService
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /ServiceAreas_NorthMohaveValley_prod/FeatureServer/0
+  method: get
+  operationId: getServiceAreasNorthMohaveValleyProdLayer
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /ServiceAreas_NorthMohaveValley_prod/FeatureServer/0/query
+  method: get
+  operationId: queryServiceAreasNorthMohaveValleyProd
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /ServiceAreas_ParadiseValley_prod/FeatureServer
+  method: get
+  operationId: getServiceAreasParadiseValleyProdService
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /ServiceAreas_ParadiseValley_prod/FeatureServer/0
+  method: get
+  operationId: getServiceAreasParadiseValleyProdLayer
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /ServiceAreas_ParadiseValley_prod/FeatureServer/0/query
+  method: get
+  operationId: queryServiceAreasParadiseValleyProd
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /ServiceAreas_SunCity_prod/FeatureServer
+  method: get
+  operationId: getServiceAreasSunCityProdService
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /ServiceAreas_SunCity_prod/FeatureServer/0
+  method: get
+  operationId: getServiceAreasSunCityProdLayer
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /ServiceAreas_SunCity_prod/FeatureServer/0/query
+  method: get
+  operationId: queryServiceAreasSunCityProd
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /ServiceAreas_SunCityWest_prod/FeatureServer
+  method: get
+  operationId: getServiceAreasSunCityWestProdService
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /ServiceAreas_SunCityWest_prod/FeatureServer/0
+  method: get
+  operationId: getServiceAreasSunCityWestProdLayer
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /ServiceAreas_SunCityWest_prod/FeatureServer/0/query
+  method: get
+  operationId: queryServiceAreasSunCityWestProd
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /ServiceAreas_ThunderMountain_prod/FeatureServer
+  method: get
+  operationId: getServiceAreasThunderMountainProdService
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /ServiceAreas_ThunderMountain_prod/FeatureServer/0
+  method: get
+  operationId: getServiceAreasThunderMountainProdLayer
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /ServiceAreas_ThunderMountain_prod/FeatureServer/0/query
+  method: get
+  operationId: queryServiceAreasThunderMountainProd
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /ServiceAreas_Tubac_prod/FeatureServer
+  method: get
+  operationId: getServiceAreasTubacProdService
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /ServiceAreas_Tubac_prod/FeatureServer/0
+  method: get
+  operationId: getServiceAreasTubacProdLayer
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /ServiceAreas_Tubac_prod/FeatureServer/0/query
+  method: get
+  operationId: queryServiceAreasTubacProd
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /UDF_Events_Prod/FeatureServer
+  method: get
+  operationId: getUDFEventsProdService
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /UDF_Events_Prod/FeatureServer/0
+  method: get
+  operationId: getUDFEventsProdL0Layer
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /UDF_Events_Prod/FeatureServer/0/query
+  method: get
+  operationId: queryUDFEventsProdL0
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /UDF_Events_Prod/FeatureServer/1
+  method: get
+  operationId: getUDFEventsProdL1Layer
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /UDF_Events_Prod/FeatureServer/1/query
+  method: get
+  operationId: queryUDFEventsProdL1
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /usa_agua_fria_outages_prod/FeatureServer
+  method: get
+  operationId: getUsaAguaFriaOutagesProdService
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /usa_agua_fria_outages_prod/FeatureServer/0
+  method: get
+  operationId: getUsaAguaFriaOutagesProdLayer
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /usa_agua_fria_outages_prod/FeatureServer/0/query
+  method: get
+  operationId: queryUsaAguaFriaOutagesProd
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /usa_anthem_outages_prod/FeatureServer
+  method: get
+  operationId: getUsaAnthemOutagesProdService
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /usa_anthem_outages_prod/FeatureServer/0
+  method: get
+  operationId: getUsaAnthemOutagesProdLayer
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /usa_anthem_outages_prod/FeatureServer/0/query
+  method: get
+  operationId: queryUsaAnthemOutagesProd
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /usa_chaparral_outages_prod/FeatureServer
+  method: get
+  operationId: getUsaChaparralOutagesProdService
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /usa_chaparral_outages_prod/FeatureServer/0
+  method: get
+  operationId: getUsaChaparralOutagesProdLayer
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /usa_chaparral_outages_prod/FeatureServer/0/query
+  method: get
+  operationId: queryUsaChaparralOutagesProd
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /usa_clovis_outages_prod/FeatureServer
+  method: get
+  operationId: getUsaClovisOutagesProdService
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /usa_clovis_outages_prod/FeatureServer/0
+  method: get
+  operationId: getUsaClovisOutagesProdLayer
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /usa_clovis_outages_prod/FeatureServer/0/query
+  method: get
+  operationId: queryUsaClovisOutagesProd
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /usa_edgewood_outages_prod/FeatureServer
+  method: get
+  operationId: getUsaEdgewoodOutagesProdService
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /usa_edgewood_outages_prod/FeatureServer/0
+  method: get
+  operationId: getUsaEdgewoodOutagesProdLayer
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /usa_edgewood_outages_prod/FeatureServer/0/query
+  method: get
+  operationId: queryUsaEdgewoodOutagesProd
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /usa_havasu_outages_prod/FeatureServer
+  method: get
+  operationId: getUsaHavasuOutagesProdService
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /usa_havasu_outages_prod/FeatureServer/0
+  method: get
+  operationId: getUsaHavasuOutagesProdLayer
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /usa_havasu_outages_prod/FeatureServer/0/query
+  method: get
+  operationId: queryUsaHavasuOutagesProd
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /usa_mohave_outages_prod/FeatureServer
+  method: get
+  operationId: getUsaMohaveOutagesProdService
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /usa_mohave_outages_prod/FeatureServer/0
+  method: get
+  operationId: getUsaMohaveOutagesProdLayer
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /usa_mohave_outages_prod/FeatureServer/0/query
+  method: get
+  operationId: queryUsaMohaveOutagesProd
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /usa_northmohavevalley_outages_prod/FeatureServer
+  method: get
+  operationId: getUsaNorthmohavevalleyOutagesProdService
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /usa_northmohavevalley_outages_prod/FeatureServer/0
+  method: get
+  operationId: getUsaNorthmohavevalleyOutagesProdLayer
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /usa_northmohavevalley_outages_prod/FeatureServer/0/query
+  method: get
+  operationId: queryUsaNorthmohavevalleyOutagesProd
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /usa_paradisevalley_outages_prod/FeatureServer
+  method: get
+  operationId: getUsaParadisevalleyOutagesProdService
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /usa_paradisevalley_outages_prod/FeatureServer/0
+  method: get
+  operationId: getUsaParadisevalleyOutagesProdLayer
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /usa_paradisevalley_outages_prod/FeatureServer/0/query
+  method: get
+  operationId: queryUsaParadisevalleyOutagesProd
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /usa_suncity_outages_prod/FeatureServer
+  method: get
+  operationId: getUsaSuncityOutagesProdService
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /usa_suncity_outages_prod/FeatureServer/0
+  method: get
+  operationId: getUsaSuncityOutagesProdLayer
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /usa_suncity_outages_prod/FeatureServer/0/query
+  method: get
+  operationId: queryUsaSuncityOutagesProd
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /usa_suncitywest_outages_prod/FeatureServer
+  method: get
+  operationId: getUsaSuncitywestOutagesProdService
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /usa_suncitywest_outages_prod/FeatureServer/0
+  method: get
+  operationId: getUsaSuncitywestOutagesProdLayer
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /usa_suncitywest_outages_prod/FeatureServer/0/query
+  method: get
+  operationId: queryUsaSuncitywestOutagesProd
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /usa_thundermountain_outages_prod/FeatureServer
+  method: get
+  operationId: getUsaThundermountainOutagesProdService
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /usa_thundermountain_outages_prod/FeatureServer/0
+  method: get
+  operationId: getUsaThundermountainOutagesProdLayer
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /usa_thundermountain_outages_prod/FeatureServer/0/query
+  method: get
+  operationId: queryUsaThundermountainOutagesProd
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /usa_tubac_outages_prod/FeatureServer
+  method: get
+  operationId: getUsaTubacOutagesProdService
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /usa_tubac_outages_prod/FeatureServer/0
+  method: get
+  operationId: getUsaTubacOutagesProdLayer
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /usa_tubac_outages_prod/FeatureServer/0/query
+  method: get
+  operationId: queryUsaTubacOutagesProd
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /usa_willowvalley_outages_prod/FeatureServer
+  method: get
+  operationId: getUsaWillowvalleyOutagesProdService
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /usa_willowvalley_outages_prod/FeatureServer/0
+  method: get
+  operationId: getUsaWillowvalleyOutagesProdLayer
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /usa_willowvalley_outages_prod/FeatureServer/0/query
+  method: get
+  operationId: queryUsaWillowvalleyOutagesProd
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /water_canada_outages_prod/FeatureServer
+  method: get
+  operationId: getWaterCanadaOutagesProdService
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /water_canada_outages_prod/FeatureServer/0
+  method: get
+  operationId: getWaterCanadaOutagesProdLayer
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /water_canada_outages_prod/FeatureServer/0/query
+  method: get
+  operationId: queryWaterCanadaOutagesProd
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /Water_InfrastructureProjects_Prod/FeatureServer
+  method: get
+  operationId: getWaterInfrastructureProjectsProdService
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /Water_InfrastructureProjects_Prod/FeatureServer/0
+  method: get
+  operationId: getWaterInfrastructureProjectsProdL0Layer
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /Water_InfrastructureProjects_Prod/FeatureServer/0/query
+  method: get
+  operationId: queryWaterInfrastructureProjectsProdL0
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /Water_InfrastructureProjects_Prod/FeatureServer/1
+  method: get
+  operationId: getWaterInfrastructureProjectsProdL1Layer
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /Water_InfrastructureProjects_Prod/FeatureServer/1/query
+  method: get
+  operationId: queryWaterInfrastructureProjectsProdL1
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
