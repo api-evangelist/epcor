@@ -51,106 +51,213 @@ created: '2026-07-27'
 modified: '2026-07-27'
 specificationVersion: '0.23'
 apis:
-  - aid: epcor:epcor-ontario-green-button
-    name: EPCOR Ontario Green Button (Download My Data / Connect My Data)
-    description: >-
-      The Green Button energy-data service EPCOR operates for its three Ontario
-      service areas (Aylmer-area natural gas, Collingwood-area and
-      Kincardine-area electricity) to satisfy Ontario's O. Reg. 633/21. Download
-      My Data lets an authenticated EPCOR customer download usage and billing
-      data in an industry-standard XML format from the Green Button portal;
-      Connect My Data ("Data Shares") lets a customer authorize a registered
-      third-party vendor to receive energy usage data, billing data and/or
-      account information on an ongoing basis via security tokens, with
-      revocation from the portal's Data Shares tab. EPCOR states it has been
-      certified by the Green Button Alliance. EPCOR publishes no technical
-      documentation, no base URI, no ESPI/NAESB version reference and no
-      machine-readable contract for this interface - a third party must apply
-      through the vendor onboarding portal, and the customer-facing portal
-      redirects every path to a login, so no endpoint could be verified
-      anonymously. Not offered in EPCOR's Alberta or US service areas.
-    humanURL: https://www.epcor.com/ca/en/on/collingwood-area/account/manage-account/green-button.html
-    tags:
-      - Energy
-      - Green Button
-      - Consumer Data
-      - Electricity
-      - Natural Gas
-      - Ontario
-    properties:
-      - type: Documentation
-        url: https://www.epcor.com/ca/en/on/collingwood-area/account/manage-account/green-button.html
-      - type: Documentation
-        url: https://www.epcor.com/ca/en/on/aylmer-area/account/manage-account/green-button.html
-      - type: Documentation
-        url: https://www.epcor.com/ca/en/on/kincardine-area/account/manage-account/green-button.html
-      - type: Portal
-        url: https://epcorgas.savagedata.com/
-      - type: Registration
-        url: https://epcorgasonboarding.savagedata.com/
-      - type: Standard
-        url: https://www.greenbuttonalliance.org/
-      - type: Regulation
-        url: https://www.oeb.ca/consumer-information-and-protection/green-button
-      - type: AgentSkill
-        url: skills/epcor-request-ontario-green-button-data.md
-  - aid: epcor:epcor-outages-arcgis
-    name: EPCOR Public Outage and Service Area Feature Services (ArcGIS REST)
-    description: >-
-      EPCOR's undocumented but fully public geospatial data surface. Its outage
-      map at outages.epcor.com loads its endpoints from a configuration file
-      that points at a publicly shared ArcGIS Online organization
-      (services6.arcgis.com/Ji2rusuWXDFSqNsP, item owner epcor_outages, access
-      public). Thirty-six production feature services answer anonymous ArcGIS
-      REST queries with live operational data: Edmonton active and planned power
-      outage areas with incident number, cause, affected-customer count,
-      neighbourhoods and street ranges; Canadian water outages and main breaks;
-      generic water events and scheduled field events; water infrastructure
-      capital projects with status, lifecycle and typed dates; and per-district
-      outage points plus service-area boundaries for fourteen EPCOR Water USA
-      districts in Arizona and New Mexico. No API key, no signup, no rate limit,
-      no licence, no terms of use and no support channel are published for it,
-      and EPCOR's own environment pipeline (dev/test/ist/uat copies) sits in the
-      same public folder. Format is selected with an f parameter (json, geojson,
-      pbf), paging uses resultOffset/resultRecordCount against a 2000-feature
-      cap, and errors are returned with HTTP 200 and an Esri error body. The
-      OpenAPI in this repo is derived by API Evangelist from live service and
-      layer metadata - EPCOR publishes no specification.
-    humanURL: https://outages.epcor.com/
-    baseURL: https://services6.arcgis.com/Ji2rusuWXDFSqNsP/ArcGIS/rest/services
-    tags:
-      - Outages
-      - Geospatial
-      - Electricity
-      - Water
-      - Open Data
-      - Edmonton
-      - Alberta
-      - Arizona
-      - New Mexico
-      - ArcGIS
-    properties:
-      - type: OpenAPI
-        url: openapi/epcor-outages-arcgis-openapi.yml
-      - type: JSONSchema
-        url: json-schema/epcor-outage-features.schema.json
-      - type: Examples
-        url: examples/epcor-power-outage-areas-query.json
-      - type: Examples
-        url: examples/epcor-arcgis-service-directory.json
-      - type: Examples
-        url: examples/epcor-water-canada-outages-query.json
-      - type: Portal
-        url: https://outages.epcor.com/
-      - type: Standard
-        url: https://developers.arcgis.com/rest/services-reference/enterprise/query-feature-service-layer/
-      - type: AgentSkill
-        url: skills/epcor-check-edmonton-power-outages.md
-      - type: AgentSkill
-        url: skills/epcor-track-water-outages-and-projects.md
-      - type: AgentSkill
-        url: skills/epcor-map-us-water-districts.md
+- aid: epcor:epcor-ontario-green-button
+  name: EPCOR Ontario Green Button (Download My Data / Connect My Data)
+  description: >-
+    The Green Button energy-data service EPCOR operates for its three Ontario service areas (Aylmer-area
+    natural gas, Collingwood-area and Kincardine-area electricity) to satisfy Ontario's O. Reg. 633/21.
+    Download My Data lets an authenticated EPCOR customer download usage and billing data in an industry-standard
+    XML format from the Green Button portal; Connect My Data ("Data Shares") lets a customer authorize
+    a registered third-party vendor to receive energy usage data, billing data and/or account information
+    on an ongoing basis via security tokens, with revocation from the portal's Data Shares tab. EPCOR
+    states it has been certified by the Green Button Alliance. EPCOR publishes no technical documentation,
+    no base URI, no ESPI/NAESB version reference and no machine-readable contract for this interface -
+    a third party must apply through the vendor onboarding portal, and the customer-facing portal redirects
+    every path to a login, so no endpoint could be verified anonymously. Not offered in EPCOR's Alberta
+    or US service areas.
+  humanURL: https://www.epcor.com/ca/en/on/collingwood-area/account/manage-account/green-button.html
+  tags:
+  - Energy
+  - Green Button
+  - Consumer Data
+  - Electricity
+  - Natural Gas
+  - Ontario
+  properties:
+  - type: Documentation
+    url: https://www.epcor.com/ca/en/on/collingwood-area/account/manage-account/green-button.html
+  - type: Documentation
+    url: https://www.epcor.com/ca/en/on/aylmer-area/account/manage-account/green-button.html
+  - type: Documentation
+    url: https://www.epcor.com/ca/en/on/kincardine-area/account/manage-account/green-button.html
+  - type: Portal
+    url: https://epcorgas.savagedata.com/
+  - type: Registration
+    url: https://epcorgasonboarding.savagedata.com/
+  - type: Standard
+    url: https://www.greenbuttonalliance.org/
+  - type: Regulation
+    url: https://www.oeb.ca/consumer-information-and-protection/green-button
+  - type: AgentSkill
+    url: skills/epcor-request-ontario-green-button-data.md
+- aid: epcor:epcor-boundaries-api
+  name: EPCOR Boundaries API
+  description: Municipal boundary reference layers.
+  humanURL: https://www.epcor.com/ca/en/on/collingwood-area/account/manage-account/green-button.html
+  baseURL: https://services6.arcgis.com/Ji2rusuWXDFSqNsP/ArcGIS/rest/services
+  tags:
+  - boundaries
+  properties:
+  - type: OpenAPI
+    url: openapi/epcor-boundaries-api-openapi.yml
+  - type: JSONSchema
+    url: json-schema/epcor-outage-features.schema.json
+  - type: Examples
+    url: examples/epcor-power-outage-areas-query.json
+  - type: Examples
+    url: examples/epcor-arcgis-service-directory.json
+  - type: Examples
+    url: examples/epcor-water-canada-outages-query.json
+  - type: Portal
+    url: https://outages.epcor.com/
+  - type: Standard
+    url: >-
+      https://developers.arcgis.com/rest/services-reference/enterprise/query-feature-service-layer/
+- aid: epcor:epcor-catalog-api
+  name: EPCOR Catalog API
+  description: Service directory.
+  humanURL: https://www.epcor.com/ca/en/on/collingwood-area/account/manage-account/green-button.html
+  baseURL: https://services6.arcgis.com/Ji2rusuWXDFSqNsP/ArcGIS/rest/services
+  tags:
+  - catalog
+  properties:
+  - type: OpenAPI
+    url: openapi/epcor-catalog-api-openapi.yml
+  - type: JSONSchema
+    url: json-schema/epcor-outage-features.schema.json
+  - type: Examples
+    url: examples/epcor-power-outage-areas-query.json
+  - type: Examples
+    url: examples/epcor-arcgis-service-directory.json
+  - type: Examples
+    url: examples/epcor-water-canada-outages-query.json
+  - type: Portal
+    url: https://outages.epcor.com/
+  - type: Standard
+    url: >-
+      https://developers.arcgis.com/rest/services-reference/enterprise/query-feature-service-layer/
+- aid: epcor:epcor-infrastructure-api
+  name: EPCOR Infrastructure API
+  description: Water infrastructure construction projects.
+  humanURL: https://www.epcor.com/ca/en/on/collingwood-area/account/manage-account/green-button.html
+  baseURL: https://services6.arcgis.com/Ji2rusuWXDFSqNsP/ArcGIS/rest/services
+  tags:
+  - infrastructure
+  properties:
+  - type: OpenAPI
+    url: openapi/epcor-infrastructure-api-openapi.yml
+  - type: JSONSchema
+    url: json-schema/epcor-outage-features.schema.json
+  - type: Examples
+    url: examples/epcor-power-outage-areas-query.json
+  - type: Examples
+    url: examples/epcor-arcgis-service-directory.json
+  - type: Examples
+    url: examples/epcor-water-canada-outages-query.json
+  - type: Portal
+    url: https://outages.epcor.com/
+  - type: Standard
+    url: >-
+      https://developers.arcgis.com/rest/services-reference/enterprise/query-feature-service-layer/
+- aid: epcor:epcor-power-outages-api
+  name: EPCOR Power Outages API
+  description: Edmonton electricity distribution outages (active, planned and point features).
+  humanURL: https://www.epcor.com/ca/en/on/collingwood-area/account/manage-account/green-button.html
+  baseURL: https://services6.arcgis.com/Ji2rusuWXDFSqNsP/ArcGIS/rest/services
+  tags:
+  - power-outages
+  properties:
+  - type: OpenAPI
+    url: openapi/epcor-power-outages-api-openapi.yml
+  - type: JSONSchema
+    url: json-schema/epcor-outage-features.schema.json
+  - type: Examples
+    url: examples/epcor-power-outage-areas-query.json
+  - type: Examples
+    url: examples/epcor-arcgis-service-directory.json
+  - type: Examples
+    url: examples/epcor-water-canada-outages-query.json
+  - type: Portal
+    url: https://outages.epcor.com/
+  - type: Standard
+    url: >-
+      https://developers.arcgis.com/rest/services-reference/enterprise/query-feature-service-layer/
+- aid: epcor:epcor-service-areas-api
+  name: EPCOR Service Areas API
+  description: EPCOR Water USA service area boundaries.
+  humanURL: https://www.epcor.com/ca/en/on/collingwood-area/account/manage-account/green-button.html
+  baseURL: https://services6.arcgis.com/Ji2rusuWXDFSqNsP/ArcGIS/rest/services
+  tags:
+  - service-areas
+  properties:
+  - type: OpenAPI
+    url: openapi/epcor-service-areas-api-openapi.yml
+  - type: JSONSchema
+    url: json-schema/epcor-outage-features.schema.json
+  - type: Examples
+    url: examples/epcor-power-outage-areas-query.json
+  - type: Examples
+    url: examples/epcor-arcgis-service-directory.json
+  - type: Examples
+    url: examples/epcor-water-canada-outages-query.json
+  - type: Portal
+    url: https://outages.epcor.com/
+  - type: Standard
+    url: >-
+      https://developers.arcgis.com/rest/services-reference/enterprise/query-feature-service-layer/
+- aid: epcor:epcor-us-water-outages-api
+  name: EPCOR Us Water Outages API
+  description: EPCOR Water USA district outage points (Arizona and New Mexico).
+  humanURL: https://www.epcor.com/ca/en/on/collingwood-area/account/manage-account/green-button.html
+  baseURL: https://services6.arcgis.com/Ji2rusuWXDFSqNsP/ArcGIS/rest/services
+  tags:
+  - us-water-outages
+  properties:
+  - type: OpenAPI
+    url: openapi/epcor-us-water-outages-api-openapi.yml
+  - type: JSONSchema
+    url: json-schema/epcor-outage-features.schema.json
+  - type: Examples
+    url: examples/epcor-power-outage-areas-query.json
+  - type: Examples
+    url: examples/epcor-arcgis-service-directory.json
+  - type: Examples
+    url: examples/epcor-water-canada-outages-query.json
+  - type: Portal
+    url: https://outages.epcor.com/
+  - type: Standard
+    url: >-
+      https://developers.arcgis.com/rest/services-reference/enterprise/query-feature-service-layer/
+- aid: epcor:epcor-water-outages-api
+  name: EPCOR Water Outages API
+  description: Canadian water outages, main breaks and field events.
+  humanURL: https://www.epcor.com/ca/en/on/collingwood-area/account/manage-account/green-button.html
+  baseURL: https://services6.arcgis.com/Ji2rusuWXDFSqNsP/ArcGIS/rest/services
+  tags:
+  - water-outages
+  properties:
+  - type: OpenAPI
+    url: openapi/epcor-water-outages-api-openapi.yml
+  - type: JSONSchema
+    url: json-schema/epcor-outage-features.schema.json
+  - type: Examples
+    url: examples/epcor-power-outage-areas-query.json
+  - type: Examples
+    url: examples/epcor-arcgis-service-directory.json
+  - type: Examples
+    url: examples/epcor-water-canada-outages-query.json
+  - type: Portal
+    url: https://outages.epcor.com/
+  - type: Standard
+    url: >-
+      https://developers.arcgis.com/rest/services-reference/enterprise/query-feature-service-layer/
 common:
+  - type: AgentSkill
+    url: skills/epcor-check-edmonton-power-outages.md
+  - type: AgentSkill
+    url: skills/epcor-track-water-outages-and-projects.md
+  - type: AgentSkill
+    url: skills/epcor-map-us-water-districts.md
   - type: AgenticAccess
     url: agentic-access/epcor-agentic-access.yml
   - type: DomainSecurity
