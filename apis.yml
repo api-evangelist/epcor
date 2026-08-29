@@ -31,6 +31,18 @@ description: >-
   is a utility that is open where a province compelled it, open where nobody
   noticed, and closed everywhere it would count as a product; wholesale market
   and system data still comes from AESO and IESO, not from EPCOR.
+deliveryModel:
+  model: saas
+  open_source: false
+  commercial: true
+  callable_host: true
+  label: Hosted service · you call their endpoint
+  confidence: high
+  source:
+  - openapi
+  - pricing
+  generated: '2026-08-28'
+  method: derived
 image: https://www.epcor.com/content/dam/epcor/images/dm-images/logos-and-icons/epcor-logo.png
 tags:
   - Energy
