@@ -108,6 +108,8 @@ apis:
   humanURL: https://www.epcor.com/ca/en/on/collingwood-area/account/manage-account/green-button.html
   baseURL: https://services6.arcgis.com/Ji2rusuWXDFSqNsP/ArcGIS/rest/services
   tags:
+  - Boundaries
+  tags_raw:
   - boundaries
   properties:
   - type: OpenAPI
@@ -131,6 +133,8 @@ apis:
   humanURL: https://www.epcor.com/ca/en/on/collingwood-area/account/manage-account/green-button.html
   baseURL: https://services6.arcgis.com/Ji2rusuWXDFSqNsP/ArcGIS/rest/services
   tags:
+  - Catalog
+  tags_raw:
   - catalog
   properties:
   - type: OpenAPI
@@ -154,6 +158,8 @@ apis:
   humanURL: https://www.epcor.com/ca/en/on/collingwood-area/account/manage-account/green-button.html
   baseURL: https://services6.arcgis.com/Ji2rusuWXDFSqNsP/ArcGIS/rest/services
   tags:
+  - Infrastructure
+  tags_raw:
   - infrastructure
   properties:
   - type: OpenAPI
@@ -200,6 +206,8 @@ apis:
   humanURL: https://www.epcor.com/ca/en/on/collingwood-area/account/manage-account/green-button.html
   baseURL: https://services6.arcgis.com/Ji2rusuWXDFSqNsP/ArcGIS/rest/services
   tags:
+  - Service Areas
+  tags_raw:
   - service-areas
   properties:
   - type: OpenAPI
