@@ -1,0 +1,81 @@
+openapi: 3.2.0
+info:
+  title: EPCOR Public Outage and Service Area Feature Services (ArcGIS REST) Catalog API
+  version: '12'
+  summary: Anonymous, machine-readable read access to EPCOR's live power outage, water outage, water infrastructure project and service area feature layers.
+  description: 'EPCOR publishes no OpenAPI, no developer portal and no API documentation. It does, however, operate a public ArcGIS Online organization (`services6.arcgis.com/Ji2rusuWXDFSqNsP`, owner `epcor_outages`) whose production feature services are shared publicly and are readable anonymously over the ArcGIS REST GeoServices interface. Those services back the EPCOR outage map at https://outages.epcor.com/ and cover Edmonton power outages, Canadian water outages and main breaks, water infrastructure projects, and the outage and service area layers for EPCOR Water''s US districts in Arizona and New Mexico.
+
+
+    THIS DOCUMENT IS DERIVED, NOT PUBLISHED BY EPCOR. Every path, layer, field name and field type below was read from the live ArcGIS service and layer metadata documents on 2026-07-27; the query parameter set is the standard Esri ArcGIS REST `query` operation contract. No endpoint, field or value has been invented. Editing capabilities advertised by some services (Create/Update/Delete) are NOT modelled here: only anonymous read was probed, and write access requires an ArcGIS token.
+
+
+    Data is operational, near real time and unversioned. EPCOR publishes no licence, no terms of use for this surface, no rate limit and no support channel for it.'
+  contact:
+    name: EPCOR
+    url: https://www.epcor.com/ca/en/ab/edmonton/contact-edmonton.html
+  x-apievangelist:
+    method: derived
+    generated: '2026-07-27'
+    derived_from:
+    - https://services6.arcgis.com/Ji2rusuWXDFSqNsP/ArcGIS/rest/services?f=json
+    - ArcGIS feature service and layer metadata documents for every *_prod service in the folder
+    - https://outages.epcor.com/assets/config.json
+    note: Derived by the API Evangelist enrichment pipeline from live, anonymously readable ArcGIS REST metadata. EPCOR does not publish this specification.
+servers:
+- url: https://services6.arcgis.com/Ji2rusuWXDFSqNsP/ArcGIS/rest/services
+  description: EPCOR public ArcGIS Online feature service folder (hosted by Esri ArcGIS Online).
+security: []
+tags:
+- name: catalog
+  description: Service directory.
+paths:
+  /:
+    get:
+      operationId: listFeatureServices
+      summary: List the EPCOR feature services
+      description: 'Returns the ArcGIS service directory for EPCOR''s public ArcGIS Online organization folder: every published FeatureServer, its type and its URL. Anonymous, no key required.'
+      tags:
+      - catalog
+      parameters:
+      - $ref: '#/components/parameters/f'
+      responses:
+        '200':
+          description: Service directory listing.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceCatalog'
+components:
+  schemas:
+    ServiceCatalog:
+      type: object
+      description: Service directory listing for the EPCOR ArcGIS Online organization folder.
+      properties:
+        currentVersion:
+          type: number
+        services:
+          type: array
+          items:
+            type: object
+            properties:
+              name:
+                type: string
+              type:
+                type: string
+              url:
+                type: string
+                format: uri
+  parameters:
+    f:
+      name: f
+      in: query
+      required: false
+      description: Response format. `json` returns the Esri FeatureSet envelope, `geojson` returns RFC 7946 GeoJSON, `pbf` returns protocol buffers, `html` returns the human service directory.
+      schema:
+        type: string
+        enum:
+        - json
+        - geojson
+        - pbf
+        - html
+        default: html
