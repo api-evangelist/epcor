@@ -1,15 +1,9 @@
 openapi: 3.2.0
 info:
-  title: EPCOR Public Outage and Service Area Feature Services (ArcGIS REST) Us Water Outages API
+  title: EPCOR Public Outage and Service Area Feature Services…
   version: '12'
   summary: Anonymous, machine-readable read access to EPCOR's live power outage, water outage, water infrastructure project and service area feature layers.
-  description: 'EPCOR publishes no OpenAPI, no developer portal and no API documentation. It does, however, operate a public ArcGIS Online organization (`services6.arcgis.com/Ji2rusuWXDFSqNsP`, owner `epcor_outages`) whose production feature services are shared publicly and are readable anonymously over the ArcGIS REST GeoServices interface. Those services back the EPCOR outage map at https://outages.epcor.com/ and cover Edmonton power outages, Canadian water outages and main breaks, water infrastructure projects, and the outage and service area layers for EPCOR Water''s US districts in Arizona and New Mexico.
-
-
-    THIS DOCUMENT IS DERIVED, NOT PUBLISHED BY EPCOR. Every path, layer, field name and field type below was read from the live ArcGIS service and layer metadata documents on 2026-07-27; the query parameter set is the standard Esri ArcGIS REST `query` operation contract. No endpoint, field or value has been invented. Editing capabilities advertised by some services (Create/Update/Delete) are NOT modelled here: only anonymous read was probed, and write access requires an ArcGIS token.
-
-
-    Data is operational, near real time and unversioned. EPCOR publishes no licence, no terms of use for this surface, no rate limit and no support channel for it.'
+  description: EPCOR publishes no OpenAPI, no developer portal and no API documentation.
   contact:
     name: EPCOR
     url: https://www.epcor.com/ca/en/ab/edmonton/contact-edmonton.html
@@ -927,16 +921,67 @@ paths:
                 - $ref: '#/components/schemas/EsriError'
 components:
   schemas:
-    SpatialReference:
+    UsaAnthemOutagesProdL0FeatureSet:
       type: object
+      description: Esri FeatureSet returned by a query against the `usa_anthem_outages-prod` layer.
       properties:
-        wkid:
-          type: integer
-        latestWkid:
-          type: integer
-    UsaAnthemOutagesProdL0Attributes:
+        objectIdFieldName:
+          type: string
+        globalIdFieldName:
+          type: string
+        geometryType:
+          type: string
+        spatialReference:
+          $ref: '#/components/schemas/SpatialReference'
+        fields:
+          type: array
+          items:
+            $ref: '#/components/schemas/FieldDefinition'
+        exceededTransferLimit:
+          type: boolean
+          description: True when more features match than were returned; page with `resultOffset`.
+        features:
+          type: array
+          items:
+            type: object
+            properties:
+              attributes:
+                $ref: '#/components/schemas/UsaAnthemOutagesProdL0Attributes'
+              geometry:
+                type: object
+                description: Feature geometry, omitted when `returnGeometry=false`.
+    UsaParadisevalleyOutagesProdL0FeatureSet:
       type: object
-      description: Attributes of a feature in the `usa_anthem_outages-prod` layer (usa_anthem_outages_prod, layer 0). Geometry type esriGeometryPoint.
+      description: Esri FeatureSet returned by a query against the `usa_paradisevalley_outages-prod` layer.
+      properties:
+        objectIdFieldName:
+          type: string
+        globalIdFieldName:
+          type: string
+        geometryType:
+          type: string
+        spatialReference:
+          $ref: '#/components/schemas/SpatialReference'
+        fields:
+          type: array
+          items:
+            $ref: '#/components/schemas/FieldDefinition'
+        exceededTransferLimit:
+          type: boolean
+          description: True when more features match than were returned; page with `resultOffset`.
+        features:
+          type: array
+          items:
+            type: object
+            properties:
+              attributes:
+                $ref: '#/components/schemas/UsaParadisevalleyOutagesProdL0Attributes'
+              geometry:
+                type: object
+                description: Feature geometry, omitted when `returnGeometry=false`.
+    UsaClovisOutagesProdL0Attributes:
+      type: object
+      description: Attributes of a feature in the `usa_clovis_outages-prod` layer (usa_clovis_outages_prod, layer 0). Geometry type esriGeometryPoint.
       properties:
         FID:
           type: integer
@@ -1016,9 +1061,9 @@ components:
           type: string
           maxLength: 50
           x-esri-field-type: esriFieldTypeString
-    UsaAguaFriaOutagesProdL0FeatureSet:
+    UsaThundermountainOutagesProdL0FeatureSet:
       type: object
-      description: Esri FeatureSet returned by a query against the `usa_agua_fria_outages-prod` layer.
+      description: Esri FeatureSet returned by a query against the `usa_thundermountain_outages-prod` layer.
       properties:
         objectIdFieldName:
           type: string
@@ -1041,37 +1086,13 @@ components:
             type: object
             properties:
               attributes:
-                $ref: '#/components/schemas/UsaAguaFriaOutagesProdL0Attributes'
+                $ref: '#/components/schemas/UsaThundermountainOutagesProdL0Attributes'
               geometry:
                 type: object
                 description: Feature geometry, omitted when `returnGeometry=false`.
-    LayerMetadata:
+    UsaChaparralOutagesProdL0FeatureSet:
       type: object
-      description: 'ArcGIS feature layer metadata document: field definitions, geometry type, extent, capabilities and edit timestamps.'
-      properties:
-        currentVersion:
-          type: number
-        id:
-          type: integer
-        name:
-          type: string
-        type:
-          type: string
-        geometryType:
-          type: string
-        fields:
-          type: array
-          items:
-            $ref: '#/components/schemas/FieldDefinition'
-        extent:
-          type: object
-        editingInfo:
-          type: object
-        maxRecordCount:
-          type: integer
-    UsaTubacOutagesProdL0FeatureSet:
-      type: object
-      description: Esri FeatureSet returned by a query against the `usa_tubac_outages-prod` layer.
+      description: Esri FeatureSet returned by a query against the `usa_chaparral_outages-prod` layer.
       properties:
         objectIdFieldName:
           type: string
@@ -1094,7 +1115,7 @@ components:
             type: object
             properties:
               attributes:
-                $ref: '#/components/schemas/UsaTubacOutagesProdL0Attributes'
+                $ref: '#/components/schemas/UsaChaparralOutagesProdL0Attributes'
               geometry:
                 type: object
                 description: Feature geometry, omitted when `returnGeometry=false`.
@@ -1127,88 +1148,6 @@ components:
               geometry:
                 type: object
                 description: Feature geometry, omitted when `returnGeometry=false`.
-    UsaParadisevalleyOutagesProdL0Attributes:
-      type: object
-      description: Attributes of a feature in the `usa_paradisevalley_outages-prod` layer (usa_paradisevalley_outages_prod, layer 0). Geometry type esriGeometryPoint.
-      properties:
-        FID:
-          type: integer
-          description: Object ID; the unique, service maintained identifier.
-          x-esri-field-type: esriFieldTypeOID
-        ID:
-          type: number
-          x-esri-field-type: esriFieldTypeDouble
-        FaultID:
-          type: number
-          x-esri-field-type: esriFieldTypeDouble
-        CommunityI:
-          type: number
-          x-esri-field-type: esriFieldTypeDouble
-        CommunityN:
-          type: string
-          maxLength: 250
-          x-esri-field-type: esriFieldTypeString
-        ConditionI:
-          type: number
-          x-esri-field-type: esriFieldTypeDouble
-        Planned:
-          type: string
-          maxLength: 1
-          x-esri-field-type: esriFieldTypeString
-        ApproxArea:
-          type: string
-          maxLength: 250
-          x-esri-field-type: esriFieldTypeString
-        ReportDate:
-          type: string
-          maxLength: 20
-          x-esri-field-type: esriFieldTypeString
-        EstimateRe:
-          type: string
-          maxLength: 20
-          x-esri-field-type: esriFieldTypeString
-        ActualRest:
-          type: string
-          maxLength: 20
-          x-esri-field-type: esriFieldTypeString
-        Details:
-          type: string
-          maxLength: 254
-          x-esri-field-type: esriFieldTypeString
-        MapX:
-          type: number
-          x-esri-field-type: esriFieldTypeDouble
-        MapY:
-          type: number
-          x-esri-field-type: esriFieldTypeDouble
-        CreatedBy:
-          type: string
-          maxLength: 50
-          x-esri-field-type: esriFieldTypeString
-        CreatedDat:
-          type: string
-          maxLength: 20
-          x-esri-field-type: esriFieldTypeString
-        EditedBy:
-          type: string
-          maxLength: 50
-          x-esri-field-type: esriFieldTypeString
-        EditedDate:
-          type: string
-          maxLength: 20
-          x-esri-field-type: esriFieldTypeString
-        PublishBy:
-          type: string
-          maxLength: 50
-          x-esri-field-type: esriFieldTypeString
-        PublishDat:
-          type: string
-          maxLength: 20
-          x-esri-field-type: esriFieldTypeString
-        ConditionN:
-          type: string
-          maxLength: 50
-          x-esri-field-type: esriFieldTypeString
     UsaSuncityOutagesProdL0FeatureSet:
       type: object
       description: Esri FeatureSet returned by a query against the `usa_suncity_outages-prod` layer.
@@ -1238,173 +1177,102 @@ components:
               geometry:
                 type: object
                 description: Feature geometry, omitted when `returnGeometry=false`.
-    UsaThundermountainOutagesProdL0Attributes:
+    ServiceMetadata:
       type: object
-      description: Attributes of a feature in the `usa_thundermountain_outages-prod` layer (usa_thundermountain_outages_prod, layer 0). Geometry type esriGeometryPoint.
+      description: ArcGIS feature service metadata document.
       properties:
-        FID:
+        currentVersion:
+          type: number
+        serviceItemId:
+          type: string
+        capabilities:
+          type: string
+          description: Comma separated capability list advertised by the service. Only `Query` is exercisable anonymously; editing capabilities require an ArcGIS token.
+        maxRecordCount:
           type: integer
-          description: Object ID; the unique, service maintained identifier.
-          x-esri-field-type: esriFieldTypeOID
-        ID:
-          type: number
-          x-esri-field-type: esriFieldTypeDouble
-        FaultID:
-          type: number
-          x-esri-field-type: esriFieldTypeDouble
-        CommunityI:
-          type: number
-          x-esri-field-type: esriFieldTypeDouble
-        CommunityN:
-          type: string
-          maxLength: 250
-          x-esri-field-type: esriFieldTypeString
-        ConditionI:
-          type: number
-          x-esri-field-type: esriFieldTypeDouble
-        Planned:
-          type: string
-          maxLength: 1
-          x-esri-field-type: esriFieldTypeString
-        ApproxArea:
-          type: string
-          maxLength: 250
-          x-esri-field-type: esriFieldTypeString
-        ReportDate:
-          type: string
-          maxLength: 20
-          x-esri-field-type: esriFieldTypeString
-        EstimateRe:
-          type: string
-          maxLength: 20
-          x-esri-field-type: esriFieldTypeString
-        ActualRest:
-          type: string
-          maxLength: 20
-          x-esri-field-type: esriFieldTypeString
-        Details:
-          type: string
-          maxLength: 254
-          x-esri-field-type: esriFieldTypeString
-        MapX:
-          type: number
-          x-esri-field-type: esriFieldTypeDouble
-        MapY:
-          type: number
-          x-esri-field-type: esriFieldTypeDouble
-        CreatedBy:
-          type: string
-          maxLength: 50
-          x-esri-field-type: esriFieldTypeString
-        CreatedDat:
-          type: string
-          maxLength: 20
-          x-esri-field-type: esriFieldTypeString
-        EditedBy:
-          type: string
-          maxLength: 50
-          x-esri-field-type: esriFieldTypeString
-        EditedDate:
-          type: string
-          maxLength: 20
-          x-esri-field-type: esriFieldTypeString
-        PublishBy:
-          type: string
-          maxLength: 50
-          x-esri-field-type: esriFieldTypeString
-        PublishDat:
-          type: string
-          maxLength: 20
-          x-esri-field-type: esriFieldTypeString
-        ConditionN:
-          type: string
-          maxLength: 50
-          x-esri-field-type: esriFieldTypeString
-    UsaAguaFriaOutagesProdL0Attributes:
+        spatialReference:
+          $ref: '#/components/schemas/SpatialReference'
+        layers:
+          type: array
+          items:
+            type: object
+    GeoJSONFeatureCollection:
       type: object
-      description: Attributes of a feature in the `usa_agua_fria_outages-prod` layer (usa_agua_fria_outages_prod, layer 0). Geometry type esriGeometryPoint.
+      description: RFC 7946 FeatureCollection returned when `f=geojson`.
       properties:
-        FID:
-          type: integer
-          description: Object ID; the unique, service maintained identifier.
-          x-esri-field-type: esriFieldTypeOID
-        ID:
-          type: number
-          x-esri-field-type: esriFieldTypeDouble
-        FaultID:
-          type: number
-          x-esri-field-type: esriFieldTypeDouble
-        CommunityI:
-          type: number
-          x-esri-field-type: esriFieldTypeDouble
-        CommunityN:
+        type:
           type: string
-          maxLength: 250
-          x-esri-field-type: esriFieldTypeString
-        ConditionI:
-          type: number
-          x-esri-field-type: esriFieldTypeDouble
-        Planned:
-          type: string
-          maxLength: 1
-          x-esri-field-type: esriFieldTypeString
-        ApproxArea:
-          type: string
-          maxLength: 250
-          x-esri-field-type: esriFieldTypeString
-        ReportDate:
-          type: string
-          maxLength: 20
-          x-esri-field-type: esriFieldTypeString
-        EstimateRe:
-          type: string
-          maxLength: 20
-          x-esri-field-type: esriFieldTypeString
-        ActualRest:
-          type: string
-          maxLength: 20
-          x-esri-field-type: esriFieldTypeString
-        Details:
-          type: string
-          maxLength: 254
-          x-esri-field-type: esriFieldTypeString
-        MapX:
-          type: number
-          x-esri-field-type: esriFieldTypeDouble
-        MapY:
-          type: number
-          x-esri-field-type: esriFieldTypeDouble
-        CreatedBy:
-          type: string
-          maxLength: 50
-          x-esri-field-type: esriFieldTypeString
-        CreatedDat:
-          type: string
-          maxLength: 20
-          x-esri-field-type: esriFieldTypeString
-        EditedBy:
-          type: string
-          maxLength: 50
-          x-esri-field-type: esriFieldTypeString
-        EditedDate:
-          type: string
-          maxLength: 20
-          x-esri-field-type: esriFieldTypeString
-        PublishBy:
-          type: string
-          maxLength: 50
-          x-esri-field-type: esriFieldTypeString
-        PublishDat:
-          type: string
-          maxLength: 20
-          x-esri-field-type: esriFieldTypeString
-        ConditionN:
-          type: string
-          maxLength: 50
-          x-esri-field-type: esriFieldTypeString
-    UsaNorthmohavevalleyOutagesProdL0Attributes:
+          const: FeatureCollection
+        properties:
+          type: object
+          properties:
+            exceededTransferLimit:
+              type: boolean
+        features:
+          type: array
+          items:
+            type: object
+    UsaSuncitywestOutagesProdL0FeatureSet:
       type: object
-      description: Attributes of a feature in the `usa_northmohavevalley_outages-prod` layer (usa_northmohavevalley_outages_prod, layer 0). Geometry type esriGeometryPoint.
+      description: Esri FeatureSet returned by a query against the `usa_suncitywest_outages-prod` layer.
+      properties:
+        objectIdFieldName:
+          type: string
+        globalIdFieldName:
+          type: string
+        geometryType:
+          type: string
+        spatialReference:
+          $ref: '#/components/schemas/SpatialReference'
+        fields:
+          type: array
+          items:
+            $ref: '#/components/schemas/FieldDefinition'
+        exceededTransferLimit:
+          type: boolean
+          description: True when more features match than were returned; page with `resultOffset`.
+        features:
+          type: array
+          items:
+            type: object
+            properties:
+              attributes:
+                $ref: '#/components/schemas/UsaSuncitywestOutagesProdL0Attributes'
+              geometry:
+                type: object
+                description: Feature geometry, omitted when `returnGeometry=false`.
+    UsaEdgewoodOutagesProdL0FeatureSet:
+      type: object
+      description: Esri FeatureSet returned by a query against the `usa_edgewood_outages-prod` layer.
+      properties:
+        objectIdFieldName:
+          type: string
+        globalIdFieldName:
+          type: string
+        geometryType:
+          type: string
+        spatialReference:
+          $ref: '#/components/schemas/SpatialReference'
+        fields:
+          type: array
+          items:
+            $ref: '#/components/schemas/FieldDefinition'
+        exceededTransferLimit:
+          type: boolean
+          description: True when more features match than were returned; page with `resultOffset`.
+        features:
+          type: array
+          items:
+            type: object
+            properties:
+              attributes:
+                $ref: '#/components/schemas/UsaEdgewoodOutagesProdL0Attributes'
+              geometry:
+                type: object
+                description: Feature geometry, omitted when `returnGeometry=false`.
+    UsaSuncityOutagesProdL0Attributes:
+      type: object
+      description: Attributes of a feature in the `usa_suncity_outages-prod` layer (usa_suncity_outages_prod, layer 0). Geometry type esriGeometryPoint.
       properties:
         FID:
           type: integer
@@ -1566,215 +1434,6 @@ components:
           type: string
           maxLength: 50
           x-esri-field-type: esriFieldTypeString
-    UsaThundermountainOutagesProdL0FeatureSet:
-      type: object
-      description: Esri FeatureSet returned by a query against the `usa_thundermountain_outages-prod` layer.
-      properties:
-        objectIdFieldName:
-          type: string
-        globalIdFieldName:
-          type: string
-        geometryType:
-          type: string
-        spatialReference:
-          $ref: '#/components/schemas/SpatialReference'
-        fields:
-          type: array
-          items:
-            $ref: '#/components/schemas/FieldDefinition'
-        exceededTransferLimit:
-          type: boolean
-          description: True when more features match than were returned; page with `resultOffset`.
-        features:
-          type: array
-          items:
-            type: object
-            properties:
-              attributes:
-                $ref: '#/components/schemas/UsaThundermountainOutagesProdL0Attributes'
-              geometry:
-                type: object
-                description: Feature geometry, omitted when `returnGeometry=false`.
-    UsaEdgewoodOutagesProdL0Attributes:
-      type: object
-      description: Attributes of a feature in the `usa_edgewood_outages-prod` layer (usa_edgewood_outages_prod, layer 0). Geometry type esriGeometryPoint.
-      properties:
-        FID:
-          type: integer
-          description: Object ID; the unique, service maintained identifier.
-          x-esri-field-type: esriFieldTypeOID
-        ID:
-          type: number
-          x-esri-field-type: esriFieldTypeDouble
-        FaultID:
-          type: number
-          x-esri-field-type: esriFieldTypeDouble
-        CommunityI:
-          type: number
-          x-esri-field-type: esriFieldTypeDouble
-        CommunityN:
-          type: string
-          maxLength: 250
-          x-esri-field-type: esriFieldTypeString
-        ConditionI:
-          type: number
-          x-esri-field-type: esriFieldTypeDouble
-        Planned:
-          type: string
-          maxLength: 1
-          x-esri-field-type: esriFieldTypeString
-        ApproxArea:
-          type: string
-          maxLength: 250
-          x-esri-field-type: esriFieldTypeString
-        ReportDate:
-          type: string
-          maxLength: 20
-          x-esri-field-type: esriFieldTypeString
-        EstimateRe:
-          type: string
-          maxLength: 20
-          x-esri-field-type: esriFieldTypeString
-        ActualRest:
-          type: string
-          maxLength: 20
-          x-esri-field-type: esriFieldTypeString
-        Details:
-          type: string
-          maxLength: 254
-          x-esri-field-type: esriFieldTypeString
-        MapX:
-          type: number
-          x-esri-field-type: esriFieldTypeDouble
-        MapY:
-          type: number
-          x-esri-field-type: esriFieldTypeDouble
-        CreatedBy:
-          type: string
-          maxLength: 50
-          x-esri-field-type: esriFieldTypeString
-        CreatedDat:
-          type: string
-          maxLength: 20
-          x-esri-field-type: esriFieldTypeString
-        EditedBy:
-          type: string
-          maxLength: 50
-          x-esri-field-type: esriFieldTypeString
-        EditedDate:
-          type: string
-          maxLength: 20
-          x-esri-field-type: esriFieldTypeString
-        PublishBy:
-          type: string
-          maxLength: 50
-          x-esri-field-type: esriFieldTypeString
-        PublishDat:
-          type: string
-          maxLength: 20
-          x-esri-field-type: esriFieldTypeString
-        ConditionN:
-          type: string
-          maxLength: 50
-          x-esri-field-type: esriFieldTypeString
-    GeoJSONFeatureCollection:
-      type: object
-      description: RFC 7946 FeatureCollection returned when `f=geojson`.
-      properties:
-        type:
-          type: string
-          const: FeatureCollection
-        properties:
-          type: object
-          properties:
-            exceededTransferLimit:
-              type: boolean
-        features:
-          type: array
-          items:
-            type: object
-    UsaWillowvalleyOutagesProdL0Attributes:
-      type: object
-      description: Attributes of a feature in the `usa_willowvalley_outages-prod` layer (usa_willowvalley_outages_prod, layer 0). Geometry type esriGeometryPoint.
-      properties:
-        FID:
-          type: integer
-          description: Object ID; the unique, service maintained identifier.
-          x-esri-field-type: esriFieldTypeOID
-        ID:
-          type: number
-          x-esri-field-type: esriFieldTypeDouble
-        FaultID:
-          type: number
-          x-esri-field-type: esriFieldTypeDouble
-        CommunityI:
-          type: number
-          x-esri-field-type: esriFieldTypeDouble
-        CommunityN:
-          type: string
-          maxLength: 250
-          x-esri-field-type: esriFieldTypeString
-        ConditionI:
-          type: number
-          x-esri-field-type: esriFieldTypeDouble
-        Planned:
-          type: string
-          maxLength: 1
-          x-esri-field-type: esriFieldTypeString
-        ApproxArea:
-          type: string
-          maxLength: 250
-          x-esri-field-type: esriFieldTypeString
-        ReportDate:
-          type: string
-          maxLength: 20
-          x-esri-field-type: esriFieldTypeString
-        EstimateRe:
-          type: string
-          maxLength: 20
-          x-esri-field-type: esriFieldTypeString
-        ActualRest:
-          type: string
-          maxLength: 20
-          x-esri-field-type: esriFieldTypeString
-        Details:
-          type: string
-          maxLength: 254
-          x-esri-field-type: esriFieldTypeString
-        MapX:
-          type: number
-          x-esri-field-type: esriFieldTypeDouble
-        MapY:
-          type: number
-          x-esri-field-type: esriFieldTypeDouble
-        CreatedBy:
-          type: string
-          maxLength: 50
-          x-esri-field-type: esriFieldTypeString
-        CreatedDat:
-          type: string
-          maxLength: 20
-          x-esri-field-type: esriFieldTypeString
-        EditedBy:
-          type: string
-          maxLength: 50
-          x-esri-field-type: esriFieldTypeString
-        EditedDate:
-          type: string
-          maxLength: 20
-          x-esri-field-type: esriFieldTypeString
-        PublishBy:
-          type: string
-          maxLength: 50
-          x-esri-field-type: esriFieldTypeString
-        PublishDat:
-          type: string
-          maxLength: 20
-          x-esri-field-type: esriFieldTypeString
-        ConditionN:
-          type: string
-          maxLength: 50
-          x-esri-field-type: esriFieldTypeString
     FieldDefinition:
       type: object
       properties:
@@ -1789,9 +1448,16 @@ components:
           type: string
         length:
           type: integer
-    UsaNorthmohavevalleyOutagesProdL0FeatureSet:
+    SpatialReference:
       type: object
-      description: Esri FeatureSet returned by a query against the `usa_northmohavevalley_outages-prod` layer.
+      properties:
+        wkid:
+          type: integer
+        latestWkid:
+          type: integer
+    UsaHavasuOutagesProdL0FeatureSet:
+      type: object
+      description: Esri FeatureSet returned by a query against the `usa_havasu_outages-prod` layer.
       properties:
         objectIdFieldName:
           type: string
@@ -1814,13 +1480,13 @@ components:
             type: object
             properties:
               attributes:
-                $ref: '#/components/schemas/UsaNorthmohavevalleyOutagesProdL0Attributes'
+                $ref: '#/components/schemas/UsaHavasuOutagesProdL0Attributes'
               geometry:
                 type: object
                 description: Feature geometry, omitted when `returnGeometry=false`.
-    UsaSuncitywestOutagesProdL0FeatureSet:
+    UsaMohaveOutagesProdL0FeatureSet:
       type: object
-      description: Esri FeatureSet returned by a query against the `usa_suncitywest_outages-prod` layer.
+      description: Esri FeatureSet returned by a query against the `usa_mohave_outages-prod` layer.
       properties:
         objectIdFieldName:
           type: string
@@ -1843,13 +1509,42 @@ components:
             type: object
             properties:
               attributes:
-                $ref: '#/components/schemas/UsaSuncitywestOutagesProdL0Attributes'
+                $ref: '#/components/schemas/UsaMohaveOutagesProdL0Attributes'
               geometry:
                 type: object
                 description: Feature geometry, omitted when `returnGeometry=false`.
-    UsaTubacOutagesProdL0Attributes:
+    UsaAguaFriaOutagesProdL0FeatureSet:
       type: object
-      description: Attributes of a feature in the `usa_tubac_outages-prod` layer (usa_tubac_outages_prod, layer 0). Geometry type esriGeometryPoint.
+      description: Esri FeatureSet returned by a query against the `usa_agua_fria_outages-prod` layer.
+      properties:
+        objectIdFieldName:
+          type: string
+        globalIdFieldName:
+          type: string
+        geometryType:
+          type: string
+        spatialReference:
+          $ref: '#/components/schemas/SpatialReference'
+        fields:
+          type: array
+          items:
+            $ref: '#/components/schemas/FieldDefinition'
+        exceededTransferLimit:
+          type: boolean
+          description: True when more features match than were returned; page with `resultOffset`.
+        features:
+          type: array
+          items:
+            type: object
+            properties:
+              attributes:
+                $ref: '#/components/schemas/UsaAguaFriaOutagesProdL0Attributes'
+              geometry:
+                type: object
+                description: Feature geometry, omitted when `returnGeometry=false`.
+    UsaHavasuOutagesProdL0Attributes:
+      type: object
+      description: Attributes of a feature in the `usa_havasu_outages-prod` layer (usa_havasu_outages_prod, layer 0). Geometry type esriGeometryPoint.
       properties:
         FID:
           type: integer
@@ -1929,38 +1624,9 @@ components:
           type: string
           maxLength: 50
           x-esri-field-type: esriFieldTypeString
-    UsaClovisOutagesProdL0FeatureSet:
+    UsaThundermountainOutagesProdL0Attributes:
       type: object
-      description: Esri FeatureSet returned by a query against the `usa_clovis_outages-prod` layer.
-      properties:
-        objectIdFieldName:
-          type: string
-        globalIdFieldName:
-          type: string
-        geometryType:
-          type: string
-        spatialReference:
-          $ref: '#/components/schemas/SpatialReference'
-        fields:
-          type: array
-          items:
-            $ref: '#/components/schemas/FieldDefinition'
-        exceededTransferLimit:
-          type: boolean
-          description: True when more features match than were returned; page with `resultOffset`.
-        features:
-          type: array
-          items:
-            type: object
-            properties:
-              attributes:
-                $ref: '#/components/schemas/UsaClovisOutagesProdL0Attributes'
-              geometry:
-                type: object
-                description: Feature geometry, omitted when `returnGeometry=false`.
-    UsaClovisOutagesProdL0Attributes:
-      type: object
-      description: Attributes of a feature in the `usa_clovis_outages-prod` layer (usa_clovis_outages_prod, layer 0). Geometry type esriGeometryPoint.
+      description: Attributes of a feature in the `usa_thundermountain_outages-prod` layer (usa_thundermountain_outages_prod, layer 0). Geometry type esriGeometryPoint.
       properties:
         FID:
           type: integer
@@ -2122,66 +1788,9 @@ components:
           type: string
           maxLength: 50
           x-esri-field-type: esriFieldTypeString
-    EsriError:
+    UsaAguaFriaOutagesProdL0Attributes:
       type: object
-      description: ArcGIS REST error envelope. Note that these services return HTTP 200 with this body rather than a 4xx status code.
-      properties:
-        error:
-          type: object
-          properties:
-            code:
-              type: integer
-              description: Esri error code.
-            message:
-              type: string
-              description: Short error message; may be an empty string.
-            details:
-              type: array
-              items:
-                type: string
-              description: Human readable detail strings.
-          required:
-          - code
-      required:
-      - error
-      examples:
-      - error:
-          code: 400
-          message: Cannot perform query. Invalid query parameters.
-          details:
-          - '''where'' parameter is invalid'
-    UsaParadisevalleyOutagesProdL0FeatureSet:
-      type: object
-      description: Esri FeatureSet returned by a query against the `usa_paradisevalley_outages-prod` layer.
-      properties:
-        objectIdFieldName:
-          type: string
-        globalIdFieldName:
-          type: string
-        geometryType:
-          type: string
-        spatialReference:
-          $ref: '#/components/schemas/SpatialReference'
-        fields:
-          type: array
-          items:
-            $ref: '#/components/schemas/FieldDefinition'
-        exceededTransferLimit:
-          type: boolean
-          description: True when more features match than were returned; page with `resultOffset`.
-        features:
-          type: array
-          items:
-            type: object
-            properties:
-              attributes:
-                $ref: '#/components/schemas/UsaParadisevalleyOutagesProdL0Attributes'
-              geometry:
-                type: object
-                description: Feature geometry, omitted when `returnGeometry=false`.
-    UsaHavasuOutagesProdL0Attributes:
-      type: object
-      description: Attributes of a feature in the `usa_havasu_outages-prod` layer (usa_havasu_outages_prod, layer 0). Geometry type esriGeometryPoint.
+      description: Attributes of a feature in the `usa_agua_fria_outages-prod` layer (usa_agua_fria_outages_prod, layer 0). Geometry type esriGeometryPoint.
       properties:
         FID:
           type: integer
@@ -2261,38 +1870,9 @@ components:
           type: string
           maxLength: 50
           x-esri-field-type: esriFieldTypeString
-    UsaChaparralOutagesProdL0FeatureSet:
+    UsaEdgewoodOutagesProdL0Attributes:
       type: object
-      description: Esri FeatureSet returned by a query against the `usa_chaparral_outages-prod` layer.
-      properties:
-        objectIdFieldName:
-          type: string
-        globalIdFieldName:
-          type: string
-        geometryType:
-          type: string
-        spatialReference:
-          $ref: '#/components/schemas/SpatialReference'
-        fields:
-          type: array
-          items:
-            $ref: '#/components/schemas/FieldDefinition'
-        exceededTransferLimit:
-          type: boolean
-          description: True when more features match than were returned; page with `resultOffset`.
-        features:
-          type: array
-          items:
-            type: object
-            properties:
-              attributes:
-                $ref: '#/components/schemas/UsaChaparralOutagesProdL0Attributes'
-              geometry:
-                type: object
-                description: Feature geometry, omitted when `returnGeometry=false`.
-    UsaSuncityOutagesProdL0Attributes:
-      type: object
-      description: Attributes of a feature in the `usa_suncity_outages-prod` layer (usa_suncity_outages_prod, layer 0). Geometry type esriGeometryPoint.
+      description: Attributes of a feature in the `usa_edgewood_outages-prod` layer (usa_edgewood_outages_prod, layer 0). Geometry type esriGeometryPoint.
       properties:
         FID:
           type: integer
@@ -2372,57 +1952,443 @@ components:
           type: string
           maxLength: 50
           x-esri-field-type: esriFieldTypeString
-    UsaMohaveOutagesProdL0FeatureSet:
+    UsaParadisevalleyOutagesProdL0Attributes:
       type: object
-      description: Esri FeatureSet returned by a query against the `usa_mohave_outages-prod` layer.
+      description: Attributes of a feature in the `usa_paradisevalley_outages-prod` layer (usa_paradisevalley_outages_prod, layer 0). Geometry type esriGeometryPoint.
       properties:
-        objectIdFieldName:
+        FID:
+          type: integer
+          description: Object ID; the unique, service maintained identifier.
+          x-esri-field-type: esriFieldTypeOID
+        ID:
+          type: number
+          x-esri-field-type: esriFieldTypeDouble
+        FaultID:
+          type: number
+          x-esri-field-type: esriFieldTypeDouble
+        CommunityI:
+          type: number
+          x-esri-field-type: esriFieldTypeDouble
+        CommunityN:
           type: string
-        globalIdFieldName:
+          maxLength: 250
+          x-esri-field-type: esriFieldTypeString
+        ConditionI:
+          type: number
+          x-esri-field-type: esriFieldTypeDouble
+        Planned:
           type: string
-        geometryType:
+          maxLength: 1
+          x-esri-field-type: esriFieldTypeString
+        ApproxArea:
           type: string
-        spatialReference:
-          $ref: '#/components/schemas/SpatialReference'
-        fields:
-          type: array
-          items:
-            $ref: '#/components/schemas/FieldDefinition'
-        exceededTransferLimit:
-          type: boolean
-          description: True when more features match than were returned; page with `resultOffset`.
-        features:
-          type: array
-          items:
-            type: object
-            properties:
-              attributes:
-                $ref: '#/components/schemas/UsaMohaveOutagesProdL0Attributes'
-              geometry:
-                type: object
-                description: Feature geometry, omitted when `returnGeometry=false`.
-    ServiceMetadata:
+          maxLength: 250
+          x-esri-field-type: esriFieldTypeString
+        ReportDate:
+          type: string
+          maxLength: 20
+          x-esri-field-type: esriFieldTypeString
+        EstimateRe:
+          type: string
+          maxLength: 20
+          x-esri-field-type: esriFieldTypeString
+        ActualRest:
+          type: string
+          maxLength: 20
+          x-esri-field-type: esriFieldTypeString
+        Details:
+          type: string
+          maxLength: 254
+          x-esri-field-type: esriFieldTypeString
+        MapX:
+          type: number
+          x-esri-field-type: esriFieldTypeDouble
+        MapY:
+          type: number
+          x-esri-field-type: esriFieldTypeDouble
+        CreatedBy:
+          type: string
+          maxLength: 50
+          x-esri-field-type: esriFieldTypeString
+        CreatedDat:
+          type: string
+          maxLength: 20
+          x-esri-field-type: esriFieldTypeString
+        EditedBy:
+          type: string
+          maxLength: 50
+          x-esri-field-type: esriFieldTypeString
+        EditedDate:
+          type: string
+          maxLength: 20
+          x-esri-field-type: esriFieldTypeString
+        PublishBy:
+          type: string
+          maxLength: 50
+          x-esri-field-type: esriFieldTypeString
+        PublishDat:
+          type: string
+          maxLength: 20
+          x-esri-field-type: esriFieldTypeString
+        ConditionN:
+          type: string
+          maxLength: 50
+          x-esri-field-type: esriFieldTypeString
+    LayerMetadata:
       type: object
-      description: ArcGIS feature service metadata document.
+      description: 'ArcGIS feature layer metadata document: field definitions, geometry type, extent, capabilities and edit timestamps.'
       properties:
         currentVersion:
           type: number
-        serviceItemId:
-          type: string
-        capabilities:
-          type: string
-          description: Comma separated capability list advertised by the service. Only `Query` is exercisable anonymously; editing capabilities require an ArcGIS token.
-        maxRecordCount:
+        id:
           type: integer
-        spatialReference:
-          $ref: '#/components/schemas/SpatialReference'
-        layers:
+        name:
+          type: string
+        type:
+          type: string
+        geometryType:
+          type: string
+        fields:
           type: array
           items:
-            type: object
-    UsaHavasuOutagesProdL0FeatureSet:
+            $ref: '#/components/schemas/FieldDefinition'
+        extent:
+          type: object
+        editingInfo:
+          type: object
+        maxRecordCount:
+          type: integer
+    UsaWillowvalleyOutagesProdL0Attributes:
       type: object
-      description: Esri FeatureSet returned by a query against the `usa_havasu_outages-prod` layer.
+      description: Attributes of a feature in the `usa_willowvalley_outages-prod` layer (usa_willowvalley_outages_prod, layer 0). Geometry type esriGeometryPoint.
+      properties:
+        FID:
+          type: integer
+          description: Object ID; the unique, service maintained identifier.
+          x-esri-field-type: esriFieldTypeOID
+        ID:
+          type: number
+          x-esri-field-type: esriFieldTypeDouble
+        FaultID:
+          type: number
+          x-esri-field-type: esriFieldTypeDouble
+        CommunityI:
+          type: number
+          x-esri-field-type: esriFieldTypeDouble
+        CommunityN:
+          type: string
+          maxLength: 250
+          x-esri-field-type: esriFieldTypeString
+        ConditionI:
+          type: number
+          x-esri-field-type: esriFieldTypeDouble
+        Planned:
+          type: string
+          maxLength: 1
+          x-esri-field-type: esriFieldTypeString
+        ApproxArea:
+          type: string
+          maxLength: 250
+          x-esri-field-type: esriFieldTypeString
+        ReportDate:
+          type: string
+          maxLength: 20
+          x-esri-field-type: esriFieldTypeString
+        EstimateRe:
+          type: string
+          maxLength: 20
+          x-esri-field-type: esriFieldTypeString
+        ActualRest:
+          type: string
+          maxLength: 20
+          x-esri-field-type: esriFieldTypeString
+        Details:
+          type: string
+          maxLength: 254
+          x-esri-field-type: esriFieldTypeString
+        MapX:
+          type: number
+          x-esri-field-type: esriFieldTypeDouble
+        MapY:
+          type: number
+          x-esri-field-type: esriFieldTypeDouble
+        CreatedBy:
+          type: string
+          maxLength: 50
+          x-esri-field-type: esriFieldTypeString
+        CreatedDat:
+          type: string
+          maxLength: 20
+          x-esri-field-type: esriFieldTypeString
+        EditedBy:
+          type: string
+          maxLength: 50
+          x-esri-field-type: esriFieldTypeString
+        EditedDate:
+          type: string
+          maxLength: 20
+          x-esri-field-type: esriFieldTypeString
+        PublishBy:
+          type: string
+          maxLength: 50
+          x-esri-field-type: esriFieldTypeString
+        PublishDat:
+          type: string
+          maxLength: 20
+          x-esri-field-type: esriFieldTypeString
+        ConditionN:
+          type: string
+          maxLength: 50
+          x-esri-field-type: esriFieldTypeString
+    UsaTubacOutagesProdL0Attributes:
+      type: object
+      description: Attributes of a feature in the `usa_tubac_outages-prod` layer (usa_tubac_outages_prod, layer 0). Geometry type esriGeometryPoint.
+      properties:
+        FID:
+          type: integer
+          description: Object ID; the unique, service maintained identifier.
+          x-esri-field-type: esriFieldTypeOID
+        ID:
+          type: number
+          x-esri-field-type: esriFieldTypeDouble
+        FaultID:
+          type: number
+          x-esri-field-type: esriFieldTypeDouble
+        CommunityI:
+          type: number
+          x-esri-field-type: esriFieldTypeDouble
+        CommunityN:
+          type: string
+          maxLength: 250
+          x-esri-field-type: esriFieldTypeString
+        ConditionI:
+          type: number
+          x-esri-field-type: esriFieldTypeDouble
+        Planned:
+          type: string
+          maxLength: 1
+          x-esri-field-type: esriFieldTypeString
+        ApproxArea:
+          type: string
+          maxLength: 250
+          x-esri-field-type: esriFieldTypeString
+        ReportDate:
+          type: string
+          maxLength: 20
+          x-esri-field-type: esriFieldTypeString
+        EstimateRe:
+          type: string
+          maxLength: 20
+          x-esri-field-type: esriFieldTypeString
+        ActualRest:
+          type: string
+          maxLength: 20
+          x-esri-field-type: esriFieldTypeString
+        Details:
+          type: string
+          maxLength: 254
+          x-esri-field-type: esriFieldTypeString
+        MapX:
+          type: number
+          x-esri-field-type: esriFieldTypeDouble
+        MapY:
+          type: number
+          x-esri-field-type: esriFieldTypeDouble
+        CreatedBy:
+          type: string
+          maxLength: 50
+          x-esri-field-type: esriFieldTypeString
+        CreatedDat:
+          type: string
+          maxLength: 20
+          x-esri-field-type: esriFieldTypeString
+        EditedBy:
+          type: string
+          maxLength: 50
+          x-esri-field-type: esriFieldTypeString
+        EditedDate:
+          type: string
+          maxLength: 20
+          x-esri-field-type: esriFieldTypeString
+        PublishBy:
+          type: string
+          maxLength: 50
+          x-esri-field-type: esriFieldTypeString
+        PublishDat:
+          type: string
+          maxLength: 20
+          x-esri-field-type: esriFieldTypeString
+        ConditionN:
+          type: string
+          maxLength: 50
+          x-esri-field-type: esriFieldTypeString
+    UsaAnthemOutagesProdL0Attributes:
+      type: object
+      description: Attributes of a feature in the `usa_anthem_outages-prod` layer (usa_anthem_outages_prod, layer 0). Geometry type esriGeometryPoint.
+      properties:
+        FID:
+          type: integer
+          description: Object ID; the unique, service maintained identifier.
+          x-esri-field-type: esriFieldTypeOID
+        ID:
+          type: number
+          x-esri-field-type: esriFieldTypeDouble
+        FaultID:
+          type: number
+          x-esri-field-type: esriFieldTypeDouble
+        CommunityI:
+          type: number
+          x-esri-field-type: esriFieldTypeDouble
+        CommunityN:
+          type: string
+          maxLength: 250
+          x-esri-field-type: esriFieldTypeString
+        ConditionI:
+          type: number
+          x-esri-field-type: esriFieldTypeDouble
+        Planned:
+          type: string
+          maxLength: 1
+          x-esri-field-type: esriFieldTypeString
+        ApproxArea:
+          type: string
+          maxLength: 250
+          x-esri-field-type: esriFieldTypeString
+        ReportDate:
+          type: string
+          maxLength: 20
+          x-esri-field-type: esriFieldTypeString
+        EstimateRe:
+          type: string
+          maxLength: 20
+          x-esri-field-type: esriFieldTypeString
+        ActualRest:
+          type: string
+          maxLength: 20
+          x-esri-field-type: esriFieldTypeString
+        Details:
+          type: string
+          maxLength: 254
+          x-esri-field-type: esriFieldTypeString
+        MapX:
+          type: number
+          x-esri-field-type: esriFieldTypeDouble
+        MapY:
+          type: number
+          x-esri-field-type: esriFieldTypeDouble
+        CreatedBy:
+          type: string
+          maxLength: 50
+          x-esri-field-type: esriFieldTypeString
+        CreatedDat:
+          type: string
+          maxLength: 20
+          x-esri-field-type: esriFieldTypeString
+        EditedBy:
+          type: string
+          maxLength: 50
+          x-esri-field-type: esriFieldTypeString
+        EditedDate:
+          type: string
+          maxLength: 20
+          x-esri-field-type: esriFieldTypeString
+        PublishBy:
+          type: string
+          maxLength: 50
+          x-esri-field-type: esriFieldTypeString
+        PublishDat:
+          type: string
+          maxLength: 20
+          x-esri-field-type: esriFieldTypeString
+        ConditionN:
+          type: string
+          maxLength: 50
+          x-esri-field-type: esriFieldTypeString
+    UsaNorthmohavevalleyOutagesProdL0Attributes:
+      type: object
+      description: Attributes of a feature in the `usa_northmohavevalley_outages-prod` layer (usa_northmohavevalley_outages_prod, layer 0). Geometry type esriGeometryPoint.
+      properties:
+        FID:
+          type: integer
+          description: Object ID; the unique, service maintained identifier.
+          x-esri-field-type: esriFieldTypeOID
+        ID:
+          type: number
+          x-esri-field-type: esriFieldTypeDouble
+        FaultID:
+          type: number
+          x-esri-field-type: esriFieldTypeDouble
+        CommunityI:
+          type: number
+          x-esri-field-type: esriFieldTypeDouble
+        CommunityN:
+          type: string
+          maxLength: 250
+          x-esri-field-type: esriFieldTypeString
+        ConditionI:
+          type: number
+          x-esri-field-type: esriFieldTypeDouble
+        Planned:
+          type: string
+          maxLength: 1
+          x-esri-field-type: esriFieldTypeString
+        ApproxArea:
+          type: string
+          maxLength: 250
+          x-esri-field-type: esriFieldTypeString
+        ReportDate:
+          type: string
+          maxLength: 20
+          x-esri-field-type: esriFieldTypeString
+        EstimateRe:
+          type: string
+          maxLength: 20
+          x-esri-field-type: esriFieldTypeString
+        ActualRest:
+          type: string
+          maxLength: 20
+          x-esri-field-type: esriFieldTypeString
+        Details:
+          type: string
+          maxLength: 254
+          x-esri-field-type: esriFieldTypeString
+        MapX:
+          type: number
+          x-esri-field-type: esriFieldTypeDouble
+        MapY:
+          type: number
+          x-esri-field-type: esriFieldTypeDouble
+        CreatedBy:
+          type: string
+          maxLength: 50
+          x-esri-field-type: esriFieldTypeString
+        CreatedDat:
+          type: string
+          maxLength: 20
+          x-esri-field-type: esriFieldTypeString
+        EditedBy:
+          type: string
+          maxLength: 50
+          x-esri-field-type: esriFieldTypeString
+        EditedDate:
+          type: string
+          maxLength: 20
+          x-esri-field-type: esriFieldTypeString
+        PublishBy:
+          type: string
+          maxLength: 50
+          x-esri-field-type: esriFieldTypeString
+        PublishDat:
+          type: string
+          maxLength: 20
+          x-esri-field-type: esriFieldTypeString
+        ConditionN:
+          type: string
+          maxLength: 50
+          x-esri-field-type: esriFieldTypeString
+    UsaTubacOutagesProdL0FeatureSet:
+      type: object
+      description: Esri FeatureSet returned by a query against the `usa_tubac_outages-prod` layer.
       properties:
         objectIdFieldName:
           type: string
@@ -2445,13 +2411,13 @@ components:
             type: object
             properties:
               attributes:
-                $ref: '#/components/schemas/UsaHavasuOutagesProdL0Attributes'
+                $ref: '#/components/schemas/UsaTubacOutagesProdL0Attributes'
               geometry:
                 type: object
                 description: Feature geometry, omitted when `returnGeometry=false`.
-    UsaAnthemOutagesProdL0FeatureSet:
+    UsaClovisOutagesProdL0FeatureSet:
       type: object
-      description: Esri FeatureSet returned by a query against the `usa_anthem_outages-prod` layer.
+      description: Esri FeatureSet returned by a query against the `usa_clovis_outages-prod` layer.
       properties:
         objectIdFieldName:
           type: string
@@ -2474,7 +2440,7 @@ components:
             type: object
             properties:
               attributes:
-                $ref: '#/components/schemas/UsaAnthemOutagesProdL0Attributes'
+                $ref: '#/components/schemas/UsaClovisOutagesProdL0Attributes'
               geometry:
                 type: object
                 description: Feature geometry, omitted when `returnGeometry=false`.
@@ -2560,9 +2526,9 @@ components:
           type: string
           maxLength: 50
           x-esri-field-type: esriFieldTypeString
-    UsaEdgewoodOutagesProdL0FeatureSet:
+    UsaNorthmohavevalleyOutagesProdL0FeatureSet:
       type: object
-      description: Esri FeatureSet returned by a query against the `usa_edgewood_outages-prod` layer.
+      description: Esri FeatureSet returned by a query against the `usa_northmohavevalley_outages-prod` layer.
       properties:
         objectIdFieldName:
           type: string
@@ -2585,27 +2551,54 @@ components:
             type: object
             properties:
               attributes:
-                $ref: '#/components/schemas/UsaEdgewoodOutagesProdL0Attributes'
+                $ref: '#/components/schemas/UsaNorthmohavevalleyOutagesProdL0Attributes'
               geometry:
                 type: object
                 description: Feature geometry, omitted when `returnGeometry=false`.
+    EsriError:
+      type: object
+      description: ArcGIS REST error envelope. Note that these services return HTTP 200 with this body rather than a 4xx status code.
+      properties:
+        error:
+          type: object
+          properties:
+            code:
+              type: integer
+              description: Esri error code.
+            message:
+              type: string
+              description: Short error message; may be an empty string.
+            details:
+              type: array
+              items:
+                type: string
+              description: Human readable detail strings.
+          required:
+          - code
+      required:
+      - error
+      examples:
+      - error:
+          code: 400
+          message: Cannot perform query. Invalid query parameters.
+          details:
+          - '''where'' parameter is invalid'
   parameters:
-    outFields:
-      name: outFields
+    returnIdsOnly:
+      name: returnIdsOnly
       in: query
       required: false
-      description: Comma separated list of attribute fields to return, or `*` for all fields.
-      schema:
-        type: string
-      example: '*'
-    returnCountOnly:
-      name: returnCountOnly
-      in: query
-      required: false
-      description: Return only the count of matching features instead of the features themselves.
+      description: Return only the object IDs of matching features.
       schema:
         type: boolean
         default: false
+    geometry:
+      name: geometry
+      in: query
+      required: false
+      description: Geometry used to spatially filter the query, in the format implied by `geometryType`.
+      schema:
+        type: string
     orderByFields:
       name: orderByFields
       in: query
@@ -2613,6 +2606,28 @@ components:
       description: Comma separated `field ASC|DESC` list used to order the result set.
       schema:
         type: string
+    resultRecordCount:
+      name: resultRecordCount
+      in: query
+      required: false
+      description: Maximum number of features to return in this page, capped by the service `maxRecordCount` (2000 on these services).
+      schema:
+        type: integer
+        minimum: 1
+        maximum: 2000
+    geometryType:
+      name: geometryType
+      in: query
+      required: false
+      description: Type of the `geometry` filter.
+      schema:
+        type: string
+        enum:
+        - esriGeometryPoint
+        - esriGeometryMultipoint
+        - esriGeometryPolyline
+        - esriGeometryPolygon
+        - esriGeometryEnvelope
     resultOffset:
       name: resultOffset
       in: query
@@ -2621,6 +2636,45 @@ components:
       schema:
         type: integer
         minimum: 0
+    outSR:
+      name: outSR
+      in: query
+      required: false
+      description: Spatial reference (WKID) requested for the returned geometry, for example `4326`.
+      schema:
+        type: string
+    spatialRel:
+      name: spatialRel
+      in: query
+      required: false
+      description: Spatial relationship applied between the `geometry` filter and the layer features.
+      schema:
+        type: string
+        default: esriSpatialRelIntersects
+    returnCountOnly:
+      name: returnCountOnly
+      in: query
+      required: false
+      description: Return only the count of matching features instead of the features themselves.
+      schema:
+        type: boolean
+        default: false
+    outFields:
+      name: outFields
+      in: query
+      required: false
+      description: Comma separated list of attribute fields to return, or `*` for all fields.
+      schema:
+        type: string
+      example: '*'
+    where:
+      name: where
+      in: query
+      required: false
+      description: SQL-92 WHERE clause applied to the layer attributes. Use `1=1` to select all features.
+      schema:
+        type: string
+      example: 1=1
     inSR:
       name: inSR
       in: query
@@ -2636,43 +2690,6 @@ components:
       schema:
         type: boolean
         default: true
-    spatialRel:
-      name: spatialRel
-      in: query
-      required: false
-      description: Spatial relationship applied between the `geometry` filter and the layer features.
-      schema:
-        type: string
-        default: esriSpatialRelIntersects
-    where:
-      name: where
-      in: query
-      required: false
-      description: SQL-92 WHERE clause applied to the layer attributes. Use `1=1` to select all features.
-      schema:
-        type: string
-      example: 1=1
-    returnIdsOnly:
-      name: returnIdsOnly
-      in: query
-      required: false
-      description: Return only the object IDs of matching features.
-      schema:
-        type: boolean
-        default: false
-    geometryType:
-      name: geometryType
-      in: query
-      required: false
-      description: Type of the `geometry` filter.
-      schema:
-        type: string
-        enum:
-        - esriGeometryPoint
-        - esriGeometryMultipoint
-        - esriGeometryPolyline
-        - esriGeometryPolygon
-        - esriGeometryEnvelope
     f:
       name: f
       in: query
@@ -2686,26 +2703,3 @@ components:
         - pbf
         - html
         default: html
-    geometry:
-      name: geometry
-      in: query
-      required: false
-      description: Geometry used to spatially filter the query, in the format implied by `geometryType`.
-      schema:
-        type: string
-    outSR:
-      name: outSR
-      in: query
-      required: false
-      description: Spatial reference (WKID) requested for the returned geometry, for example `4326`.
-      schema:
-        type: string
-    resultRecordCount:
-      name: resultRecordCount
-      in: query
-      required: false
-      description: Maximum number of features to return in this page, capped by the service `maxRecordCount` (2000 on these services).
-      schema:
-        type: integer
-        minimum: 1
-        maximum: 2000

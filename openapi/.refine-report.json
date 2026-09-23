@@ -1,0 +1,32 @@
+{
+  "provider": "epcor",
+  "sources": [
+    "_original/epcor-outages-arcgis-openapi.yml"
+  ],
+  "outputs": [
+    "epcor-boundaries-api-openapi.yml",
+    "epcor-catalog-api-openapi.yml",
+    "epcor-infrastructure-api-openapi.yml",
+    "epcor-power-outages-api-openapi.yml",
+    "epcor-service-areas-api-openapi.yml",
+    "epcor-us-water-outages-api-openapi.yml",
+    "epcor-water-outages-api-openapi.yml"
+  ],
+  "archived": [],
+  "errors": [],
+  "warnings": [],
+  "notes": [
+    "sourced from openapi/_original/ (1 archived document(s)); previously refined output at the top level was skipped rather than re-split",
+    "epcor-outages-arcgis-openapi.yml: upgraded openapi 3.1.0 -> OpenAPI 3.2.0",
+    "apis.yml register: already-registered"
+  ],
+  "skipped": [
+    "epcor-boundaries-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "epcor-catalog-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "epcor-infrastructure-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "epcor-power-outages-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "epcor-service-areas-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "epcor-us-water-outages-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "epcor-water-outages-api-openapi.yml: previously refined output, superseded by openapi/_original/"
+  ]
+}
