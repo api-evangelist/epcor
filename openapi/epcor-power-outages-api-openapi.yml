@@ -216,209 +216,7 @@ paths:
                 - $ref: '#/components/schemas/GeoJSONFeatureCollection'
                 - $ref: '#/components/schemas/EsriError'
 components:
-  parameters:
-    geometry:
-      name: geometry
-      in: query
-      required: false
-      description: Geometry used to spatially filter the query, in the format implied by `geometryType`.
-      schema:
-        type: string
-    returnIdsOnly:
-      name: returnIdsOnly
-      in: query
-      required: false
-      description: Return only the object IDs of matching features.
-      schema:
-        type: boolean
-        default: false
-    orderByFields:
-      name: orderByFields
-      in: query
-      required: false
-      description: Comma separated `field ASC|DESC` list used to order the result set.
-      schema:
-        type: string
-    resultRecordCount:
-      name: resultRecordCount
-      in: query
-      required: false
-      description: Maximum number of features to return in this page, capped by the service `maxRecordCount` (2000 on these services).
-      schema:
-        type: integer
-        minimum: 1
-        maximum: 2000
-    geometryType:
-      name: geometryType
-      in: query
-      required: false
-      description: Type of the `geometry` filter.
-      schema:
-        type: string
-        enum:
-        - esriGeometryPoint
-        - esriGeometryMultipoint
-        - esriGeometryPolyline
-        - esriGeometryPolygon
-        - esriGeometryEnvelope
-    resultOffset:
-      name: resultOffset
-      in: query
-      required: false
-      description: Zero based offset into the ordered result set; the cursor half of ArcGIS paging.
-      schema:
-        type: integer
-        minimum: 0
-    outSR:
-      name: outSR
-      in: query
-      required: false
-      description: Spatial reference (WKID) requested for the returned geometry, for example `4326`.
-      schema:
-        type: string
-    spatialRel:
-      name: spatialRel
-      in: query
-      required: false
-      description: Spatial relationship applied between the `geometry` filter and the layer features.
-      schema:
-        type: string
-        default: esriSpatialRelIntersects
-    returnCountOnly:
-      name: returnCountOnly
-      in: query
-      required: false
-      description: Return only the count of matching features instead of the features themselves.
-      schema:
-        type: boolean
-        default: false
-    outFields:
-      name: outFields
-      in: query
-      required: false
-      description: Comma separated list of attribute fields to return, or `*` for all fields.
-      schema:
-        type: string
-      example: '*'
-    where:
-      name: where
-      in: query
-      required: false
-      description: SQL-92 WHERE clause applied to the layer attributes. Use `1=1` to select all features.
-      schema:
-        type: string
-      example: 1=1
-    inSR:
-      name: inSR
-      in: query
-      required: false
-      description: Spatial reference (WKID) of the input `geometry`.
-      schema:
-        type: string
-    returnGeometry:
-      name: returnGeometry
-      in: query
-      required: false
-      description: Whether the feature geometry is included in the response.
-      schema:
-        type: boolean
-        default: true
-    f:
-      name: f
-      in: query
-      required: false
-      description: Response format. `json` returns the Esri FeatureSet envelope, `geojson` returns RFC 7946 GeoJSON, `pbf` returns protocol buffers, `html` returns the human service directory.
-      schema:
-        type: string
-        enum:
-        - json
-        - geojson
-        - pbf
-        - html
-        default: html
   schemas:
-    ServiceMetadata:
-      type: object
-      description: ArcGIS feature service metadata document.
-      properties:
-        currentVersion:
-          type: number
-        serviceItemId:
-          type: string
-        capabilities:
-          type: string
-          description: Comma separated capability list advertised by the service. Only `Query` is exercisable anonymously; editing capabilities require an ArcGIS token.
-        maxRecordCount:
-          type: integer
-        spatialReference:
-          $ref: '#/components/schemas/SpatialReference'
-        layers:
-          type: array
-          items:
-            type: object
-    PowerOutageProdL0Attributes:
-      type: object
-      description: Attributes of a feature in the `power_outage-prod` layer (power_outage_prod, layer 0). Geometry type esriGeometryPoint.
-      properties:
-        FID:
-          type: integer
-          description: Object ID; the unique, service maintained identifier.
-          x-esri-field-type: esriFieldTypeOID
-        ID:
-          type: number
-          x-esri-field-type: esriFieldTypeDouble
-        AvenueFrom:
-          type: string
-          maxLength: 200
-          x-esri-field-type: esriFieldTypeString
-        AvenueTo:
-          type: string
-          maxLength: 200
-          x-esri-field-type: esriFieldTypeString
-        CauseTitle:
-          type: string
-          maxLength: 200
-          x-esri-field-type: esriFieldTypeString
-        Details:
-          type: string
-          maxLength: 200
-          x-esri-field-type: esriFieldTypeString
-        FaultResto:
-          type: string
-          maxLength: 200
-          x-esri-field-type: esriFieldTypeString
-        FaultStart:
-          type: string
-          maxLength: 200
-          x-esri-field-type: esriFieldTypeString
-        NodeTitle:
-          type: string
-          maxLength: 200
-          x-esri-field-type: esriFieldTypeString
-        StreetFrom:
-          type: string
-          maxLength: 200
-          x-esri-field-type: esriFieldTypeString
-        StreetTo:
-          type: string
-          maxLength: 200
-          x-esri-field-type: esriFieldTypeString
-    GeoJSONFeatureCollection:
-      type: object
-      description: RFC 7946 FeatureCollection returned when `f=geojson`.
-      properties:
-        type:
-          type: string
-          const: FeatureCollection
-        properties:
-          type: object
-          properties:
-            exceededTransferLimit:
-              type: boolean
-        features:
-          type: array
-          items:
-            type: object
     OcpsProdAvL0FeatureSet:
       type: object
       description: Esri FeatureSet returned by a query against the `ocps_prod_av` layer.
@@ -448,6 +246,138 @@ components:
               geometry:
                 type: object
                 description: Feature geometry, omitted when `returnGeometry=false`.
+    EsriError:
+      type: object
+      description: ArcGIS REST error envelope. Note that these services return HTTP 200 with this body rather than a 4xx status code.
+      properties:
+        error:
+          type: object
+          properties:
+            code:
+              type: integer
+              description: Esri error code.
+            message:
+              type: string
+              description: Short error message; may be an empty string.
+            details:
+              type: array
+              items:
+                type: string
+              description: Human readable detail strings.
+          required:
+          - code
+      required:
+      - error
+      examples:
+      - error:
+          code: 400
+          message: Cannot perform query. Invalid query parameters.
+          details:
+          - '''where'' parameter is invalid'
+    OcpsProdPlL0Attributes:
+      type: object
+      description: Attributes of a feature in the `ocps_prod_pl` layer (ocps_prod_pl, layer 0). Geometry type esriGeometryPolygon.
+      properties:
+        OBJECTID:
+          type: integer
+          description: Object ID; the unique, service maintained identifier.
+          x-esri-field-type: esriFieldTypeOID
+        id:
+          type: string
+          maxLength: 256
+          description: ID
+          x-esri-field-type: esriFieldTypeString
+        Shape__Area:
+          type: number
+          x-esri-field-type: esriFieldTypeDouble
+        Shape__Length:
+          type: number
+          x-esri-field-type: esriFieldTypeDouble
+        GlobalID:
+          type: string
+          maxLength: 38
+          description: GUID.
+          x-esri-field-type: esriFieldTypeGlobalID
+        startat:
+          type: string
+          maxLength: 50
+          description: Start Time
+          x-esri-field-type: esriFieldTypeString
+        endat:
+          type: string
+          maxLength: 50
+          description: End Time
+          x-esri-field-type: esriFieldTypeString
+        affcusts:
+          type: string
+          maxLength: 15
+          description: Affected Customers
+          x-esri-field-type: esriFieldTypeString
+        cause:
+          type: string
+          maxLength: 200
+          description: Cause
+          x-esri-field-type: esriFieldTypeString
+        details:
+          type: string
+          maxLength: 300
+          description: Details
+          x-esri-field-type: esriFieldTypeString
+        nbhoods:
+          type: string
+          maxLength: 1000
+          description: Affected Neighborhoods
+          x-esri-field-type: esriFieldTypeString
+        lastupd:
+          type: string
+          maxLength: 25
+          description: Lasted Updated Time
+          x-esri-field-type: esriFieldTypeString
+        affstree:
+          type: string
+          maxLength: 8000
+          description: Affected Streets
+          x-esri-field-type: esriFieldTypeString
+    LayerMetadata:
+      type: object
+      description: 'ArcGIS feature layer metadata document: field definitions, geometry type, extent, capabilities and edit timestamps.'
+      properties:
+        currentVersion:
+          type: number
+        id:
+          type: integer
+        name:
+          type: string
+        type:
+          type: string
+        geometryType:
+          type: string
+        fields:
+          type: array
+          items:
+            $ref: '#/components/schemas/FieldDefinition'
+        extent:
+          type: object
+        editingInfo:
+          type: object
+        maxRecordCount:
+          type: integer
+    GeoJSONFeatureCollection:
+      type: object
+      description: RFC 7946 FeatureCollection returned when `f=geojson`.
+      properties:
+        type:
+          type: string
+          const: FeatureCollection
+        properties:
+          type: object
+          properties:
+            exceededTransferLimit:
+              type: boolean
+        features:
+          type: array
+          items:
+            type: object
     SpatialReference:
       type: object
       properties:
@@ -455,20 +385,25 @@ components:
           type: integer
         latestWkid:
           type: integer
-    FieldDefinition:
+    ServiceMetadata:
       type: object
+      description: ArcGIS feature service metadata document.
       properties:
-        name:
+        currentVersion:
+          type: number
+        serviceItemId:
           type: string
-        type:
+        capabilities:
           type: string
-          description: Esri field type, for example `esriFieldTypeString`.
-        alias:
-          type: string
-        sqlType:
-          type: string
-        length:
+          description: Comma separated capability list advertised by the service. Only `Query` is exercisable anonymously; editing capabilities require an ArcGIS token.
+        maxRecordCount:
           type: integer
+        spatialReference:
+          $ref: '#/components/schemas/SpatialReference'
+        layers:
+          type: array
+          items:
+            type: object
     OcpsProdAvL0Attributes:
       type: object
       description: Attributes of a feature in the `ocps_prod_av` layer (ocps_prod_av, layer 0). Geometry type esriGeometryPolygon.
@@ -564,70 +499,67 @@ components:
               geometry:
                 type: object
                 description: Feature geometry, omitted when `returnGeometry=false`.
-    OcpsProdPlL0Attributes:
+    PowerOutageProdL0Attributes:
       type: object
-      description: Attributes of a feature in the `ocps_prod_pl` layer (ocps_prod_pl, layer 0). Geometry type esriGeometryPolygon.
+      description: Attributes of a feature in the `power_outage-prod` layer (power_outage_prod, layer 0). Geometry type esriGeometryPoint.
       properties:
-        OBJECTID:
+        FID:
           type: integer
           description: Object ID; the unique, service maintained identifier.
           x-esri-field-type: esriFieldTypeOID
-        id:
-          type: string
-          maxLength: 256
-          description: ID
-          x-esri-field-type: esriFieldTypeString
-        Shape__Area:
+        ID:
           type: number
           x-esri-field-type: esriFieldTypeDouble
-        Shape__Length:
-          type: number
-          x-esri-field-type: esriFieldTypeDouble
-        GlobalID:
-          type: string
-          maxLength: 38
-          description: GUID.
-          x-esri-field-type: esriFieldTypeGlobalID
-        startat:
-          type: string
-          maxLength: 50
-          description: Start Time
-          x-esri-field-type: esriFieldTypeString
-        endat:
-          type: string
-          maxLength: 50
-          description: End Time
-          x-esri-field-type: esriFieldTypeString
-        affcusts:
-          type: string
-          maxLength: 15
-          description: Affected Customers
-          x-esri-field-type: esriFieldTypeString
-        cause:
+        AvenueFrom:
           type: string
           maxLength: 200
-          description: Cause
           x-esri-field-type: esriFieldTypeString
-        details:
+        AvenueTo:
           type: string
-          maxLength: 300
-          description: Details
+          maxLength: 200
           x-esri-field-type: esriFieldTypeString
-        nbhoods:
+        CauseTitle:
           type: string
-          maxLength: 1000
-          description: Affected Neighborhoods
+          maxLength: 200
           x-esri-field-type: esriFieldTypeString
-        lastupd:
+        Details:
           type: string
-          maxLength: 25
-          description: Lasted Updated Time
+          maxLength: 200
           x-esri-field-type: esriFieldTypeString
-        affstree:
+        FaultResto:
           type: string
-          maxLength: 8000
-          description: Affected Streets
+          maxLength: 200
           x-esri-field-type: esriFieldTypeString
+        FaultStart:
+          type: string
+          maxLength: 200
+          x-esri-field-type: esriFieldTypeString
+        NodeTitle:
+          type: string
+          maxLength: 200
+          x-esri-field-type: esriFieldTypeString
+        StreetFrom:
+          type: string
+          maxLength: 200
+          x-esri-field-type: esriFieldTypeString
+        StreetTo:
+          type: string
+          maxLength: 200
+          x-esri-field-type: esriFieldTypeString
+    FieldDefinition:
+      type: object
+      properties:
+        name:
+          type: string
+        type:
+          type: string
+          description: Esri field type, for example `esriFieldTypeString`.
+        alias:
+          type: string
+        sqlType:
+          type: string
+        length:
+          type: integer
     PowerOutageProdL0FeatureSet:
       type: object
       description: Esri FeatureSet returned by a query against the `power_outage-prod` layer.
@@ -657,55 +589,123 @@ components:
               geometry:
                 type: object
                 description: Feature geometry, omitted when `returnGeometry=false`.
-    LayerMetadata:
-      type: object
-      description: 'ArcGIS feature layer metadata document: field definitions, geometry type, extent, capabilities and edit timestamps.'
-      properties:
-        currentVersion:
-          type: number
-        id:
-          type: integer
-        name:
-          type: string
-        type:
-          type: string
-        geometryType:
-          type: string
-        fields:
-          type: array
-          items:
-            $ref: '#/components/schemas/FieldDefinition'
-        extent:
-          type: object
-        editingInfo:
-          type: object
-        maxRecordCount:
-          type: integer
-    EsriError:
-      type: object
-      description: ArcGIS REST error envelope. Note that these services return HTTP 200 with this body rather than a 4xx status code.
-      properties:
-        error:
-          type: object
-          properties:
-            code:
-              type: integer
-              description: Esri error code.
-            message:
-              type: string
-              description: Short error message; may be an empty string.
-            details:
-              type: array
-              items:
-                type: string
-              description: Human readable detail strings.
-          required:
-          - code
-      required:
-      - error
-      examples:
-      - error:
-          code: 400
-          message: Cannot perform query. Invalid query parameters.
-          details:
-          - '''where'' parameter is invalid'
+  parameters:
+    geometry:
+      name: geometry
+      in: query
+      required: false
+      description: Geometry used to spatially filter the query, in the format implied by `geometryType`.
+      schema:
+        type: string
+    where:
+      name: where
+      in: query
+      required: false
+      description: SQL-92 WHERE clause applied to the layer attributes. Use `1=1` to select all features.
+      schema:
+        type: string
+      example: 1=1
+    returnIdsOnly:
+      name: returnIdsOnly
+      in: query
+      required: false
+      description: Return only the object IDs of matching features.
+      schema:
+        type: boolean
+        default: false
+    resultRecordCount:
+      name: resultRecordCount
+      in: query
+      required: false
+      description: Maximum number of features to return in this page, capped by the service `maxRecordCount` (2000 on these services).
+      schema:
+        type: integer
+        minimum: 1
+        maximum: 2000
+    outSR:
+      name: outSR
+      in: query
+      required: false
+      description: Spatial reference (WKID) requested for the returned geometry, for example `4326`.
+      schema:
+        type: string
+    geometryType:
+      name: geometryType
+      in: query
+      required: false
+      description: Type of the `geometry` filter.
+      schema:
+        type: string
+        enum:
+        - esriGeometryPoint
+        - esriGeometryMultipoint
+        - esriGeometryPolyline
+        - esriGeometryPolygon
+        - esriGeometryEnvelope
+    inSR:
+      name: inSR
+      in: query
+      required: false
+      description: Spatial reference (WKID) of the input `geometry`.
+      schema:
+        type: string
+    outFields:
+      name: outFields
+      in: query
+      required: false
+      description: Comma separated list of attribute fields to return, or `*` for all fields.
+      schema:
+        type: string
+      example: '*'
+    returnCountOnly:
+      name: returnCountOnly
+      in: query
+      required: false
+      description: Return only the count of matching features instead of the features themselves.
+      schema:
+        type: boolean
+        default: false
+    resultOffset:
+      name: resultOffset
+      in: query
+      required: false
+      description: Zero based offset into the ordered result set; the cursor half of ArcGIS paging.
+      schema:
+        type: integer
+        minimum: 0
+    f:
+      name: f
+      in: query
+      required: false
+      description: Response format. `json` returns the Esri FeatureSet envelope, `geojson` returns RFC 7946 GeoJSON, `pbf` returns protocol buffers, `html` returns the human service directory.
+      schema:
+        type: string
+        enum:
+        - json
+        - geojson
+        - pbf
+        - html
+        default: html
+    spatialRel:
+      name: spatialRel
+      in: query
+      required: false
+      description: Spatial relationship applied between the `geometry` filter and the layer features.
+      schema:
+        type: string
+        default: esriSpatialRelIntersects
+    returnGeometry:
+      name: returnGeometry
+      in: query
+      required: false
+      description: Whether the feature geometry is included in the response.
+      schema:
+        type: boolean
+        default: true
+    orderByFields:
+      name: orderByFields
+      in: query
+      required: false
+      description: Comma separated `field ASC|DESC` list used to order the result set.
+      schema:
+        type: string

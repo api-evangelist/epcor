@@ -377,6 +377,147 @@ paths:
                 - $ref: '#/components/schemas/EsriError'
 components:
   schemas:
+    UDFEventsProdL0Attributes:
+      type: object
+      description: Attributes of a feature in the `UDF_Events_Pt` layer (UDF_Events_Prod, layer 0). Geometry type esriGeometryPoint.
+      properties:
+        OBJECTID:
+          type: integer
+          description: Object ID; the unique, service maintained identifier.
+          x-esri-field-type: esriFieldTypeOID
+        UDFID:
+          type: string
+          maxLength: 50
+          description: UDF Area
+          x-esri-field-type: esriFieldTypeString
+        MSLINK:
+          type: integer
+          description: MSLink
+          x-esri-field-type: esriFieldTypeInteger
+        URL:
+          type: string
+          maxLength: 400
+          x-esri-field-type: esriFieldTypeString
+        SCHD_START:
+          type: integer
+          maxLength: 8
+          description: Approximate Start Date Epoch milliseconds (Esri date field).
+          x-esri-field-type: esriFieldTypeDate
+        SCHD_END:
+          type: integer
+          maxLength: 8
+          description: Approximate End Date Epoch milliseconds (Esri date field).
+          x-esri-field-type: esriFieldTypeDate
+    GenericWaterEventsProdL1FeatureSet:
+      type: object
+      description: Esri FeatureSet returned by a query against the `Generic_Events_Area` layer.
+      properties:
+        objectIdFieldName:
+          type: string
+        globalIdFieldName:
+          type: string
+        geometryType:
+          type: string
+        spatialReference:
+          $ref: '#/components/schemas/SpatialReference'
+        fields:
+          type: array
+          items:
+            $ref: '#/components/schemas/FieldDefinition'
+        exceededTransferLimit:
+          type: boolean
+          description: True when more features match than were returned; page with `resultOffset`.
+        features:
+          type: array
+          items:
+            type: object
+            properties:
+              attributes:
+                $ref: '#/components/schemas/GenericWaterEventsProdL1Attributes'
+              geometry:
+                type: object
+                description: Feature geometry, omitted when `returnGeometry=false`.
+    EsriError:
+      type: object
+      description: ArcGIS REST error envelope. Note that these services return HTTP 200 with this body rather than a 4xx status code.
+      properties:
+        error:
+          type: object
+          properties:
+            code:
+              type: integer
+              description: Esri error code.
+            message:
+              type: string
+              description: Short error message; may be an empty string.
+            details:
+              type: array
+              items:
+                type: string
+              description: Human readable detail strings.
+          required:
+          - code
+      required:
+      - error
+      examples:
+      - error:
+          code: 400
+          message: Cannot perform query. Invalid query parameters.
+          details:
+          - '''where'' parameter is invalid'
+    LayerMetadata:
+      type: object
+      description: 'ArcGIS feature layer metadata document: field definitions, geometry type, extent, capabilities and edit timestamps.'
+      properties:
+        currentVersion:
+          type: number
+        id:
+          type: integer
+        name:
+          type: string
+        type:
+          type: string
+        geometryType:
+          type: string
+        fields:
+          type: array
+          items:
+            $ref: '#/components/schemas/FieldDefinition'
+        extent:
+          type: object
+        editingInfo:
+          type: object
+        maxRecordCount:
+          type: integer
+    UDFEventsProdL1FeatureSet:
+      type: object
+      description: Esri FeatureSet returned by a query against the `UDF_Events_area` layer.
+      properties:
+        objectIdFieldName:
+          type: string
+        globalIdFieldName:
+          type: string
+        geometryType:
+          type: string
+        spatialReference:
+          $ref: '#/components/schemas/SpatialReference'
+        fields:
+          type: array
+          items:
+            $ref: '#/components/schemas/FieldDefinition'
+        exceededTransferLimit:
+          type: boolean
+          description: True when more features match than were returned; page with `resultOffset`.
+        features:
+          type: array
+          items:
+            type: object
+            properties:
+              attributes:
+                $ref: '#/components/schemas/UDFEventsProdL1Attributes'
+              geometry:
+                type: object
+                description: Feature geometry, omitted when `returnGeometry=false`.
     EPCorWaterOutagesProdL0Attributes:
       type: object
       description: Attributes of a feature in the `EPCor_Water_Outages_Prod` layer (EPCor_Water_Outages_Prod, layer 0). Geometry type esriGeometryPoint.
@@ -418,6 +559,104 @@ components:
           maxLength: 256
           description: Tank Location
           x-esri-field-type: esriFieldTypeString
+    GeoJSONFeatureCollection:
+      type: object
+      description: RFC 7946 FeatureCollection returned when `f=geojson`.
+      properties:
+        type:
+          type: string
+          const: FeatureCollection
+        properties:
+          type: object
+          properties:
+            exceededTransferLimit:
+              type: boolean
+        features:
+          type: array
+          items:
+            type: object
+    SpatialReference:
+      type: object
+      properties:
+        wkid:
+          type: integer
+        latestWkid:
+          type: integer
+    GenericWaterEventsProdL1Attributes:
+      type: object
+      description: Attributes of a feature in the `Generic_Events_Area` layer (GenericWaterEvents_Prod, layer 1). Geometry type esriGeometryPolygon.
+      properties:
+        OBJECTID:
+          type: integer
+          description: Object ID; the unique, service maintained identifier.
+          x-esri-field-type: esriFieldTypeOID
+        Event:
+          type: string
+          maxLength: 256
+          x-esri-field-type: esriFieldTypeString
+        Location:
+          type: string
+          maxLength: 256
+          x-esri-field-type: esriFieldTypeString
+        EventType:
+          type: string
+          maxLength: 256
+          description: Event Type
+          x-esri-field-type: esriFieldTypeString
+        CreatedBy:
+          type: string
+          maxLength: 256
+          description: 'Created By:'
+          x-esri-field-type: esriFieldTypeString
+        Description:
+          type: string
+          maxLength: 256
+          x-esri-field-type: esriFieldTypeString
+        ApproximateStartDate:
+          type: integer
+          maxLength: 8
+          description: Approximate Start Date Epoch milliseconds (Esri date field).
+          x-esri-field-type: esriFieldTypeDate
+        ApproximateEndDate:
+          type: integer
+          maxLength: 8
+          description: Approximate End Date Epoch milliseconds (Esri date field).
+          x-esri-field-type: esriFieldTypeDate
+        Shape__Area:
+          type: number
+          x-esri-field-type: esriFieldTypeDouble
+        Shape__Length:
+          type: number
+          x-esri-field-type: esriFieldTypeDouble
+    GenericWaterEventsProdL0FeatureSet:
+      type: object
+      description: Esri FeatureSet returned by a query against the `Generic_Events_Pt` layer.
+      properties:
+        objectIdFieldName:
+          type: string
+        globalIdFieldName:
+          type: string
+        geometryType:
+          type: string
+        spatialReference:
+          $ref: '#/components/schemas/SpatialReference'
+        fields:
+          type: array
+          items:
+            $ref: '#/components/schemas/FieldDefinition'
+        exceededTransferLimit:
+          type: boolean
+          description: True when more features match than were returned; page with `resultOffset`.
+        features:
+          type: array
+          items:
+            type: object
+            properties:
+              attributes:
+                $ref: '#/components/schemas/GenericWaterEventsProdL0Attributes'
+              geometry:
+                type: object
+                description: Feature geometry, omitted when `returnGeometry=false`.
     ServiceMetadata:
       type: object
       description: ArcGIS feature service metadata document.
@@ -506,22 +745,42 @@ components:
               geometry:
                 type: object
                 description: Feature geometry, omitted when `returnGeometry=false`.
-    GeoJSONFeatureCollection:
+    UDFEventsProdL1Attributes:
       type: object
-      description: RFC 7946 FeatureCollection returned when `f=geojson`.
+      description: Attributes of a feature in the `UDF_Events_area` layer (UDF_Events_Prod, layer 1). Geometry type esriGeometryPolygon.
       properties:
-        type:
+        OBJECTID:
+          type: integer
+          description: Object ID; the unique, service maintained identifier.
+          x-esri-field-type: esriFieldTypeOID
+        UDFID:
           type: string
-          const: FeatureCollection
-        properties:
-          type: object
-          properties:
-            exceededTransferLimit:
-              type: boolean
-        features:
-          type: array
-          items:
-            type: object
+          maxLength: 50
+          description: UDF Area
+          x-esri-field-type: esriFieldTypeString
+        MSLINK:
+          type: integer
+          x-esri-field-type: esriFieldTypeInteger
+        URL:
+          type: string
+          maxLength: 400
+          x-esri-field-type: esriFieldTypeString
+        SCHD_START:
+          type: integer
+          maxLength: 8
+          description: Approximate Start Date Epoch milliseconds (Esri date field).
+          x-esri-field-type: esriFieldTypeDate
+        SCHD_END:
+          type: integer
+          maxLength: 8
+          description: Approximate End Date Epoch milliseconds (Esri date field).
+          x-esri-field-type: esriFieldTypeDate
+        Shape__Area:
+          type: number
+          x-esri-field-type: esriFieldTypeDouble
+        Shape__Length:
+          type: number
+          x-esri-field-type: esriFieldTypeDouble
     WaterCanadaOutagesProdL0FeatureSet:
       type: object
       description: Esri FeatureSet returned by a query against the `water_canada_outages-prod` layer.
@@ -551,162 +810,6 @@ components:
               geometry:
                 type: object
                 description: Feature geometry, omitted when `returnGeometry=false`.
-    GenericWaterEventsProdL1FeatureSet:
-      type: object
-      description: Esri FeatureSet returned by a query against the `Generic_Events_Area` layer.
-      properties:
-        objectIdFieldName:
-          type: string
-        globalIdFieldName:
-          type: string
-        geometryType:
-          type: string
-        spatialReference:
-          $ref: '#/components/schemas/SpatialReference'
-        fields:
-          type: array
-          items:
-            $ref: '#/components/schemas/FieldDefinition'
-        exceededTransferLimit:
-          type: boolean
-          description: True when more features match than were returned; page with `resultOffset`.
-        features:
-          type: array
-          items:
-            type: object
-            properties:
-              attributes:
-                $ref: '#/components/schemas/GenericWaterEventsProdL1Attributes'
-              geometry:
-                type: object
-                description: Feature geometry, omitted when `returnGeometry=false`.
-    UDFEventsProdL0Attributes:
-      type: object
-      description: Attributes of a feature in the `UDF_Events_Pt` layer (UDF_Events_Prod, layer 0). Geometry type esriGeometryPoint.
-      properties:
-        OBJECTID:
-          type: integer
-          description: Object ID; the unique, service maintained identifier.
-          x-esri-field-type: esriFieldTypeOID
-        UDFID:
-          type: string
-          maxLength: 50
-          description: UDF Area
-          x-esri-field-type: esriFieldTypeString
-        MSLINK:
-          type: integer
-          description: MSLink
-          x-esri-field-type: esriFieldTypeInteger
-        URL:
-          type: string
-          maxLength: 400
-          x-esri-field-type: esriFieldTypeString
-        SCHD_START:
-          type: integer
-          maxLength: 8
-          description: Approximate Start Date Epoch milliseconds (Esri date field).
-          x-esri-field-type: esriFieldTypeDate
-        SCHD_END:
-          type: integer
-          maxLength: 8
-          description: Approximate End Date Epoch milliseconds (Esri date field).
-          x-esri-field-type: esriFieldTypeDate
-    FieldDefinition:
-      type: object
-      properties:
-        name:
-          type: string
-        type:
-          type: string
-          description: Esri field type, for example `esriFieldTypeString`.
-        alias:
-          type: string
-        sqlType:
-          type: string
-        length:
-          type: integer
-    UDFEventsProdL0FeatureSet:
-      type: object
-      description: Esri FeatureSet returned by a query against the `UDF_Events_Pt` layer.
-      properties:
-        objectIdFieldName:
-          type: string
-        globalIdFieldName:
-          type: string
-        geometryType:
-          type: string
-        spatialReference:
-          $ref: '#/components/schemas/SpatialReference'
-        fields:
-          type: array
-          items:
-            $ref: '#/components/schemas/FieldDefinition'
-        exceededTransferLimit:
-          type: boolean
-          description: True when more features match than were returned; page with `resultOffset`.
-        features:
-          type: array
-          items:
-            type: object
-            properties:
-              attributes:
-                $ref: '#/components/schemas/UDFEventsProdL0Attributes'
-              geometry:
-                type: object
-                description: Feature geometry, omitted when `returnGeometry=false`.
-    SpatialReference:
-      type: object
-      properties:
-        wkid:
-          type: integer
-        latestWkid:
-          type: integer
-    GenericWaterEventsProdL1Attributes:
-      type: object
-      description: Attributes of a feature in the `Generic_Events_Area` layer (GenericWaterEvents_Prod, layer 1). Geometry type esriGeometryPolygon.
-      properties:
-        OBJECTID:
-          type: integer
-          description: Object ID; the unique, service maintained identifier.
-          x-esri-field-type: esriFieldTypeOID
-        Event:
-          type: string
-          maxLength: 256
-          x-esri-field-type: esriFieldTypeString
-        Location:
-          type: string
-          maxLength: 256
-          x-esri-field-type: esriFieldTypeString
-        EventType:
-          type: string
-          maxLength: 256
-          description: Event Type
-          x-esri-field-type: esriFieldTypeString
-        CreatedBy:
-          type: string
-          maxLength: 256
-          description: 'Created By:'
-          x-esri-field-type: esriFieldTypeString
-        Description:
-          type: string
-          maxLength: 256
-          x-esri-field-type: esriFieldTypeString
-        ApproximateStartDate:
-          type: integer
-          maxLength: 8
-          description: Approximate Start Date Epoch milliseconds (Esri date field).
-          x-esri-field-type: esriFieldTypeDate
-        ApproximateEndDate:
-          type: integer
-          maxLength: 8
-          description: Approximate End Date Epoch milliseconds (Esri date field).
-          x-esri-field-type: esriFieldTypeDate
-        Shape__Area:
-          type: number
-          x-esri-field-type: esriFieldTypeDouble
-        Shape__Length:
-          type: number
-          x-esri-field-type: esriFieldTypeDouble
     WaterCanadaOutagesProdL0Attributes:
       type: object
       description: Attributes of a feature in the `water_canada_outages-prod` layer (water_canada_outages_prod, layer 0). Geometry type esriGeometryPoint.
@@ -752,152 +855,49 @@ components:
         Status: Water main break has been repaired. Awaiting surface restoration. If you’re experiencing a water outage, please report it to 780-412-4500.
         Details: Road restoration is carried out by a 3rd party and may take up to 6 weeks to complete.
         EstimateRe: Customers are NOT out of Water
-    LayerMetadata:
+    UDFEventsProdL0FeatureSet:
       type: object
-      description: 'ArcGIS feature layer metadata document: field definitions, geometry type, extent, capabilities and edit timestamps.'
+      description: Esri FeatureSet returned by a query against the `UDF_Events_Pt` layer.
       properties:
-        currentVersion:
-          type: number
-        id:
-          type: integer
+        objectIdFieldName:
+          type: string
+        globalIdFieldName:
+          type: string
+        geometryType:
+          type: string
+        spatialReference:
+          $ref: '#/components/schemas/SpatialReference'
+        fields:
+          type: array
+          items:
+            $ref: '#/components/schemas/FieldDefinition'
+        exceededTransferLimit:
+          type: boolean
+          description: True when more features match than were returned; page with `resultOffset`.
+        features:
+          type: array
+          items:
+            type: object
+            properties:
+              attributes:
+                $ref: '#/components/schemas/UDFEventsProdL0Attributes'
+              geometry:
+                type: object
+                description: Feature geometry, omitted when `returnGeometry=false`.
+    FieldDefinition:
+      type: object
+      properties:
         name:
           type: string
         type:
           type: string
-        geometryType:
+          description: Esri field type, for example `esriFieldTypeString`.
+        alias:
           type: string
-        fields:
-          type: array
-          items:
-            $ref: '#/components/schemas/FieldDefinition'
-        extent:
-          type: object
-        editingInfo:
-          type: object
-        maxRecordCount:
+        sqlType:
+          type: string
+        length:
           type: integer
-    UDFEventsProdL1Attributes:
-      type: object
-      description: Attributes of a feature in the `UDF_Events_area` layer (UDF_Events_Prod, layer 1). Geometry type esriGeometryPolygon.
-      properties:
-        OBJECTID:
-          type: integer
-          description: Object ID; the unique, service maintained identifier.
-          x-esri-field-type: esriFieldTypeOID
-        UDFID:
-          type: string
-          maxLength: 50
-          description: UDF Area
-          x-esri-field-type: esriFieldTypeString
-        MSLINK:
-          type: integer
-          x-esri-field-type: esriFieldTypeInteger
-        URL:
-          type: string
-          maxLength: 400
-          x-esri-field-type: esriFieldTypeString
-        SCHD_START:
-          type: integer
-          maxLength: 8
-          description: Approximate Start Date Epoch milliseconds (Esri date field).
-          x-esri-field-type: esriFieldTypeDate
-        SCHD_END:
-          type: integer
-          maxLength: 8
-          description: Approximate End Date Epoch milliseconds (Esri date field).
-          x-esri-field-type: esriFieldTypeDate
-        Shape__Area:
-          type: number
-          x-esri-field-type: esriFieldTypeDouble
-        Shape__Length:
-          type: number
-          x-esri-field-type: esriFieldTypeDouble
-    UDFEventsProdL1FeatureSet:
-      type: object
-      description: Esri FeatureSet returned by a query against the `UDF_Events_area` layer.
-      properties:
-        objectIdFieldName:
-          type: string
-        globalIdFieldName:
-          type: string
-        geometryType:
-          type: string
-        spatialReference:
-          $ref: '#/components/schemas/SpatialReference'
-        fields:
-          type: array
-          items:
-            $ref: '#/components/schemas/FieldDefinition'
-        exceededTransferLimit:
-          type: boolean
-          description: True when more features match than were returned; page with `resultOffset`.
-        features:
-          type: array
-          items:
-            type: object
-            properties:
-              attributes:
-                $ref: '#/components/schemas/UDFEventsProdL1Attributes'
-              geometry:
-                type: object
-                description: Feature geometry, omitted when `returnGeometry=false`.
-    GenericWaterEventsProdL0FeatureSet:
-      type: object
-      description: Esri FeatureSet returned by a query against the `Generic_Events_Pt` layer.
-      properties:
-        objectIdFieldName:
-          type: string
-        globalIdFieldName:
-          type: string
-        geometryType:
-          type: string
-        spatialReference:
-          $ref: '#/components/schemas/SpatialReference'
-        fields:
-          type: array
-          items:
-            $ref: '#/components/schemas/FieldDefinition'
-        exceededTransferLimit:
-          type: boolean
-          description: True when more features match than were returned; page with `resultOffset`.
-        features:
-          type: array
-          items:
-            type: object
-            properties:
-              attributes:
-                $ref: '#/components/schemas/GenericWaterEventsProdL0Attributes'
-              geometry:
-                type: object
-                description: Feature geometry, omitted when `returnGeometry=false`.
-    EsriError:
-      type: object
-      description: ArcGIS REST error envelope. Note that these services return HTTP 200 with this body rather than a 4xx status code.
-      properties:
-        error:
-          type: object
-          properties:
-            code:
-              type: integer
-              description: Esri error code.
-            message:
-              type: string
-              description: Short error message; may be an empty string.
-            details:
-              type: array
-              items:
-                type: string
-              description: Human readable detail strings.
-          required:
-          - code
-      required:
-      - error
-      examples:
-      - error:
-          code: 400
-          message: Cannot perform query. Invalid query parameters.
-          details:
-          - '''where'' parameter is invalid'
   parameters:
     geometry:
       name: geometry
@@ -906,6 +906,14 @@ components:
       description: Geometry used to spatially filter the query, in the format implied by `geometryType`.
       schema:
         type: string
+    where:
+      name: where
+      in: query
+      required: false
+      description: SQL-92 WHERE clause applied to the layer attributes. Use `1=1` to select all features.
+      schema:
+        type: string
+      example: 1=1
     returnIdsOnly:
       name: returnIdsOnly
       in: query
@@ -914,13 +922,6 @@ components:
       schema:
         type: boolean
         default: false
-    orderByFields:
-      name: orderByFields
-      in: query
-      required: false
-      description: Comma separated `field ASC|DESC` list used to order the result set.
-      schema:
-        type: string
     resultRecordCount:
       name: resultRecordCount
       in: query
@@ -930,6 +931,13 @@ components:
         type: integer
         minimum: 1
         maximum: 2000
+    outSR:
+      name: outSR
+      in: query
+      required: false
+      description: Spatial reference (WKID) requested for the returned geometry, for example `4326`.
+      schema:
+        type: string
     geometryType:
       name: geometryType
       in: query
@@ -943,37 +951,6 @@ components:
         - esriGeometryPolyline
         - esriGeometryPolygon
         - esriGeometryEnvelope
-    resultOffset:
-      name: resultOffset
-      in: query
-      required: false
-      description: Zero based offset into the ordered result set; the cursor half of ArcGIS paging.
-      schema:
-        type: integer
-        minimum: 0
-    outSR:
-      name: outSR
-      in: query
-      required: false
-      description: Spatial reference (WKID) requested for the returned geometry, for example `4326`.
-      schema:
-        type: string
-    spatialRel:
-      name: spatialRel
-      in: query
-      required: false
-      description: Spatial relationship applied between the `geometry` filter and the layer features.
-      schema:
-        type: string
-        default: esriSpatialRelIntersects
-    returnCountOnly:
-      name: returnCountOnly
-      in: query
-      required: false
-      description: Return only the count of matching features instead of the features themselves.
-      schema:
-        type: boolean
-        default: false
     outFields:
       name: outFields
       in: query
@@ -982,29 +959,22 @@ components:
       schema:
         type: string
       example: '*'
-    where:
-      name: where
+    returnCountOnly:
+      name: returnCountOnly
       in: query
       required: false
-      description: SQL-92 WHERE clause applied to the layer attributes. Use `1=1` to select all features.
-      schema:
-        type: string
-      example: 1=1
-    inSR:
-      name: inSR
-      in: query
-      required: false
-      description: Spatial reference (WKID) of the input `geometry`.
-      schema:
-        type: string
-    returnGeometry:
-      name: returnGeometry
-      in: query
-      required: false
-      description: Whether the feature geometry is included in the response.
+      description: Return only the count of matching features instead of the features themselves.
       schema:
         type: boolean
-        default: true
+        default: false
+    resultOffset:
+      name: resultOffset
+      in: query
+      required: false
+      description: Zero based offset into the ordered result set; the cursor half of ArcGIS paging.
+      schema:
+        type: integer
+        minimum: 0
     f:
       name: f
       in: query
@@ -1018,3 +988,33 @@ components:
         - pbf
         - html
         default: html
+    spatialRel:
+      name: spatialRel
+      in: query
+      required: false
+      description: Spatial relationship applied between the `geometry` filter and the layer features.
+      schema:
+        type: string
+        default: esriSpatialRelIntersects
+    returnGeometry:
+      name: returnGeometry
+      in: query
+      required: false
+      description: Whether the feature geometry is included in the response.
+      schema:
+        type: boolean
+        default: true
+    orderByFields:
+      name: orderByFields
+      in: query
+      required: false
+      description: Comma separated `field ASC|DESC` list used to order the result set.
+      schema:
+        type: string
+    inSR:
+      name: inSR
+      in: query
+      required: false
+      description: Spatial reference (WKID) of the input `geometry`.
+      schema:
+        type: string
