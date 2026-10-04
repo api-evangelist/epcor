@@ -856,580 +856,10 @@ paths:
                 - $ref: '#/components/schemas/GeoJSONFeatureCollection'
                 - $ref: '#/components/schemas/EsriError'
 components:
-  parameters:
-    returnGeometry:
-      name: returnGeometry
-      in: query
-      required: false
-      description: Whether the feature geometry is included in the response.
-      schema:
-        type: boolean
-        default: true
-    orderByFields:
-      name: orderByFields
-      in: query
-      required: false
-      description: Comma separated `field ASC|DESC` list used to order the result set.
-      schema:
-        type: string
-    where:
-      name: where
-      in: query
-      required: false
-      description: SQL-92 WHERE clause applied to the layer attributes. Use `1=1` to select all features.
-      schema:
-        type: string
-      example: 1=1
-    spatialRel:
-      name: spatialRel
-      in: query
-      required: false
-      description: Spatial relationship applied between the `geometry` filter and the layer features.
-      schema:
-        type: string
-        default: esriSpatialRelIntersects
-    resultRecordCount:
-      name: resultRecordCount
-      in: query
-      required: false
-      description: Maximum number of features to return in this page, capped by the service `maxRecordCount` (2000 on these services).
-      schema:
-        type: integer
-        minimum: 1
-        maximum: 2000
-    resultOffset:
-      name: resultOffset
-      in: query
-      required: false
-      description: Zero based offset into the ordered result set; the cursor half of ArcGIS paging.
-      schema:
-        type: integer
-        minimum: 0
-    returnIdsOnly:
-      name: returnIdsOnly
-      in: query
-      required: false
-      description: Return only the object IDs of matching features.
-      schema:
-        type: boolean
-        default: false
-    inSR:
-      name: inSR
-      in: query
-      required: false
-      description: Spatial reference (WKID) of the input `geometry`.
-      schema:
-        type: string
-    geometryType:
-      name: geometryType
-      in: query
-      required: false
-      description: Type of the `geometry` filter.
-      schema:
-        type: string
-        enum:
-        - esriGeometryPoint
-        - esriGeometryMultipoint
-        - esriGeometryPolyline
-        - esriGeometryPolygon
-        - esriGeometryEnvelope
-    outSR:
-      name: outSR
-      in: query
-      required: false
-      description: Spatial reference (WKID) requested for the returned geometry, for example `4326`.
-      schema:
-        type: string
-    returnCountOnly:
-      name: returnCountOnly
-      in: query
-      required: false
-      description: Return only the count of matching features instead of the features themselves.
-      schema:
-        type: boolean
-        default: false
-    f:
-      name: f
-      in: query
-      required: false
-      description: Response format. `json` returns the Esri FeatureSet envelope, `geojson` returns RFC 7946 GeoJSON, `pbf` returns protocol buffers, `html` returns the human service directory.
-      schema:
-        type: string
-        enum:
-        - json
-        - geojson
-        - pbf
-        - html
-        default: html
-    outFields:
-      name: outFields
-      in: query
-      required: false
-      description: Comma separated list of attribute fields to return, or `*` for all fields.
-      schema:
-        type: string
-      example: '*'
-    geometry:
-      name: geometry
-      in: query
-      required: false
-      description: Geometry used to spatially filter the query, in the format implied by `geometryType`.
-      schema:
-        type: string
   schemas:
-    ServiceAreasClovisProdL0Attributes:
+    ServiceAreasChaparralProdL0Attributes:
       type: object
-      description: Attributes of a feature in the `ServiceAreas_Clovis_prod` layer (ServiceAreas_Clovis_prod, layer 0). Geometry type esriGeometryPolygon.
-      properties:
-        FID:
-          type: integer
-          description: Object ID; the unique, service maintained identifier.
-          x-esri-field-type: esriFieldTypeOID
-        OBJECTID:
-          type: number
-          x-esri-field-type: esriFieldTypeDouble
-        ServiceAre:
-          type: string
-          maxLength: 30
-          x-esri-field-type: esriFieldTypeString
-        District:
-          type: string
-          maxLength: 50
-          x-esri-field-type: esriFieldTypeString
-        State:
-          type: string
-          maxLength: 20
-          x-esri-field-type: esriFieldTypeString
-        Shape_Leng:
-          type: number
-          x-esri-field-type: esriFieldTypeDouble
-        Shape_Area:
-          type: number
-          x-esri-field-type: esriFieldTypeDouble
-    ServiceAreasSunCityWestProdL0FeatureSet:
-      type: object
-      description: Esri FeatureSet returned by a query against the `ServiceAreas_SunCityWest_prod` layer.
-      properties:
-        objectIdFieldName:
-          type: string
-        globalIdFieldName:
-          type: string
-        geometryType:
-          type: string
-        spatialReference:
-          $ref: '#/components/schemas/SpatialReference'
-        fields:
-          type: array
-          items:
-            $ref: '#/components/schemas/FieldDefinition'
-        exceededTransferLimit:
-          type: boolean
-          description: True when more features match than were returned; page with `resultOffset`.
-        features:
-          type: array
-          items:
-            type: object
-            properties:
-              attributes:
-                $ref: '#/components/schemas/ServiceAreasSunCityWestProdL0Attributes'
-              geometry:
-                type: object
-                description: Feature geometry, omitted when `returnGeometry=false`.
-    ServiceAreasAnthemProdL0Attributes:
-      type: object
-      description: Attributes of a feature in the `ServiceAreas_Anthem_prod` layer (ServiceAreas_Anthem_prod, layer 0). Geometry type esriGeometryPolygon.
-      properties:
-        FID:
-          type: integer
-          description: Object ID; the unique, service maintained identifier.
-          x-esri-field-type: esriFieldTypeOID
-        OBJECTID:
-          type: number
-          x-esri-field-type: esriFieldTypeDouble
-        ServiceAre:
-          type: string
-          maxLength: 30
-          x-esri-field-type: esriFieldTypeString
-        District:
-          type: string
-          maxLength: 50
-          x-esri-field-type: esriFieldTypeString
-        State:
-          type: string
-          maxLength: 20
-          x-esri-field-type: esriFieldTypeString
-        Shape_Leng:
-          type: number
-          x-esri-field-type: esriFieldTypeDouble
-        Shape_Area:
-          type: number
-          x-esri-field-type: esriFieldTypeDouble
-    ServiceAreasHavasuProdL0Attributes:
-      type: object
-      description: Attributes of a feature in the `ServiceAreas_Havasu_prod` layer (ServiceAreas_Havasu_prod, layer 0). Geometry type esriGeometryPolygon.
-      properties:
-        FID:
-          type: integer
-          description: Object ID; the unique, service maintained identifier.
-          x-esri-field-type: esriFieldTypeOID
-        OBJECTID:
-          type: number
-          x-esri-field-type: esriFieldTypeDouble
-        ServiceAre:
-          type: string
-          maxLength: 30
-          x-esri-field-type: esriFieldTypeString
-        District:
-          type: string
-          maxLength: 50
-          x-esri-field-type: esriFieldTypeString
-        State:
-          type: string
-          maxLength: 20
-          x-esri-field-type: esriFieldTypeString
-        Shape_Leng:
-          type: number
-          x-esri-field-type: esriFieldTypeDouble
-        Shape_Area:
-          type: number
-          x-esri-field-type: esriFieldTypeDouble
-    ServiceAreasMohaveProdL0FeatureSet:
-      type: object
-      description: Esri FeatureSet returned by a query against the `ServiceAreas_Mohave_prod` layer.
-      properties:
-        objectIdFieldName:
-          type: string
-        globalIdFieldName:
-          type: string
-        geometryType:
-          type: string
-        spatialReference:
-          $ref: '#/components/schemas/SpatialReference'
-        fields:
-          type: array
-          items:
-            $ref: '#/components/schemas/FieldDefinition'
-        exceededTransferLimit:
-          type: boolean
-          description: True when more features match than were returned; page with `resultOffset`.
-        features:
-          type: array
-          items:
-            type: object
-            properties:
-              attributes:
-                $ref: '#/components/schemas/ServiceAreasMohaveProdL0Attributes'
-              geometry:
-                type: object
-                description: Feature geometry, omitted when `returnGeometry=false`.
-    ServiceAreasThunderMountainProdL0FeatureSet:
-      type: object
-      description: Esri FeatureSet returned by a query against the `ServiceAreas_ThunderMountain_prod` layer.
-      properties:
-        objectIdFieldName:
-          type: string
-        globalIdFieldName:
-          type: string
-        geometryType:
-          type: string
-        spatialReference:
-          $ref: '#/components/schemas/SpatialReference'
-        fields:
-          type: array
-          items:
-            $ref: '#/components/schemas/FieldDefinition'
-        exceededTransferLimit:
-          type: boolean
-          description: True when more features match than were returned; page with `resultOffset`.
-        features:
-          type: array
-          items:
-            type: object
-            properties:
-              attributes:
-                $ref: '#/components/schemas/ServiceAreasThunderMountainProdL0Attributes'
-              geometry:
-                type: object
-                description: Feature geometry, omitted when `returnGeometry=false`.
-    ServiceAreasEdgewoodProdL0Attributes:
-      type: object
-      description: Attributes of a feature in the `ServiceAreas_Edgewood_prod` layer (ServiceAreas_Edgewood_prod, layer 0). Geometry type esriGeometryPolygon.
-      properties:
-        FID:
-          type: integer
-          description: Object ID; the unique, service maintained identifier.
-          x-esri-field-type: esriFieldTypeOID
-        OBJECTID:
-          type: number
-          x-esri-field-type: esriFieldTypeDouble
-        ServiceAre:
-          type: string
-          maxLength: 30
-          x-esri-field-type: esriFieldTypeString
-        District:
-          type: string
-          maxLength: 50
-          x-esri-field-type: esriFieldTypeString
-        State:
-          type: string
-          maxLength: 20
-          x-esri-field-type: esriFieldTypeString
-        Shape_Leng:
-          type: number
-          x-esri-field-type: esriFieldTypeDouble
-        Shape_Area:
-          type: number
-          x-esri-field-type: esriFieldTypeDouble
-    ServiceAreasEdgewoodProdL0FeatureSet:
-      type: object
-      description: Esri FeatureSet returned by a query against the `ServiceAreas_Edgewood_prod` layer.
-      properties:
-        objectIdFieldName:
-          type: string
-        globalIdFieldName:
-          type: string
-        geometryType:
-          type: string
-        spatialReference:
-          $ref: '#/components/schemas/SpatialReference'
-        fields:
-          type: array
-          items:
-            $ref: '#/components/schemas/FieldDefinition'
-        exceededTransferLimit:
-          type: boolean
-          description: True when more features match than were returned; page with `resultOffset`.
-        features:
-          type: array
-          items:
-            type: object
-            properties:
-              attributes:
-                $ref: '#/components/schemas/ServiceAreasEdgewoodProdL0Attributes'
-              geometry:
-                type: object
-                description: Feature geometry, omitted when `returnGeometry=false`.
-    ServiceAreasClovisProdL0FeatureSet:
-      type: object
-      description: Esri FeatureSet returned by a query against the `ServiceAreas_Clovis_prod` layer.
-      properties:
-        objectIdFieldName:
-          type: string
-        globalIdFieldName:
-          type: string
-        geometryType:
-          type: string
-        spatialReference:
-          $ref: '#/components/schemas/SpatialReference'
-        fields:
-          type: array
-          items:
-            $ref: '#/components/schemas/FieldDefinition'
-        exceededTransferLimit:
-          type: boolean
-          description: True when more features match than were returned; page with `resultOffset`.
-        features:
-          type: array
-          items:
-            type: object
-            properties:
-              attributes:
-                $ref: '#/components/schemas/ServiceAreasClovisProdL0Attributes'
-              geometry:
-                type: object
-                description: Feature geometry, omitted when `returnGeometry=false`.
-    LayerMetadata:
-      type: object
-      description: 'ArcGIS feature layer metadata document: field definitions, geometry type, extent, capabilities and edit timestamps.'
-      properties:
-        currentVersion:
-          type: number
-        id:
-          type: integer
-        name:
-          type: string
-        type:
-          type: string
-        geometryType:
-          type: string
-        fields:
-          type: array
-          items:
-            $ref: '#/components/schemas/FieldDefinition'
-        extent:
-          type: object
-        editingInfo:
-          type: object
-        maxRecordCount:
-          type: integer
-    SpatialReference:
-      type: object
-      properties:
-        wkid:
-          type: integer
-        latestWkid:
-          type: integer
-    ServiceAreasTubacProdL0Attributes:
-      type: object
-      description: Attributes of a feature in the `ServiceAreas_Tubac_prod` layer (ServiceAreas_Tubac_prod, layer 0). Geometry type esriGeometryPolygon.
-      properties:
-        FID:
-          type: integer
-          description: Object ID; the unique, service maintained identifier.
-          x-esri-field-type: esriFieldTypeOID
-        OBJECTID:
-          type: number
-          x-esri-field-type: esriFieldTypeDouble
-        ServiceAre:
-          type: string
-          maxLength: 30
-          x-esri-field-type: esriFieldTypeString
-        District:
-          type: string
-          maxLength: 50
-          x-esri-field-type: esriFieldTypeString
-        State:
-          type: string
-          maxLength: 20
-          x-esri-field-type: esriFieldTypeString
-        Shape_Leng:
-          type: number
-          x-esri-field-type: esriFieldTypeDouble
-        Shape_Area:
-          type: number
-          x-esri-field-type: esriFieldTypeDouble
-    ServiceAreasThunderMountainProdL0Attributes:
-      type: object
-      description: Attributes of a feature in the `ServiceAreas_ThunderMountain_prod` layer (ServiceAreas_ThunderMountain_prod, layer 0). Geometry type esriGeometryPolygon.
-      properties:
-        FID:
-          type: integer
-          description: Object ID; the unique, service maintained identifier.
-          x-esri-field-type: esriFieldTypeOID
-        OBJECTID:
-          type: number
-          x-esri-field-type: esriFieldTypeDouble
-        ServiceAre:
-          type: string
-          maxLength: 30
-          x-esri-field-type: esriFieldTypeString
-        District:
-          type: string
-          maxLength: 50
-          x-esri-field-type: esriFieldTypeString
-        State:
-          type: string
-          maxLength: 20
-          x-esri-field-type: esriFieldTypeString
-        Shape_Leng:
-          type: number
-          x-esri-field-type: esriFieldTypeDouble
-        Shape_Area:
-          type: number
-          x-esri-field-type: esriFieldTypeDouble
-    ServiceAreasNorthMohaveValleyProdL0FeatureSet:
-      type: object
-      description: Esri FeatureSet returned by a query against the `ServiceAreas_NorthMohaveValley_prod` layer.
-      properties:
-        objectIdFieldName:
-          type: string
-        globalIdFieldName:
-          type: string
-        geometryType:
-          type: string
-        spatialReference:
-          $ref: '#/components/schemas/SpatialReference'
-        fields:
-          type: array
-          items:
-            $ref: '#/components/schemas/FieldDefinition'
-        exceededTransferLimit:
-          type: boolean
-          description: True when more features match than were returned; page with `resultOffset`.
-        features:
-          type: array
-          items:
-            type: object
-            properties:
-              attributes:
-                $ref: '#/components/schemas/ServiceAreasNorthMohaveValleyProdL0Attributes'
-              geometry:
-                type: object
-                description: Feature geometry, omitted when `returnGeometry=false`.
-    FieldDefinition:
-      type: object
-      properties:
-        name:
-          type: string
-        type:
-          type: string
-          description: Esri field type, for example `esriFieldTypeString`.
-        alias:
-          type: string
-        sqlType:
-          type: string
-        length:
-          type: integer
-    EsriError:
-      type: object
-      description: ArcGIS REST error envelope. Note that these services return HTTP 200 with this body rather than a 4xx status code.
-      properties:
-        error:
-          type: object
-          properties:
-            code:
-              type: integer
-              description: Esri error code.
-            message:
-              type: string
-              description: Short error message; may be an empty string.
-            details:
-              type: array
-              items:
-                type: string
-              description: Human readable detail strings.
-          required:
-          - code
-      required:
-      - error
-      examples:
-      - error:
-          code: 400
-          message: Cannot perform query. Invalid query parameters.
-          details:
-          - '''where'' parameter is invalid'
-    ServiceAreasSunCityProdL0Attributes:
-      type: object
-      description: Attributes of a feature in the `ServiceAreas_SunCity_prod` layer (ServiceAreas_SunCity_prod, layer 0). Geometry type esriGeometryPolygon.
-      properties:
-        FID:
-          type: integer
-          description: Object ID; the unique, service maintained identifier.
-          x-esri-field-type: esriFieldTypeOID
-        OBJECTID:
-          type: number
-          x-esri-field-type: esriFieldTypeDouble
-        ServiceAre:
-          type: string
-          maxLength: 30
-          x-esri-field-type: esriFieldTypeString
-        District:
-          type: string
-          maxLength: 50
-          x-esri-field-type: esriFieldTypeString
-        State:
-          type: string
-          maxLength: 20
-          x-esri-field-type: esriFieldTypeString
-        Shape_Leng:
-          type: number
-          x-esri-field-type: esriFieldTypeDouble
-        Shape_Area:
-          type: number
-          x-esri-field-type: esriFieldTypeDouble
-    ServiceAreasSunCityWestProdL0Attributes:
-      type: object
-      description: Attributes of a feature in the `ServiceAreas_SunCityWest_prod` layer (ServiceAreas_SunCityWest_prod, layer 0). Geometry type esriGeometryPolygon.
+      description: Attributes of a feature in the `ServiceAreas_Chaparral_prod` layer (ServiceAreas_Chaparral_prod, layer 0). Geometry type esriGeometryPolygon.
       properties:
         FID:
           type: integer
@@ -1485,276 +915,9 @@ components:
               geometry:
                 type: object
                 description: Feature geometry, omitted when `returnGeometry=false`.
-    ServiceAreasAnthemProdL0FeatureSet:
-      type: object
-      description: Esri FeatureSet returned by a query against the `ServiceAreas_Anthem_prod` layer.
-      properties:
-        objectIdFieldName:
-          type: string
-        globalIdFieldName:
-          type: string
-        geometryType:
-          type: string
-        spatialReference:
-          $ref: '#/components/schemas/SpatialReference'
-        fields:
-          type: array
-          items:
-            $ref: '#/components/schemas/FieldDefinition'
-        exceededTransferLimit:
-          type: boolean
-          description: True when more features match than were returned; page with `resultOffset`.
-        features:
-          type: array
-          items:
-            type: object
-            properties:
-              attributes:
-                $ref: '#/components/schemas/ServiceAreasAnthemProdL0Attributes'
-              geometry:
-                type: object
-                description: Feature geometry, omitted when `returnGeometry=false`.
-    ServiceMetadata:
-      type: object
-      description: ArcGIS feature service metadata document.
-      properties:
-        currentVersion:
-          type: number
-        serviceItemId:
-          type: string
-        capabilities:
-          type: string
-          description: Comma separated capability list advertised by the service. Only `Query` is exercisable anonymously; editing capabilities require an ArcGIS token.
-        maxRecordCount:
-          type: integer
-        spatialReference:
-          $ref: '#/components/schemas/SpatialReference'
-        layers:
-          type: array
-          items:
-            type: object
     ServiceAreasAguaFriaProdL0Attributes:
       type: object
       description: Attributes of a feature in the `ServiceAreas_AguaFria_prod` layer (ServiceAreas_AguaFria_prod, layer 0). Geometry type esriGeometryPolygon.
-      properties:
-        FID:
-          type: integer
-          description: Object ID; the unique, service maintained identifier.
-          x-esri-field-type: esriFieldTypeOID
-        OBJECTID:
-          type: number
-          x-esri-field-type: esriFieldTypeDouble
-        ServiceAre:
-          type: string
-          maxLength: 30
-          x-esri-field-type: esriFieldTypeString
-        District:
-          type: string
-          maxLength: 50
-          x-esri-field-type: esriFieldTypeString
-        State:
-          type: string
-          maxLength: 20
-          x-esri-field-type: esriFieldTypeString
-        Shape_Leng:
-          type: number
-          x-esri-field-type: esriFieldTypeDouble
-        Shape_Area:
-          type: number
-          x-esri-field-type: esriFieldTypeDouble
-    ServiceAreasTubacProdL0FeatureSet:
-      type: object
-      description: Esri FeatureSet returned by a query against the `ServiceAreas_Tubac_prod` layer.
-      properties:
-        objectIdFieldName:
-          type: string
-        globalIdFieldName:
-          type: string
-        geometryType:
-          type: string
-        spatialReference:
-          $ref: '#/components/schemas/SpatialReference'
-        fields:
-          type: array
-          items:
-            $ref: '#/components/schemas/FieldDefinition'
-        exceededTransferLimit:
-          type: boolean
-          description: True when more features match than were returned; page with `resultOffset`.
-        features:
-          type: array
-          items:
-            type: object
-            properties:
-              attributes:
-                $ref: '#/components/schemas/ServiceAreasTubacProdL0Attributes'
-              geometry:
-                type: object
-                description: Feature geometry, omitted when `returnGeometry=false`.
-    ServiceAreasChaparralProdL0FeatureSet:
-      type: object
-      description: Esri FeatureSet returned by a query against the `ServiceAreas_Chaparral_prod` layer.
-      properties:
-        objectIdFieldName:
-          type: string
-        globalIdFieldName:
-          type: string
-        geometryType:
-          type: string
-        spatialReference:
-          $ref: '#/components/schemas/SpatialReference'
-        fields:
-          type: array
-          items:
-            $ref: '#/components/schemas/FieldDefinition'
-        exceededTransferLimit:
-          type: boolean
-          description: True when more features match than were returned; page with `resultOffset`.
-        features:
-          type: array
-          items:
-            type: object
-            properties:
-              attributes:
-                $ref: '#/components/schemas/ServiceAreasChaparralProdL0Attributes'
-              geometry:
-                type: object
-                description: Feature geometry, omitted when `returnGeometry=false`.
-    GeoJSONFeatureCollection:
-      type: object
-      description: RFC 7946 FeatureCollection returned when `f=geojson`.
-      properties:
-        type:
-          type: string
-          const: FeatureCollection
-        properties:
-          type: object
-          properties:
-            exceededTransferLimit:
-              type: boolean
-        features:
-          type: array
-          items:
-            type: object
-    ServiceAreasSunCityProdL0FeatureSet:
-      type: object
-      description: Esri FeatureSet returned by a query against the `ServiceAreas_SunCity_prod` layer.
-      properties:
-        objectIdFieldName:
-          type: string
-        globalIdFieldName:
-          type: string
-        geometryType:
-          type: string
-        spatialReference:
-          $ref: '#/components/schemas/SpatialReference'
-        fields:
-          type: array
-          items:
-            $ref: '#/components/schemas/FieldDefinition'
-        exceededTransferLimit:
-          type: boolean
-          description: True when more features match than were returned; page with `resultOffset`.
-        features:
-          type: array
-          items:
-            type: object
-            properties:
-              attributes:
-                $ref: '#/components/schemas/ServiceAreasSunCityProdL0Attributes'
-              geometry:
-                type: object
-                description: Feature geometry, omitted when `returnGeometry=false`.
-    ServiceAreasHavasuProdL0FeatureSet:
-      type: object
-      description: Esri FeatureSet returned by a query against the `ServiceAreas_Havasu_prod` layer.
-      properties:
-        objectIdFieldName:
-          type: string
-        globalIdFieldName:
-          type: string
-        geometryType:
-          type: string
-        spatialReference:
-          $ref: '#/components/schemas/SpatialReference'
-        fields:
-          type: array
-          items:
-            $ref: '#/components/schemas/FieldDefinition'
-        exceededTransferLimit:
-          type: boolean
-          description: True when more features match than were returned; page with `resultOffset`.
-        features:
-          type: array
-          items:
-            type: object
-            properties:
-              attributes:
-                $ref: '#/components/schemas/ServiceAreasHavasuProdL0Attributes'
-              geometry:
-                type: object
-                description: Feature geometry, omitted when `returnGeometry=false`.
-    ServiceAreasAguaFriaProdL0FeatureSet:
-      type: object
-      description: Esri FeatureSet returned by a query against the `ServiceAreas_AguaFria_prod` layer.
-      properties:
-        objectIdFieldName:
-          type: string
-        globalIdFieldName:
-          type: string
-        geometryType:
-          type: string
-        spatialReference:
-          $ref: '#/components/schemas/SpatialReference'
-        fields:
-          type: array
-          items:
-            $ref: '#/components/schemas/FieldDefinition'
-        exceededTransferLimit:
-          type: boolean
-          description: True when more features match than were returned; page with `resultOffset`.
-        features:
-          type: array
-          items:
-            type: object
-            properties:
-              attributes:
-                $ref: '#/components/schemas/ServiceAreasAguaFriaProdL0Attributes'
-              geometry:
-                type: object
-                description: Feature geometry, omitted when `returnGeometry=false`.
-    ServiceAreasNorthMohaveValleyProdL0Attributes:
-      type: object
-      description: Attributes of a feature in the `ServiceAreas_NorthMohaveValley_prod` layer (ServiceAreas_NorthMohaveValley_prod, layer 0). Geometry type esriGeometryPolygon.
-      properties:
-        FID:
-          type: integer
-          description: Object ID; the unique, service maintained identifier.
-          x-esri-field-type: esriFieldTypeOID
-        OBJECTID:
-          type: number
-          x-esri-field-type: esriFieldTypeDouble
-        ServiceAre:
-          type: string
-          maxLength: 30
-          x-esri-field-type: esriFieldTypeString
-        District:
-          type: string
-          maxLength: 50
-          x-esri-field-type: esriFieldTypeString
-        State:
-          type: string
-          maxLength: 20
-          x-esri-field-type: esriFieldTypeString
-        Shape_Leng:
-          type: number
-          x-esri-field-type: esriFieldTypeDouble
-        Shape_Area:
-          type: number
-          x-esri-field-type: esriFieldTypeDouble
-    ServiceAreasParadiseValleyProdL0Attributes:
-      type: object
-      description: Attributes of a feature in the `ServiceAreas_ParadiseValley_prod` layer (ServiceAreas_ParadiseValley_prod, layer 0). Geometry type esriGeometryPolygon.
       properties:
         FID:
           type: integer
@@ -1810,9 +973,183 @@ components:
         Shape_Area:
           type: number
           x-esri-field-type: esriFieldTypeDouble
-    ServiceAreasChaparralProdL0Attributes:
+    ServiceAreasTubacProdL0FeatureSet:
       type: object
-      description: Attributes of a feature in the `ServiceAreas_Chaparral_prod` layer (ServiceAreas_Chaparral_prod, layer 0). Geometry type esriGeometryPolygon.
+      description: Esri FeatureSet returned by a query against the `ServiceAreas_Tubac_prod` layer.
+      properties:
+        objectIdFieldName:
+          type: string
+        globalIdFieldName:
+          type: string
+        geometryType:
+          type: string
+        spatialReference:
+          $ref: '#/components/schemas/SpatialReference'
+        fields:
+          type: array
+          items:
+            $ref: '#/components/schemas/FieldDefinition'
+        exceededTransferLimit:
+          type: boolean
+          description: True when more features match than were returned; page with `resultOffset`.
+        features:
+          type: array
+          items:
+            type: object
+            properties:
+              attributes:
+                $ref: '#/components/schemas/ServiceAreasTubacProdL0Attributes'
+              geometry:
+                type: object
+                description: Feature geometry, omitted when `returnGeometry=false`.
+    ServiceAreasEdgewoodProdL0FeatureSet:
+      type: object
+      description: Esri FeatureSet returned by a query against the `ServiceAreas_Edgewood_prod` layer.
+      properties:
+        objectIdFieldName:
+          type: string
+        globalIdFieldName:
+          type: string
+        geometryType:
+          type: string
+        spatialReference:
+          $ref: '#/components/schemas/SpatialReference'
+        fields:
+          type: array
+          items:
+            $ref: '#/components/schemas/FieldDefinition'
+        exceededTransferLimit:
+          type: boolean
+          description: True when more features match than were returned; page with `resultOffset`.
+        features:
+          type: array
+          items:
+            type: object
+            properties:
+              attributes:
+                $ref: '#/components/schemas/ServiceAreasEdgewoodProdL0Attributes'
+              geometry:
+                type: object
+                description: Feature geometry, omitted when `returnGeometry=false`.
+    ServiceAreasAnthemProdL0FeatureSet:
+      type: object
+      description: Esri FeatureSet returned by a query against the `ServiceAreas_Anthem_prod` layer.
+      properties:
+        objectIdFieldName:
+          type: string
+        globalIdFieldName:
+          type: string
+        geometryType:
+          type: string
+        spatialReference:
+          $ref: '#/components/schemas/SpatialReference'
+        fields:
+          type: array
+          items:
+            $ref: '#/components/schemas/FieldDefinition'
+        exceededTransferLimit:
+          type: boolean
+          description: True when more features match than were returned; page with `resultOffset`.
+        features:
+          type: array
+          items:
+            type: object
+            properties:
+              attributes:
+                $ref: '#/components/schemas/ServiceAreasAnthemProdL0Attributes'
+              geometry:
+                type: object
+                description: Feature geometry, omitted when `returnGeometry=false`.
+    ServiceAreasClovisProdL0FeatureSet:
+      type: object
+      description: Esri FeatureSet returned by a query against the `ServiceAreas_Clovis_prod` layer.
+      properties:
+        objectIdFieldName:
+          type: string
+        globalIdFieldName:
+          type: string
+        geometryType:
+          type: string
+        spatialReference:
+          $ref: '#/components/schemas/SpatialReference'
+        fields:
+          type: array
+          items:
+            $ref: '#/components/schemas/FieldDefinition'
+        exceededTransferLimit:
+          type: boolean
+          description: True when more features match than were returned; page with `resultOffset`.
+        features:
+          type: array
+          items:
+            type: object
+            properties:
+              attributes:
+                $ref: '#/components/schemas/ServiceAreasClovisProdL0Attributes'
+              geometry:
+                type: object
+                description: Feature geometry, omitted when `returnGeometry=false`.
+    ServiceAreasMohaveProdL0FeatureSet:
+      type: object
+      description: Esri FeatureSet returned by a query against the `ServiceAreas_Mohave_prod` layer.
+      properties:
+        objectIdFieldName:
+          type: string
+        globalIdFieldName:
+          type: string
+        geometryType:
+          type: string
+        spatialReference:
+          $ref: '#/components/schemas/SpatialReference'
+        fields:
+          type: array
+          items:
+            $ref: '#/components/schemas/FieldDefinition'
+        exceededTransferLimit:
+          type: boolean
+          description: True when more features match than were returned; page with `resultOffset`.
+        features:
+          type: array
+          items:
+            type: object
+            properties:
+              attributes:
+                $ref: '#/components/schemas/ServiceAreasMohaveProdL0Attributes'
+              geometry:
+                type: object
+                description: Feature geometry, omitted when `returnGeometry=false`.
+    ServiceAreasHavasuProdL0FeatureSet:
+      type: object
+      description: Esri FeatureSet returned by a query against the `ServiceAreas_Havasu_prod` layer.
+      properties:
+        objectIdFieldName:
+          type: string
+        globalIdFieldName:
+          type: string
+        geometryType:
+          type: string
+        spatialReference:
+          $ref: '#/components/schemas/SpatialReference'
+        fields:
+          type: array
+          items:
+            $ref: '#/components/schemas/FieldDefinition'
+        exceededTransferLimit:
+          type: boolean
+          description: True when more features match than were returned; page with `resultOffset`.
+        features:
+          type: array
+          items:
+            type: object
+            properties:
+              attributes:
+                $ref: '#/components/schemas/ServiceAreasHavasuProdL0Attributes'
+              geometry:
+                type: object
+                description: Feature geometry, omitted when `returnGeometry=false`.
+    ServiceAreasClovisProdL0Attributes:
+      type: object
+      description: Attributes of a feature in the `ServiceAreas_Clovis_prod` layer (ServiceAreas_Clovis_prod, layer 0). Geometry type esriGeometryPolygon.
       properties:
         FID:
           type: integer
@@ -1839,3 +1176,666 @@ components:
         Shape_Area:
           type: number
           x-esri-field-type: esriFieldTypeDouble
+    ServiceAreasSunCityWestProdL0Attributes:
+      type: object
+      description: Attributes of a feature in the `ServiceAreas_SunCityWest_prod` layer (ServiceAreas_SunCityWest_prod, layer 0). Geometry type esriGeometryPolygon.
+      properties:
+        FID:
+          type: integer
+          description: Object ID; the unique, service maintained identifier.
+          x-esri-field-type: esriFieldTypeOID
+        OBJECTID:
+          type: number
+          x-esri-field-type: esriFieldTypeDouble
+        ServiceAre:
+          type: string
+          maxLength: 30
+          x-esri-field-type: esriFieldTypeString
+        District:
+          type: string
+          maxLength: 50
+          x-esri-field-type: esriFieldTypeString
+        State:
+          type: string
+          maxLength: 20
+          x-esri-field-type: esriFieldTypeString
+        Shape_Leng:
+          type: number
+          x-esri-field-type: esriFieldTypeDouble
+        Shape_Area:
+          type: number
+          x-esri-field-type: esriFieldTypeDouble
+    FieldDefinition:
+      type: object
+      properties:
+        name:
+          type: string
+        type:
+          type: string
+          description: Esri field type, for example `esriFieldTypeString`.
+        alias:
+          type: string
+        sqlType:
+          type: string
+        length:
+          type: integer
+    LayerMetadata:
+      type: object
+      description: 'ArcGIS feature layer metadata document: field definitions, geometry type, extent, capabilities and edit timestamps.'
+      properties:
+        currentVersion:
+          type: number
+        id:
+          type: integer
+        name:
+          type: string
+        type:
+          type: string
+        geometryType:
+          type: string
+        fields:
+          type: array
+          items:
+            $ref: '#/components/schemas/FieldDefinition'
+        extent:
+          type: object
+        editingInfo:
+          type: object
+        maxRecordCount:
+          type: integer
+    ServiceAreasThunderMountainProdL0Attributes:
+      type: object
+      description: Attributes of a feature in the `ServiceAreas_ThunderMountain_prod` layer (ServiceAreas_ThunderMountain_prod, layer 0). Geometry type esriGeometryPolygon.
+      properties:
+        FID:
+          type: integer
+          description: Object ID; the unique, service maintained identifier.
+          x-esri-field-type: esriFieldTypeOID
+        OBJECTID:
+          type: number
+          x-esri-field-type: esriFieldTypeDouble
+        ServiceAre:
+          type: string
+          maxLength: 30
+          x-esri-field-type: esriFieldTypeString
+        District:
+          type: string
+          maxLength: 50
+          x-esri-field-type: esriFieldTypeString
+        State:
+          type: string
+          maxLength: 20
+          x-esri-field-type: esriFieldTypeString
+        Shape_Leng:
+          type: number
+          x-esri-field-type: esriFieldTypeDouble
+        Shape_Area:
+          type: number
+          x-esri-field-type: esriFieldTypeDouble
+    ServiceAreasAguaFriaProdL0FeatureSet:
+      type: object
+      description: Esri FeatureSet returned by a query against the `ServiceAreas_AguaFria_prod` layer.
+      properties:
+        objectIdFieldName:
+          type: string
+        globalIdFieldName:
+          type: string
+        geometryType:
+          type: string
+        spatialReference:
+          $ref: '#/components/schemas/SpatialReference'
+        fields:
+          type: array
+          items:
+            $ref: '#/components/schemas/FieldDefinition'
+        exceededTransferLimit:
+          type: boolean
+          description: True when more features match than were returned; page with `resultOffset`.
+        features:
+          type: array
+          items:
+            type: object
+            properties:
+              attributes:
+                $ref: '#/components/schemas/ServiceAreasAguaFriaProdL0Attributes'
+              geometry:
+                type: object
+                description: Feature geometry, omitted when `returnGeometry=false`.
+    ServiceAreasChaparralProdL0FeatureSet:
+      type: object
+      description: Esri FeatureSet returned by a query against the `ServiceAreas_Chaparral_prod` layer.
+      properties:
+        objectIdFieldName:
+          type: string
+        globalIdFieldName:
+          type: string
+        geometryType:
+          type: string
+        spatialReference:
+          $ref: '#/components/schemas/SpatialReference'
+        fields:
+          type: array
+          items:
+            $ref: '#/components/schemas/FieldDefinition'
+        exceededTransferLimit:
+          type: boolean
+          description: True when more features match than were returned; page with `resultOffset`.
+        features:
+          type: array
+          items:
+            type: object
+            properties:
+              attributes:
+                $ref: '#/components/schemas/ServiceAreasChaparralProdL0Attributes'
+              geometry:
+                type: object
+                description: Feature geometry, omitted when `returnGeometry=false`.
+    EsriError:
+      type: object
+      description: ArcGIS REST error envelope. Note that these services return HTTP 200 with this body rather than a 4xx status code.
+      properties:
+        error:
+          type: object
+          properties:
+            code:
+              type: integer
+              description: Esri error code.
+            message:
+              type: string
+              description: Short error message; may be an empty string.
+            details:
+              type: array
+              items:
+                type: string
+              description: Human readable detail strings.
+          required:
+          - code
+      required:
+      - error
+      examples:
+      - error:
+          code: 400
+          message: Cannot perform query. Invalid query parameters.
+          details:
+          - '''where'' parameter is invalid'
+    ServiceMetadata:
+      type: object
+      description: ArcGIS feature service metadata document.
+      properties:
+        currentVersion:
+          type: number
+        serviceItemId:
+          type: string
+        capabilities:
+          type: string
+          description: Comma separated capability list advertised by the service. Only `Query` is exercisable anonymously; editing capabilities require an ArcGIS token.
+        maxRecordCount:
+          type: integer
+        spatialReference:
+          $ref: '#/components/schemas/SpatialReference'
+        layers:
+          type: array
+          items:
+            type: object
+    ServiceAreasThunderMountainProdL0FeatureSet:
+      type: object
+      description: Esri FeatureSet returned by a query against the `ServiceAreas_ThunderMountain_prod` layer.
+      properties:
+        objectIdFieldName:
+          type: string
+        globalIdFieldName:
+          type: string
+        geometryType:
+          type: string
+        spatialReference:
+          $ref: '#/components/schemas/SpatialReference'
+        fields:
+          type: array
+          items:
+            $ref: '#/components/schemas/FieldDefinition'
+        exceededTransferLimit:
+          type: boolean
+          description: True when more features match than were returned; page with `resultOffset`.
+        features:
+          type: array
+          items:
+            type: object
+            properties:
+              attributes:
+                $ref: '#/components/schemas/ServiceAreasThunderMountainProdL0Attributes'
+              geometry:
+                type: object
+                description: Feature geometry, omitted when `returnGeometry=false`.
+    ServiceAreasNorthMohaveValleyProdL0FeatureSet:
+      type: object
+      description: Esri FeatureSet returned by a query against the `ServiceAreas_NorthMohaveValley_prod` layer.
+      properties:
+        objectIdFieldName:
+          type: string
+        globalIdFieldName:
+          type: string
+        geometryType:
+          type: string
+        spatialReference:
+          $ref: '#/components/schemas/SpatialReference'
+        fields:
+          type: array
+          items:
+            $ref: '#/components/schemas/FieldDefinition'
+        exceededTransferLimit:
+          type: boolean
+          description: True when more features match than were returned; page with `resultOffset`.
+        features:
+          type: array
+          items:
+            type: object
+            properties:
+              attributes:
+                $ref: '#/components/schemas/ServiceAreasNorthMohaveValleyProdL0Attributes'
+              geometry:
+                type: object
+                description: Feature geometry, omitted when `returnGeometry=false`.
+    ServiceAreasNorthMohaveValleyProdL0Attributes:
+      type: object
+      description: Attributes of a feature in the `ServiceAreas_NorthMohaveValley_prod` layer (ServiceAreas_NorthMohaveValley_prod, layer 0). Geometry type esriGeometryPolygon.
+      properties:
+        FID:
+          type: integer
+          description: Object ID; the unique, service maintained identifier.
+          x-esri-field-type: esriFieldTypeOID
+        OBJECTID:
+          type: number
+          x-esri-field-type: esriFieldTypeDouble
+        ServiceAre:
+          type: string
+          maxLength: 30
+          x-esri-field-type: esriFieldTypeString
+        District:
+          type: string
+          maxLength: 50
+          x-esri-field-type: esriFieldTypeString
+        State:
+          type: string
+          maxLength: 20
+          x-esri-field-type: esriFieldTypeString
+        Shape_Leng:
+          type: number
+          x-esri-field-type: esriFieldTypeDouble
+        Shape_Area:
+          type: number
+          x-esri-field-type: esriFieldTypeDouble
+    ServiceAreasHavasuProdL0Attributes:
+      type: object
+      description: Attributes of a feature in the `ServiceAreas_Havasu_prod` layer (ServiceAreas_Havasu_prod, layer 0). Geometry type esriGeometryPolygon.
+      properties:
+        FID:
+          type: integer
+          description: Object ID; the unique, service maintained identifier.
+          x-esri-field-type: esriFieldTypeOID
+        OBJECTID:
+          type: number
+          x-esri-field-type: esriFieldTypeDouble
+        ServiceAre:
+          type: string
+          maxLength: 30
+          x-esri-field-type: esriFieldTypeString
+        District:
+          type: string
+          maxLength: 50
+          x-esri-field-type: esriFieldTypeString
+        State:
+          type: string
+          maxLength: 20
+          x-esri-field-type: esriFieldTypeString
+        Shape_Leng:
+          type: number
+          x-esri-field-type: esriFieldTypeDouble
+        Shape_Area:
+          type: number
+          x-esri-field-type: esriFieldTypeDouble
+    GeoJSONFeatureCollection:
+      type: object
+      description: RFC 7946 FeatureCollection returned when `f=geojson`.
+      properties:
+        type:
+          type: string
+          const: FeatureCollection
+        properties:
+          type: object
+          properties:
+            exceededTransferLimit:
+              type: boolean
+        features:
+          type: array
+          items:
+            type: object
+    ServiceAreasParadiseValleyProdL0Attributes:
+      type: object
+      description: Attributes of a feature in the `ServiceAreas_ParadiseValley_prod` layer (ServiceAreas_ParadiseValley_prod, layer 0). Geometry type esriGeometryPolygon.
+      properties:
+        FID:
+          type: integer
+          description: Object ID; the unique, service maintained identifier.
+          x-esri-field-type: esriFieldTypeOID
+        OBJECTID:
+          type: number
+          x-esri-field-type: esriFieldTypeDouble
+        ServiceAre:
+          type: string
+          maxLength: 30
+          x-esri-field-type: esriFieldTypeString
+        District:
+          type: string
+          maxLength: 50
+          x-esri-field-type: esriFieldTypeString
+        State:
+          type: string
+          maxLength: 20
+          x-esri-field-type: esriFieldTypeString
+        Shape_Leng:
+          type: number
+          x-esri-field-type: esriFieldTypeDouble
+        Shape_Area:
+          type: number
+          x-esri-field-type: esriFieldTypeDouble
+    ServiceAreasAnthemProdL0Attributes:
+      type: object
+      description: Attributes of a feature in the `ServiceAreas_Anthem_prod` layer (ServiceAreas_Anthem_prod, layer 0). Geometry type esriGeometryPolygon.
+      properties:
+        FID:
+          type: integer
+          description: Object ID; the unique, service maintained identifier.
+          x-esri-field-type: esriFieldTypeOID
+        OBJECTID:
+          type: number
+          x-esri-field-type: esriFieldTypeDouble
+        ServiceAre:
+          type: string
+          maxLength: 30
+          x-esri-field-type: esriFieldTypeString
+        District:
+          type: string
+          maxLength: 50
+          x-esri-field-type: esriFieldTypeString
+        State:
+          type: string
+          maxLength: 20
+          x-esri-field-type: esriFieldTypeString
+        Shape_Leng:
+          type: number
+          x-esri-field-type: esriFieldTypeDouble
+        Shape_Area:
+          type: number
+          x-esri-field-type: esriFieldTypeDouble
+    ServiceAreasSunCityWestProdL0FeatureSet:
+      type: object
+      description: Esri FeatureSet returned by a query against the `ServiceAreas_SunCityWest_prod` layer.
+      properties:
+        objectIdFieldName:
+          type: string
+        globalIdFieldName:
+          type: string
+        geometryType:
+          type: string
+        spatialReference:
+          $ref: '#/components/schemas/SpatialReference'
+        fields:
+          type: array
+          items:
+            $ref: '#/components/schemas/FieldDefinition'
+        exceededTransferLimit:
+          type: boolean
+          description: True when more features match than were returned; page with `resultOffset`.
+        features:
+          type: array
+          items:
+            type: object
+            properties:
+              attributes:
+                $ref: '#/components/schemas/ServiceAreasSunCityWestProdL0Attributes'
+              geometry:
+                type: object
+                description: Feature geometry, omitted when `returnGeometry=false`.
+    ServiceAreasSunCityProdL0FeatureSet:
+      type: object
+      description: Esri FeatureSet returned by a query against the `ServiceAreas_SunCity_prod` layer.
+      properties:
+        objectIdFieldName:
+          type: string
+        globalIdFieldName:
+          type: string
+        geometryType:
+          type: string
+        spatialReference:
+          $ref: '#/components/schemas/SpatialReference'
+        fields:
+          type: array
+          items:
+            $ref: '#/components/schemas/FieldDefinition'
+        exceededTransferLimit:
+          type: boolean
+          description: True when more features match than were returned; page with `resultOffset`.
+        features:
+          type: array
+          items:
+            type: object
+            properties:
+              attributes:
+                $ref: '#/components/schemas/ServiceAreasSunCityProdL0Attributes'
+              geometry:
+                type: object
+                description: Feature geometry, omitted when `returnGeometry=false`.
+    ServiceAreasTubacProdL0Attributes:
+      type: object
+      description: Attributes of a feature in the `ServiceAreas_Tubac_prod` layer (ServiceAreas_Tubac_prod, layer 0). Geometry type esriGeometryPolygon.
+      properties:
+        FID:
+          type: integer
+          description: Object ID; the unique, service maintained identifier.
+          x-esri-field-type: esriFieldTypeOID
+        OBJECTID:
+          type: number
+          x-esri-field-type: esriFieldTypeDouble
+        ServiceAre:
+          type: string
+          maxLength: 30
+          x-esri-field-type: esriFieldTypeString
+        District:
+          type: string
+          maxLength: 50
+          x-esri-field-type: esriFieldTypeString
+        State:
+          type: string
+          maxLength: 20
+          x-esri-field-type: esriFieldTypeString
+        Shape_Leng:
+          type: number
+          x-esri-field-type: esriFieldTypeDouble
+        Shape_Area:
+          type: number
+          x-esri-field-type: esriFieldTypeDouble
+    ServiceAreasSunCityProdL0Attributes:
+      type: object
+      description: Attributes of a feature in the `ServiceAreas_SunCity_prod` layer (ServiceAreas_SunCity_prod, layer 0). Geometry type esriGeometryPolygon.
+      properties:
+        FID:
+          type: integer
+          description: Object ID; the unique, service maintained identifier.
+          x-esri-field-type: esriFieldTypeOID
+        OBJECTID:
+          type: number
+          x-esri-field-type: esriFieldTypeDouble
+        ServiceAre:
+          type: string
+          maxLength: 30
+          x-esri-field-type: esriFieldTypeString
+        District:
+          type: string
+          maxLength: 50
+          x-esri-field-type: esriFieldTypeString
+        State:
+          type: string
+          maxLength: 20
+          x-esri-field-type: esriFieldTypeString
+        Shape_Leng:
+          type: number
+          x-esri-field-type: esriFieldTypeDouble
+        Shape_Area:
+          type: number
+          x-esri-field-type: esriFieldTypeDouble
+    ServiceAreasEdgewoodProdL0Attributes:
+      type: object
+      description: Attributes of a feature in the `ServiceAreas_Edgewood_prod` layer (ServiceAreas_Edgewood_prod, layer 0). Geometry type esriGeometryPolygon.
+      properties:
+        FID:
+          type: integer
+          description: Object ID; the unique, service maintained identifier.
+          x-esri-field-type: esriFieldTypeOID
+        OBJECTID:
+          type: number
+          x-esri-field-type: esriFieldTypeDouble
+        ServiceAre:
+          type: string
+          maxLength: 30
+          x-esri-field-type: esriFieldTypeString
+        District:
+          type: string
+          maxLength: 50
+          x-esri-field-type: esriFieldTypeString
+        State:
+          type: string
+          maxLength: 20
+          x-esri-field-type: esriFieldTypeString
+        Shape_Leng:
+          type: number
+          x-esri-field-type: esriFieldTypeDouble
+        Shape_Area:
+          type: number
+          x-esri-field-type: esriFieldTypeDouble
+    SpatialReference:
+      type: object
+      properties:
+        wkid:
+          type: integer
+        latestWkid:
+          type: integer
+  parameters:
+    resultRecordCount:
+      name: resultRecordCount
+      in: query
+      required: false
+      description: Maximum number of features to return in this page, capped by the service `maxRecordCount` (2000 on these services).
+      schema:
+        type: integer
+        minimum: 1
+        maximum: 2000
+    returnGeometry:
+      name: returnGeometry
+      in: query
+      required: false
+      description: Whether the feature geometry is included in the response.
+      schema:
+        type: boolean
+        default: true
+    geometry:
+      name: geometry
+      in: query
+      required: false
+      description: Geometry used to spatially filter the query, in the format implied by `geometryType`.
+      schema:
+        type: string
+    returnIdsOnly:
+      name: returnIdsOnly
+      in: query
+      required: false
+      description: Return only the object IDs of matching features.
+      schema:
+        type: boolean
+        default: false
+    f:
+      name: f
+      in: query
+      required: false
+      description: Response format. `json` returns the Esri FeatureSet envelope, `geojson` returns RFC 7946 GeoJSON, `pbf` returns protocol buffers, `html` returns the human service directory.
+      schema:
+        type: string
+        enum:
+        - json
+        - geojson
+        - pbf
+        - html
+        default: html
+    returnCountOnly:
+      name: returnCountOnly
+      in: query
+      required: false
+      description: Return only the count of matching features instead of the features themselves.
+      schema:
+        type: boolean
+        default: false
+    resultOffset:
+      name: resultOffset
+      in: query
+      required: false
+      description: Zero based offset into the ordered result set; the cursor half of ArcGIS paging.
+      schema:
+        type: integer
+        minimum: 0
+    orderByFields:
+      name: orderByFields
+      in: query
+      required: false
+      description: Comma separated `field ASC|DESC` list used to order the result set.
+      schema:
+        type: string
+    outFields:
+      name: outFields
+      in: query
+      required: false
+      description: Comma separated list of attribute fields to return, or `*` for all fields.
+      schema:
+        type: string
+      example: '*'
+    outSR:
+      name: outSR
+      in: query
+      required: false
+      description: Spatial reference (WKID) requested for the returned geometry, for example `4326`.
+      schema:
+        type: string
+    geometryType:
+      name: geometryType
+      in: query
+      required: false
+      description: Type of the `geometry` filter.
+      schema:
+        type: string
+        enum:
+        - esriGeometryPoint
+        - esriGeometryMultipoint
+        - esriGeometryPolyline
+        - esriGeometryPolygon
+        - esriGeometryEnvelope
+    spatialRel:
+      name: spatialRel
+      in: query
+      required: false
+      description: Spatial relationship applied between the `geometry` filter and the layer features.
+      schema:
+        type: string
+        default: esriSpatialRelIntersects
+    inSR:
+      name: inSR
+      in: query
+      required: false
+      description: Spatial reference (WKID) of the input `geometry`.
+      schema:
+        type: string
+    where:
+      name: where
+      in: query
+      required: false
+      description: SQL-92 WHERE clause applied to the layer attributes. Use `1=1` to select all features.
+      schema:
+        type: string
+      example: 1=1
