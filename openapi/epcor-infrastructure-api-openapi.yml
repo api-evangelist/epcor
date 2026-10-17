@@ -137,23 +137,6 @@ paths:
                 - $ref: '#/components/schemas/EsriError'
 components:
   parameters:
-    resultRecordCount:
-      name: resultRecordCount
-      in: query
-      required: false
-      description: Maximum number of features to return in this page, capped by the service `maxRecordCount` (2000 on these services).
-      schema:
-        type: integer
-        minimum: 1
-        maximum: 2000
-    returnGeometry:
-      name: returnGeometry
-      in: query
-      required: false
-      description: Whether the feature geometry is included in the response.
-      schema:
-        type: boolean
-        default: true
     geometry:
       name: geometry
       in: query
@@ -161,27 +144,6 @@ components:
       description: Geometry used to spatially filter the query, in the format implied by `geometryType`.
       schema:
         type: string
-    returnIdsOnly:
-      name: returnIdsOnly
-      in: query
-      required: false
-      description: Return only the object IDs of matching features.
-      schema:
-        type: boolean
-        default: false
-    f:
-      name: f
-      in: query
-      required: false
-      description: Response format. `json` returns the Esri FeatureSet envelope, `geojson` returns RFC 7946 GeoJSON, `pbf` returns protocol buffers, `html` returns the human service directory.
-      schema:
-        type: string
-        enum:
-        - json
-        - geojson
-        - pbf
-        - html
-        default: html
     returnCountOnly:
       name: returnCountOnly
       in: query
@@ -190,36 +152,6 @@ components:
       schema:
         type: boolean
         default: false
-    resultOffset:
-      name: resultOffset
-      in: query
-      required: false
-      description: Zero based offset into the ordered result set; the cursor half of ArcGIS paging.
-      schema:
-        type: integer
-        minimum: 0
-    orderByFields:
-      name: orderByFields
-      in: query
-      required: false
-      description: Comma separated `field ASC|DESC` list used to order the result set.
-      schema:
-        type: string
-    outFields:
-      name: outFields
-      in: query
-      required: false
-      description: Comma separated list of attribute fields to return, or `*` for all fields.
-      schema:
-        type: string
-      example: '*'
-    outSR:
-      name: outSR
-      in: query
-      required: false
-      description: Spatial reference (WKID) requested for the returned geometry, for example `4326`.
-      schema:
-        type: string
     geometryType:
       name: geometryType
       in: query
@@ -233,6 +165,74 @@ components:
         - esriGeometryPolyline
         - esriGeometryPolygon
         - esriGeometryEnvelope
+    inSR:
+      name: inSR
+      in: query
+      required: false
+      description: Spatial reference (WKID) of the input `geometry`.
+      schema:
+        type: string
+    resultOffset:
+      name: resultOffset
+      in: query
+      required: false
+      description: Zero based offset into the ordered result set; the cursor half of ArcGIS paging.
+      schema:
+        type: integer
+        minimum: 0
+    f:
+      name: f
+      in: query
+      required: false
+      description: Response format. `json` returns the Esri FeatureSet envelope, `geojson` returns RFC 7946 GeoJSON, `pbf` returns protocol buffers, `html` returns the human service directory.
+      schema:
+        type: string
+        enum:
+        - json
+        - geojson
+        - pbf
+        - html
+        default: html
+    returnGeometry:
+      name: returnGeometry
+      in: query
+      required: false
+      description: Whether the feature geometry is included in the response.
+      schema:
+        type: boolean
+        default: true
+    resultRecordCount:
+      name: resultRecordCount
+      in: query
+      required: false
+      description: Maximum number of features to return in this page, capped by the service `maxRecordCount` (2000 on these services).
+      schema:
+        type: integer
+        minimum: 1
+        maximum: 2000
+    returnIdsOnly:
+      name: returnIdsOnly
+      in: query
+      required: false
+      description: Return only the object IDs of matching features.
+      schema:
+        type: boolean
+        default: false
+    outSR:
+      name: outSR
+      in: query
+      required: false
+      description: Spatial reference (WKID) requested for the returned geometry, for example `4326`.
+      schema:
+        type: string
+    outFields:
+      name: outFields
+      in: query
+      required: false
+      description: Comma separated list of attribute fields to return, or `*` for all fields.
+      schema:
+        type: string
+      example: '*'
     spatialRel:
       name: spatialRel
       in: query
@@ -241,11 +241,11 @@ components:
       schema:
         type: string
         default: esriSpatialRelIntersects
-    inSR:
-      name: inSR
+    orderByFields:
+      name: orderByFields
       in: query
       required: false
-      description: Spatial reference (WKID) of the input `geometry`.
+      description: Comma separated `field ASC|DESC` list used to order the result set.
       schema:
         type: string
     where:
@@ -257,6 +257,51 @@ components:
         type: string
       example: 1=1
   schemas:
+    WaterInfrastructureProjectsProdL1FeatureSet:
+      type: object
+      description: Esri FeatureSet returned by a query against the `WaterInfrastructureProjects_area` layer.
+      properties:
+        objectIdFieldName:
+          type: string
+        globalIdFieldName:
+          type: string
+        geometryType:
+          type: string
+        spatialReference:
+          $ref: '#/components/schemas/SpatialReference'
+        fields:
+          type: array
+          items:
+            $ref: '#/components/schemas/FieldDefinition'
+        exceededTransferLimit:
+          type: boolean
+          description: True when more features match than were returned; page with `resultOffset`.
+        features:
+          type: array
+          items:
+            type: object
+            properties:
+              attributes:
+                $ref: '#/components/schemas/WaterInfrastructureProjectsProdL1Attributes'
+              geometry:
+                type: object
+                description: Feature geometry, omitted when `returnGeometry=false`.
+    GeoJSONFeatureCollection:
+      type: object
+      description: RFC 7946 FeatureCollection returned when `f=geojson`.
+      properties:
+        type:
+          type: string
+          const: FeatureCollection
+        properties:
+          type: object
+          properties:
+            exceededTransferLimit:
+              type: boolean
+        features:
+          type: array
+          items:
+            type: object
     WaterInfrastructureProjectsProdL1Attributes:
       type: object
       description: Attributes of a feature in the `WaterInfrastructureProjects_area` layer (Water_InfrastructureProjects_Prod, layer 1). Geometry type esriGeometryPolygon.
@@ -320,165 +365,6 @@ components:
         Shape__Length:
           type: number
           x-esri-field-type: esriFieldTypeDouble
-    WaterInfrastructureProjectsProdL1FeatureSet:
-      type: object
-      description: Esri FeatureSet returned by a query against the `WaterInfrastructureProjects_area` layer.
-      properties:
-        objectIdFieldName:
-          type: string
-        globalIdFieldName:
-          type: string
-        geometryType:
-          type: string
-        spatialReference:
-          $ref: '#/components/schemas/SpatialReference'
-        fields:
-          type: array
-          items:
-            $ref: '#/components/schemas/FieldDefinition'
-        exceededTransferLimit:
-          type: boolean
-          description: True when more features match than were returned; page with `resultOffset`.
-        features:
-          type: array
-          items:
-            type: object
-            properties:
-              attributes:
-                $ref: '#/components/schemas/WaterInfrastructureProjectsProdL1Attributes'
-              geometry:
-                type: object
-                description: Feature geometry, omitted when `returnGeometry=false`.
-    FieldDefinition:
-      type: object
-      properties:
-        name:
-          type: string
-        type:
-          type: string
-          description: Esri field type, for example `esriFieldTypeString`.
-        alias:
-          type: string
-        sqlType:
-          type: string
-        length:
-          type: integer
-    LayerMetadata:
-      type: object
-      description: 'ArcGIS feature layer metadata document: field definitions, geometry type, extent, capabilities and edit timestamps.'
-      properties:
-        currentVersion:
-          type: number
-        id:
-          type: integer
-        name:
-          type: string
-        type:
-          type: string
-        geometryType:
-          type: string
-        fields:
-          type: array
-          items:
-            $ref: '#/components/schemas/FieldDefinition'
-        extent:
-          type: object
-        editingInfo:
-          type: object
-        maxRecordCount:
-          type: integer
-    ServiceMetadata:
-      type: object
-      description: ArcGIS feature service metadata document.
-      properties:
-        currentVersion:
-          type: number
-        serviceItemId:
-          type: string
-        capabilities:
-          type: string
-          description: Comma separated capability list advertised by the service. Only `Query` is exercisable anonymously; editing capabilities require an ArcGIS token.
-        maxRecordCount:
-          type: integer
-        spatialReference:
-          $ref: '#/components/schemas/SpatialReference'
-        layers:
-          type: array
-          items:
-            type: object
-    EsriError:
-      type: object
-      description: ArcGIS REST error envelope. Note that these services return HTTP 200 with this body rather than a 4xx status code.
-      properties:
-        error:
-          type: object
-          properties:
-            code:
-              type: integer
-              description: Esri error code.
-            message:
-              type: string
-              description: Short error message; may be an empty string.
-            details:
-              type: array
-              items:
-                type: string
-              description: Human readable detail strings.
-          required:
-          - code
-      required:
-      - error
-      examples:
-      - error:
-          code: 400
-          message: Cannot perform query. Invalid query parameters.
-          details:
-          - '''where'' parameter is invalid'
-    GeoJSONFeatureCollection:
-      type: object
-      description: RFC 7946 FeatureCollection returned when `f=geojson`.
-      properties:
-        type:
-          type: string
-          const: FeatureCollection
-        properties:
-          type: object
-          properties:
-            exceededTransferLimit:
-              type: boolean
-        features:
-          type: array
-          items:
-            type: object
-    WaterInfrastructureProjectsProdL0FeatureSet:
-      type: object
-      description: Esri FeatureSet returned by a query against the `WaterInfrastructureProjects_pt` layer.
-      properties:
-        objectIdFieldName:
-          type: string
-        globalIdFieldName:
-          type: string
-        geometryType:
-          type: string
-        spatialReference:
-          $ref: '#/components/schemas/SpatialReference'
-        fields:
-          type: array
-          items:
-            $ref: '#/components/schemas/FieldDefinition'
-        exceededTransferLimit:
-          type: boolean
-          description: True when more features match than were returned; page with `resultOffset`.
-        features:
-          type: array
-          items:
-            type: object
-            properties:
-              attributes:
-                $ref: '#/components/schemas/WaterInfrastructureProjectsProdL0Attributes'
-              geometry:
-                type: object
-                description: Feature geometry, omitted when `returnGeometry=false`.
     WaterInfrastructureProjectsProdL0Attributes:
       type: object
       description: Attributes of a feature in the `WaterInfrastructureProjects_pt` layer (Water_InfrastructureProjects_Prod, layer 0). Geometry type esriGeometryPoint.
@@ -536,6 +422,48 @@ components:
           maxLength: 256
           description: Redirect URL
           x-esri-field-type: esriFieldTypeString
+    FieldDefinition:
+      type: object
+      properties:
+        name:
+          type: string
+        type:
+          type: string
+          description: Esri field type, for example `esriFieldTypeString`.
+        alias:
+          type: string
+        sqlType:
+          type: string
+        length:
+          type: integer
+    EsriError:
+      type: object
+      description: ArcGIS REST error envelope. Note that these services return HTTP 200 with this body rather than a 4xx status code.
+      properties:
+        error:
+          type: object
+          properties:
+            code:
+              type: integer
+              description: Esri error code.
+            message:
+              type: string
+              description: Short error message; may be an empty string.
+            details:
+              type: array
+              items:
+                type: string
+              description: Human readable detail strings.
+          required:
+          - code
+      required:
+      - error
+      examples:
+      - error:
+          code: 400
+          message: Cannot perform query. Invalid query parameters.
+          details:
+          - '''where'' parameter is invalid'
     SpatialReference:
       type: object
       properties:
@@ -543,3 +471,75 @@ components:
           type: integer
         latestWkid:
           type: integer
+    LayerMetadata:
+      type: object
+      description: 'ArcGIS feature layer metadata document: field definitions, geometry type, extent, capabilities and edit timestamps.'
+      properties:
+        currentVersion:
+          type: number
+        id:
+          type: integer
+        name:
+          type: string
+        type:
+          type: string
+        geometryType:
+          type: string
+        fields:
+          type: array
+          items:
+            $ref: '#/components/schemas/FieldDefinition'
+        extent:
+          type: object
+        editingInfo:
+          type: object
+        maxRecordCount:
+          type: integer
+    WaterInfrastructureProjectsProdL0FeatureSet:
+      type: object
+      description: Esri FeatureSet returned by a query against the `WaterInfrastructureProjects_pt` layer.
+      properties:
+        objectIdFieldName:
+          type: string
+        globalIdFieldName:
+          type: string
+        geometryType:
+          type: string
+        spatialReference:
+          $ref: '#/components/schemas/SpatialReference'
+        fields:
+          type: array
+          items:
+            $ref: '#/components/schemas/FieldDefinition'
+        exceededTransferLimit:
+          type: boolean
+          description: True when more features match than were returned; page with `resultOffset`.
+        features:
+          type: array
+          items:
+            type: object
+            properties:
+              attributes:
+                $ref: '#/components/schemas/WaterInfrastructureProjectsProdL0Attributes'
+              geometry:
+                type: object
+                description: Feature geometry, omitted when `returnGeometry=false`.
+    ServiceMetadata:
+      type: object
+      description: ArcGIS feature service metadata document.
+      properties:
+        currentVersion:
+          type: number
+        serviceItemId:
+          type: string
+        capabilities:
+          type: string
+          description: Comma separated capability list advertised by the service. Only `Query` is exercisable anonymously; editing capabilities require an ArcGIS token.
+        maxRecordCount:
+          type: integer
+        spatialReference:
+          $ref: '#/components/schemas/SpatialReference'
+        layers:
+          type: array
+          items:
+            type: object
