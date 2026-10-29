@@ -1,4 +1,4 @@
-# EPCOR (epcor)
+# EPCOR
 
 <!-- API-EVANGELIST-PROVENANCE:BEGIN -->
 > ### About this repository
@@ -64,84 +64,125 @@
 > Full detail: **[Where this data comes from](https://apievangelist.com/about/where-our-data-comes-from)**
 <!-- API-EVANGELIST-PROVENANCE:END -->
 
-EPCOR Utilities Inc. is a municipally owned Canadian utility headquartered in Edmonton, Alberta, wholly owned by the City of Edmonton, that builds and operates electricity distribution and transmission, water and wastewater, and natural gas distribution systems across Alberta, Ontario and British Columbia in Canada and in Arizona, New Mexico and Texas in the United States. In its Alberta home market it is both a wires company for Edmonton and, through EPCOR Energy Alberta, a regulated-rate electricity retailer, sitting at the distribution-and-retail end of the value chain rather than in generation (generation was spun out as Capital Power in 2009).
+EPCOR Utilities Inc. is a municipally owned Canadian utility headquartered in Edmonton, Alberta, wholly owned by the City of Edmonton, that builds and operates electricity distribution and transmission, water and wastewater, and natural gas distribution systems across Alberta, Ontario and British Columbia in Canada and in Arizona, New Mexico and Texas in the United States. In its Alberta home market it is both a wires company for Edmonton and, through EPCOR Energy Alberta, a regulated-rate electricity retailer, sitting at the distribution-and-retail end of the value chain rather than in generation (generation was spun out as Capital Power in 2009). EPCOR runs no developer programme: epcor.com publishes no developer portal, no API documentation, no OpenAPI and no llms.txt, and the developer., developers., api., docs. and data. subdomains do not resolve. It nonetheless operates two real programmatic surfaces. The first is compelled: the Green Button Download My Data and Connect My Data service its three Ontario service areas - natural gas in the Aylmer area and electricity in the Collingwood and Kincardine areas - must run under Ontario's energy data regulation (O. Reg. 633/21), delivered behind a customer login and a third-party vendor registration portal, with EPCOR stating Green Button Alliance certification but publishing no base URI, no ESPI version and no technical contract. The second is accidental and entirely open: a public ArcGIS Online organization (owner epcor_outages) whose 36 production feature services - Edmonton power outage areas, Canadian water main breaks, water infrastructure projects, scheduled field events, and the outage and service-area layers for fourteen EPCOR Water USA districts in Arizona and New Mexico - answer anonymous ArcGIS REST queries with live data. EPCOR documents none of it, licenses none of it and announces none of it. The result is a utility that is open where a province compelled it, open where nobody noticed, and closed everywhere it would count as a product; wholesale market and system data still comes from AESO and IESO, not from EPCOR.
 
-EPCOR runs no developer programme — no developer portal, no API documentation, no OpenAPI, no llms.txt, and the developer., developers., api., docs. and data. subdomains do not resolve. It nonetheless operates **two real programmatic surfaces**:
+**Areas:** Energy · Canada · Utilities · Electricity · Natural Gas · Water · Green Button · Smart Metering · Grid · Ontario · Alberta · Outages
 
-1. **Compelled** — the Green Button Download My Data and Connect My Data service its three Ontario service areas (Aylmer-area natural gas, Collingwood-area and Kincardine-area electricity) must run under Ontario's O. Reg. 633/21. Gated behind a customer login and a third-party vendor registration portal, with EPCOR stating Green Button Alliance certification but publishing no base URI, no ESPI version and no technical contract.
-2. **Accidental and entirely open** — a public ArcGIS Online organization (item owner `epcor_outages`) whose 36 production feature services answer anonymous ArcGIS REST queries with live operational data: Edmonton power outage areas, Canadian water main breaks, water infrastructure projects, scheduled field events, and outage plus service-area layers for fourteen EPCOR Water USA districts in Arizona and New Mexico. EPCOR documents none of it, licenses none of it and announces none of it.
+## EPCOR on APIs.io
 
-Wholesale market and system data still comes from AESO and IESO, not from EPCOR.
+Everything profiled for EPCOR is published on APIs.io rather than in this repository. Start at the provider page — **[apis.io/providers/epcor/](https://apis.io/providers/epcor/)** — or go straight to one of the APIs or properties below.
 
-**APIs.json:** [https://raw.githubusercontent.com/api-evangelist/epcor/refs/heads/main/apis.yml](https://raw.githubusercontent.com/api-evangelist/epcor/refs/heads/main/apis.yml)
+### APIs (8)
 
-## Tags
+- [EPCOR Ontario Green Button (Download My Data / Connect My Data)](https://apis.io/apis/epcor/epcor-ontario-green-button/) — The Green Button energy-data service EPCOR operates for its three Ontario service areas (Aylmer-area natural gas, Collingwood-area and Kincardine-area…
+- [EPCOR Boundaries API](https://apis.io/apis/epcor/epcor-boundaries-api/) — Municipal boundary reference layers.
+- [EPCOR Catalog API](https://apis.io/apis/epcor/epcor-catalog-api/) — Service directory.
+- [EPCOR Infrastructure API](https://apis.io/apis/epcor/epcor-infrastructure-api/) — Water infrastructure construction projects.
+- [EPCOR Power Outages API](https://apis.io/apis/epcor/epcor-power-outages-api/) — Edmonton electricity distribution outages (active, planned and point features).
+- [EPCOR Service Areas API](https://apis.io/apis/epcor/epcor-service-areas-api/) — EPCOR Water USA service area boundaries.
+- [EPCOR Us Water Outages API](https://apis.io/apis/epcor/epcor-us-water-outages-api/) — EPCOR Water USA district outage points (Arizona and New Mexico).
+- [EPCOR Water Outages API](https://apis.io/apis/epcor/epcor-water-outages-api/) — Canadian water outages, main breaks and field events.
 
-- Energy
-- Canada
-- Utilities
-- Electricity
-- Natural Gas
-- Water
-- Green Button
-- Smart Metering
-- Grid
-- Ontario
-- Alberta
-- Outages
-- Geospatial
-- Open Data
+### Published properties
 
-## Timestamps
+Each property below is a page on APIs.io carrying the machine-readable artifact and what it says.
 
-- **Created:** 2026-07-27
-- **Modified:** 2026-07-27
+#### Agentic access (1)
 
-## APIs
+Which operations an agent can call, which act, and which need a human in the loop.
 
-### EPCOR Ontario Green Button (Download My Data / Connect My Data)
+- [Epcor Agentic Access](https://apis.io/agentic-access/epcor/epcor-agentic-access/)
 
-The Green Button energy-data service EPCOR operates for its three Ontario service areas to satisfy Ontario's O. Reg. 633/21. Download My Data lets an authenticated EPCOR customer download usage and billing data in an industry-standard XML format; Connect My Data ("Data Shares") lets a customer authorize a registered third-party vendor to receive energy usage data, billing data and/or account information on an ongoing basis via security tokens, revocable from the portal's Data Shares tab. EPCOR publishes no technical documentation, no base URI, no ESPI/NAESB version reference and no machine-readable contract — a third party must apply through the vendor onboarding portal, and the customer-facing portal redirects every path to a login. Not offered in EPCOR's Alberta or US service areas.
+#### JSON Schema (1)
 
-- **Human URL:** [https://www.epcor.com/ca/en/on/collingwood-area/account/manage-account/green-button.html](https://www.epcor.com/ca/en/on/collingwood-area/account/manage-account/green-button.html)
-- **Base URL:** not published
+The data models the API reads and writes.
 
-### EPCOR Public Outage and Service Area Feature Services (ArcGIS REST)
+- [EPCOR public feature layer attributes](https://apis.io/schemas/epcor/epcor-outage-features.schema/)
 
-EPCOR's undocumented but fully public geospatial data surface, discovered in the 2026-07-27 enrichment round by following the outage map's bundle to `/assets/config.json`. Thirty-six production feature services answer anonymous queries with live data — no API key, no signup, no rate limit, no licence, no terms of use and no support channel. Format is chosen with `f` (json / geojson / pbf), paging uses `resultOffset` / `resultRecordCount` against a 2000-feature cap, and errors come back with **HTTP 200** and an Esri error body.
+#### Examples (6)
 
-- **Human URL:** [https://outages.epcor.com/](https://outages.epcor.com/)
-- **Base URL:** `https://services6.arcgis.com/Ji2rusuWXDFSqNsP/ArcGIS/rest/services`
-- **Derived OpenAPI:** [openapi/epcor-outages-arcgis-openapi.yml](openapi/epcor-outages-arcgis-openapi.yml) — 115 read operations over 39 production layers, derived from live ArcGIS metadata. **Not published by EPCOR.**
+Example requests and responses.
 
-## Artifacts
+- [Epcor Arcgis Error Responses](https://apis.io/examples/epcor/epcor-arcgis-error-responses/)
+- [Epcor Arcgis Service Directory](https://apis.io/examples/epcor/epcor-arcgis-service-directory/)
+- [Epcor Outage Map Config](https://apis.io/examples/epcor/epcor-outage-map-config/)
+- [Epcor Power Outage Areas Geojson](https://apis.io/examples/epcor/epcor-power-outage-areas-geojson/)
+- [Epcor Power Outage Areas Query](https://apis.io/examples/epcor/epcor-power-outage-areas-query/)
+- [Epcor Water Canada Outages Query](https://apis.io/examples/epcor/epcor-water-canada-outages-query/)
 
-| Artifact | File |
+#### Collections (1)
+
+Postman and Open Collection request collections.
+
+- [EPCOR Public Outage and Service Area Feature Services (ArcGIS REST)](https://apis.io/collections/epcor/open-epcor-outages-arcgis/)
+
+#### Security (2)
+
+Authentication, trust centre, and vulnerability disclosure.
+
+- [Epcor Authentication](https://apis.io/security/epcor/epcor-authentication/)
+- [Epcor Domain Security](https://apis.io/security/epcor/epcor-domain-security/)
+
+## Where to find this API
+
+Links to the company's own pages. This repository publishes no copy of their specifications — the canonical document is theirs and lives at the URLs below.
+
+- [Website](https://www.epcor.com/)
+- [Support](https://www.epcor.com/ca/en/ab/edmonton/contact-edmonton.html)
+- [Blog](https://www.epcor.com/ca/en/news.html)
+- [Terms of service](https://www.epcor.com/ca/en/about/policies/terms-of-use.html)
+- [Privacy policy](https://www.epcor.com/ca/en/about/policies/privacy-policy.html)
+- [Status](https://outages.epcor.com/)
+
+## API Evangelist rating
+
+**Kin Score 32.9** — thin · rubric 0.24.0 · scored 2026-10-17
+
+| Facet | Score |
 |---|---|
-| OpenAPI (derived) | [openapi/epcor-outages-arcgis-openapi.yml](openapi/epcor-outages-arcgis-openapi.yml) |
-| JSON Schema (derived) | [json-schema/epcor-outage-features.schema.json](json-schema/epcor-outage-features.schema.json) |
-| Examples (verbatim captures) | [examples/](examples/) |
-| Authentication | [authentication/epcor-authentication.yml](authentication/epcor-authentication.yml) |
-| Conventions | [conventions/epcor-conventions.yml](conventions/epcor-conventions.yml) |
-| Error catalog | [errors/epcor-problem-types.yml](errors/epcor-problem-types.yml) |
-| Lifecycle | [lifecycle/epcor-lifecycle.yml](lifecycle/epcor-lifecycle.yml) |
-| Conformance | [conformance/epcor-conformance.yml](conformance/epcor-conformance.yml) |
-| Data model | [data-model/epcor-data-model.yml](data-model/epcor-data-model.yml) |
-| Domain security | [security/epcor-domain-security.yml](security/epcor-domain-security.yml) |
-| Well-known probes (all misses) | [well-known/epcor-well-known.yml](well-known/epcor-well-known.yml) |
-| Packages (none) | [packages/epcor-packages.yml](packages/epcor-packages.yml) |
-| Agentic access | [agentic-access/epcor-agentic-access.yml](agentic-access/epcor-agentic-access.yml) |
-| Agent skills | [skills/_index.yml](skills/_index.yml) |
-| llms.txt (generated) | [llms/epcor-llms.txt](llms/epcor-llms.txt) |
+| Discoverability | 64.3 |
+| Contract quality | 16.8 |
+| Contract governance | 18.2 |
+| Operational transparency | 15.8 |
+| Developer ergonomics | 39.9 |
+| Access clarity | 34.2 |
 
-## Mandate Posture
+**Agent readiness 25.8** — agent-aware
 
-- **Mandate regime:** `green-button-ontario` — Ontario O. Reg. 633/21 requires Ontario electricity and natural gas utilities to offer Green Button Download My Data and Connect My Data, certified by the Green Button Alliance, by 1 November 2023. No Canadian federal energy data right exists; Alberta has no equivalent.
-- **Mandate status:** `live-implemented` — two live, EPCOR-branded production hosts were confirmed (a customer Green Button portal at `epcorgas.savagedata.com`, HTTP 200, and a third-party vendor registration application at `epcorgasonboarding.savagedata.com`, HTTP 200), both linked from EPCOR's own Green Button pages. Conformance itself is **attested, not observed**: no ESPI base URI, OAuth endpoint or `ApplicationInformation` resource could be read anonymously, and the Green Button Alliance certified-product register returned HTTP 403 to this probe.
-- **Data standard:** Green Button (DMD + CMD). EPCOR names no version and never cites ESPI, NAESB or REQ.21; the regulation itself requires NAESB REQ.21 ESPI 3.3.
-- **Consumer data:** available — but only in the three Ontario service areas, gated by customer consent and vendor registration. `/ca/en/ab/edmonton/account/manage-account/green-button.html` returns 404: the Alberta home market has no equivalent.
-- **Market data:** none. No wholesale grid, system or market data, no open data portal, no data licence. Alberta market data comes from AESO, Ontario's from IESO.
-- **Operational data:** open, unannounced and unlicensed — the ArcGIS feature services above. This corrects the first round's finding that the outage map was "a map, not a dataset".
-- **Access gate:** `application-approval` for Connect My Data (register as an authorized third-party vendor, then obtain per-customer consent); `customer-account-required` for Download My Data; **none at all** for the ArcGIS surface.
+| Agent-readiness dimension | Result |
+|---|---|
+| Spec Presence | yes |
+| Agentic Access | derived (partial credit) |
+| Reversibility Documented | na |
+| MCP Server | — |
+| Auth Clarity | bearer (partial credit) |
+| Idempotency | na |
+| Error Semantics | documented (partial credit) |
+| OpenAPI Examples | documented (partial credit) |
+| Rate Limit Signal | — |
+| Event Surface Described | — |
+| Agent Skills | derived (partial credit) |
+| Well Known Catalog | — |
+| Consent Identity | — |
+| Agent Card | — |
+| Dry Run Mode | na |
+| Delegated Identity | — |
+| Protected Resource Metadata | — |
+| Dynamic Client Registration | — |
+| Agentic Commerce | — |
 
-See [review.yml](review.yml) for every URL probed, its HTTP status, and the full mandate/standard/access findings.
+**Regulatory alignment 34.8** — Energy & Utilities
+
+The rubric is published at [github.com/api-evangelist/kin-score](https://github.com/api-evangelist/kin-score). The per-check breakdown behind these numbers — which checks were earned, partial or missed — along with score history and how this provider compares to its peers, is available at [apis.io/providers/epcor/](https://apis.io/providers/epcor/).
+
+## How this profile is made
+
+API Evangelist profiles a company's public API surface the way a developer would find it: the website, developer portal and documentation, the specifications it publishes, its public repositories, and its pricing, status and changelog pages. From that it derives the properties above — contracts split per API, workflows, schemas, collections, governance rules, plans and rate limits — and scores them against the published [Kin Score rubric](https://github.com/api-evangelist/kin-score).
+
+The artifacts are published on [APIs.io](https://apis.io), not in this repository. This repository is the public record for EPCOR: the place to say something is wrong, missing or out of date, and to ask for a re-score or a removal.
+
+## Open an issue
+
+- **Something about this listing** — a wrong description, a missing API, a stale artifact or a question about the rating: [open an issue on this repository](https://github.com/api-evangelist/epcor/issues/new).
+- **A new API, or one that is not in the catalog yet** — [submit it on APIs.io](https://apis.io/add/).
+- **Anything else** — [the APIs.io inbox](https://github.com/api-search/inbox/issues/new) or [info@apievangelist.com](mailto:info@apievangelist.com).
